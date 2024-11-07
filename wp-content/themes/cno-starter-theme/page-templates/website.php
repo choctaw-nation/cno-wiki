@@ -9,7 +9,7 @@
 
 get_header( 'docs' );
 ?>
-<main <?php post_class( 'container my-5' ); ?>>
+<div class="container my-5">
 	<?php get_template_part( 'template-parts/single/nav', 'breadcrumbs' ); ?>
 	<?php if ( has_post_thumbnail() ) : ?>
 	<div class="row my-5">
@@ -23,31 +23,29 @@ get_header( 'docs' );
 		</div>
 	</div>
 	<?php endif; ?>
-	<div class="row justify-content-center">
-		<div class="col-lg-10">
-			<?php the_title( '<h1>', '</h1>' ); ?>
-			<?php
-			$children = wp_list_pages(
-				array(
-					'title_li'    => '',
-					'child_of'    => get_the_ID(),
-					'echo'        => 0,
-					'post_type'   => 'website',
-					'post_status' => 'publish',
-				)
-			);
-
-			if ( $children ) :
-				?>
-			<nav class="table-of-contents">
-				<h2>Table of Contents</h2>
-				<ul>
-					<?php echo $children; ?>
-				</ul>
-			</nav>
-			<?php endif; ?>
-		</div>
-	</div>
-</main>
+</div>
+<article <?php post_class( 'mb-5' ); ?>>
+	<?php
+	the_title( '<h1>', '</h1>' );
+	$children = wp_list_pages(
+		array(
+			'title_li'    => '',
+			'child_of'    => get_the_ID(),
+			'echo'        => 0,
+			'post_type'   => 'website',
+			'post_status' => 'publish',
+		)
+	);
+	?>
+	<?php if ( $children ) : ?>
+	<nav class="table-of-contents">
+		<h2>Table of Contents</h2>
+		<ul>
+			<?php echo $children; ?>
+		</ul>
+	</nav>
+	<?php endif; ?>
+	<?php the_content(); ?>
+</article>
 <?php
 get_footer();
