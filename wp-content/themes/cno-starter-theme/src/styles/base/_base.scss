@@ -1,0 +1,29 @@
+@use "../abstracts/variables" as v;
+@use "bootstrap/scss/vendor/rfs" as rfs;
+
+:root {
+	--font-headings: #{v.$font-headings};
+	--font-body: #{v.$font-body};
+	--font-serif: #{v.$font-serif};
+
+	--transition-standard: #{v.$transition-standard};
+}
+
+ul,
+ol {
+	margin-left: 1.25rem;
+}
+body {
+	@include rfs.font-size(1.35rem);
+}
+
+article {
+	& > :where(:not(.alignleft):not(.alignright):not(.align-full)) {
+		max-width: var(--wp--style--global--content-size);
+		margin-inline: auto;
+	}
+
+	& > .alignwide {
+		max-width: var(--wp--style--global--wide-size);
+	}
+}

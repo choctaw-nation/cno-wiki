@@ -1,0 +1,215 @@
+{
+	"version": 3,
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"settings": {
+		"appearanceTools": true,
+		"color": {
+			"background": true,
+			"customDuotone": false,
+			"customGradient": false,
+			"defaultGradients": false,
+			"defaultPalette": false,
+			"palette": [
+				{
+					"slug": "primary",
+					"color": "#512d6d",
+					"name": "Primary"
+				},
+				{
+					"slug": "secondary",
+					"color": "#6c757d",
+					"name": "Secondary"
+				},
+				{
+					"slug": "dark",
+					"color": "#221c45",
+					"name": "Dark"
+				},
+				{
+					"slug": "white",
+					"color": "#fff",
+					"name": "White"
+				},
+				{
+					"slug": "black",
+					"color": "#000",
+					"name": "Black"
+				},
+				{
+					"slug": "success",
+					"color": "#198754",
+					"name": "Success"
+				},
+				{
+					"slug": "info",
+					"color": "#0dcaf0",
+					"name": "Info"
+				},
+				{
+					"slug": "warning",
+					"color": "#ffc107",
+					"name": "Warning"
+				},
+				{
+					"slug": "danger",
+					"color": "#dc3545",
+					"name": "Danger"
+				}
+			],
+			"text": true,
+			"heading": true,
+			"button": true
+		},
+		"dimensions": {
+			"aspectRatio": true,
+			"minHeight": true
+		},
+		"layout": {
+			"contentSize": "800px",
+			"wideSize": "1200px"
+		},
+		"spacing": {
+			"blockGap": true,
+			"customSpacingSize": true,
+			"margin": true,
+			"padding": true,
+			"units": [ "rem", "%", "px", "vh", "vw" ]
+		},
+		"typography": {
+			"customFontSize": false,
+			"defaultFontSizes": false,
+			"lineHeight": false,
+			"dropCap": false,
+			"fluid": true,
+			"fontStyle": true,
+			"fontWeight": true,
+			"letterSpacing": true,
+			"textDecoration": true,
+			"textTransform": true,
+			"fontSizes": [
+				{
+					"slug": "base",
+					"size": "1.35rem",
+					"name": "Body",
+					"fluid": true
+				},
+				{
+					"slug": "sm",
+					"size": "1.2rem",
+					"name": "Small (H6)",
+					"fluid": true
+				},
+				{
+					"slug": "md",
+					"size": "1.44rem",
+					"name": "Medium (H5)",
+					"fluid": true
+				},
+				{
+					"slug": "lg",
+					"size": "1.728rem",
+					"name": "Large (H4)",
+					"fluid": true
+				},
+				{
+					"slug": "xl",
+					"size": "2.074rem",
+					"name": "XL (H3)",
+					"fluid": true
+				},
+				{
+					"slug": "2xl",
+					"size": "2.488rem",
+					"name": "2XL (H2)",
+					"fluid": true
+				},
+				{
+					"slug": "3xl",
+					"size": "2.986rem",
+					"name": "3XL (H1)",
+					"fluid": true
+				}
+			],
+			"fontFamilies": [
+				{
+					"slug": "gill-sans-nova",
+					"name": "Gill Sans Nova",
+					"fontFamily": "gill-sans-nova, \"Helvetica Neue\", \"Noto Sans\", \"Liberation Sans\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\""
+				}
+			]
+		},
+		"custom": {
+			"lineHeight": "calc(4px + 2.5ex)",
+			"transitionTiming": ".15s",
+			"transitionEasing": "ease-in-out",
+			"transition": "var:custom|transition-timing var:custom|transition-easing"
+		}
+	},
+	"styles": {
+		"typography": {
+			"fontSize": "var:preset|font-size|base"
+		},
+		"blocks": {
+			"core/paragraph": {
+				"typography": {
+					"fontSize": "var:preset|font-size|base",
+					"fontFamily": "var:preset|font-family|gill-sans-nova"
+				}
+			},
+			"core/list": {
+				"typography": {
+					"fontSize": "var:preset|font-size|base",
+					"fontFamily": "var:preset|font-family|gill-sans-nova"
+				}
+			},
+			"core/list-item": {
+				"typography": {
+					"fontSize": "var:preset|font-size|base",
+					"fontFamily": "var:preset|font-family|gill-sans-nova"
+				}
+			},
+			"core/heading": {
+				"typography": {
+					"fontFamily": "var:preset|font-family|gill-sans-nova"
+				}
+			}
+		},
+		"elements": {
+			"heading": {
+				"typography": {
+					"fontFamily": "var:preset|font-family|gill-sans-nova"
+				}
+			},
+			"h1": {
+				"typography": {
+					"fontSize": "var:preset|font-size|3-xl"
+				}
+			},
+			"h2": {
+				"typography": {
+					"fontSize": "var:preset|font-size|2-xl"
+				}
+			},
+			"h3": {
+				"typography": {
+					"fontSize": "var:preset|font-size|xl"
+				}
+			},
+			"h4": {
+				"typography": {
+					"fontSize": "var:preset|font-size|lg"
+				}
+			},
+			"h5": {
+				"typography": {
+					"fontSize": "var:preset|font-size|md"
+				}
+			},
+			"h6": {
+				"typography": {
+					"fontSize": "var:preset|font-size|sm"
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,29 @@
+{
+	"name": "cno-starter-theme",
+	"version": "1.0.0",
+	"description": "Custom WP theme for CNO sites",
+	"prettier": "@wordpress/prettier-config",
+	"browserslist": [
+		"extends @wordpress/browserslist-config"
+	],
+	"scripts": {
+		"build": "wp-scripts build",
+		"check-engines": "wp-scripts check-engines",
+		"packages-update": "wp-scripts packages-update",
+		"start": "wp-scripts start"
+	},
+	"author": "Choctaw Nation of Oklahoma",
+	"license": "GPL-3.0-or-later",
+	"dependencies": {
+		"aos": "^2.3.4",
+		"bootstrap": "^5.3.3",
+		"swiper": "^11.1.14"
+	},
+	"devDependencies": {
+		"@wordpress/scripts": "^30.4.0"
+	},
+	"overrides": {
+		"cookie": "^1.0.0",
+		"puppeteer-core": "^23.4.0"
+	}
+}
