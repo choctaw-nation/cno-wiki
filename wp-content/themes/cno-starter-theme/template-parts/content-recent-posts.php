@@ -43,7 +43,7 @@ if ( $as_swiper ) {
 		<div class="col-1 position-relative">
 			<div class="swiper-button-prev"></div>
 		</div>
-		<div class="col-10 swiper overflow-y-visible">
+		<div class="col-10 swiper">
 			<div class="swiper-wrapper">
 				<?php while ( $recent_posts->have_posts() ) : ?>
 				<?php $recent_posts->the_post(); ?>
@@ -65,11 +65,9 @@ if ( $as_swiper ) {
 			<div class="swiper-button-next"></div>
 		</div>
 	</div>
-	<?php if ( count( $recent_posts->posts ) > 12 ) : ?>
 	<div class="row justify-content-center">
 		<div class="col"><a href="" class="btn btn-outline-primary">View All</a></div>
 	</div>
-	<?php endif; ?>
 	<?php else : ?>
 	<ul class="list-unstyled row row-cols-1 row-cols-md-auto align-items-stretch gx-0 gap-4 mb-5">
 		<?php
