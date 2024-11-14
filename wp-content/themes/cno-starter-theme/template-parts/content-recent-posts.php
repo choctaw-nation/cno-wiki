@@ -38,7 +38,7 @@ if ( $as_swiper ) {
 	);
 	?>
 	<?php if ( $recent_posts->have_posts() ) : ?>
-	<?php if ( $as_swiper ) : ?>
+		<?php if ( $as_swiper ) : ?>
 	<div class="row position-relative" style="--swiper-navigation-color:var(--bs-primary);">
 		<div class="col-1 position-relative">
 			<div class="swiper-button-prev"></div>
@@ -46,7 +46,7 @@ if ( $as_swiper ) {
 		<div class="col-10 swiper">
 			<div class="swiper-wrapper">
 				<?php while ( $recent_posts->have_posts() ) : ?>
-				<?php $recent_posts->the_post(); ?>
+					<?php $recent_posts->the_post(); ?>
 				<div class="swiper-slide">
 					<?php
 						get_template_part(

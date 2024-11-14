@@ -31,32 +31,35 @@ class Badge_Generator {
 	 * @return array
 	 */
 	public function get_badges(): array {
-		$this->badges = array_merge( $this->badges, $this->get_post_type_badge() );
+		$this->badges = array_merge( $this->badges, $this->get_category_badge() );
 		$this->badges = array_merge( $this->badges, $this->get_dev_note_badge( 'framework' ) );
 		$this->badges = array_merge( $this->badges, $this->get_dev_note_badge( 'language' ) );
 		return $this->badges;
 	}
 
 	/**
-	 * Get the post type badge
+	 * Get the category badge
 	 */
-	private function get_post_type_badge(): array {
-		$post_type_map = array(
-			'post'     => array(
-				'label' => 'General',
-				'color' => 'primary',
-				'href'  => get_post_type_archive_link( 'post' ),
-			),
-			'dev-note' => array(
-				'label' => 'Dev Note',
-				'color' => 'secondary',
-				'href'  => get_post_type_archive_link( 'dev-note' ),
-			),
-			'website'  => null,
-		);
-		return array( get_post_type() => $post_type_map[ get_post_type() ] );
+	private function get_category_badge(): array {
+		$categories = get_the_category();
+		if ( ! $categories || is_wp_error( $categories ) ) {
+			return array();
+		}
+		$category_badges = array();
+		foreach ( $categories as $category ) {
+			$category_badges = array_merge(
+				$category_badges,
+				array(
+					$category->slug => array(
+						'label' => $category->name,
+						'color' => 'primary',
+						'href'  => get_category_link( $category ),
+					),
+				),
+			);
+		}
+		return $category_badges;
 	}
-
 	/**
 	 * Get the dev-note badge
 	 *

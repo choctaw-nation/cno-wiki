@@ -34,9 +34,11 @@ $button_text        = isset( $args['button_text'] ) ? $args['button_text'] : 'Re
 			);
 			?>
 		</div>
-		<p class="fs-base">
-			<?php echo get_the_excerpt(); ?>
-		</p>
-		<a href="<?php the_permalink(); ?>" class="btn btn-primary mt-auto align-self-start"><?php echo $button_text; ?></a>
+		<?php
+		$short_excerpt = substr( get_the_excerpt(), 0, 240 );
+		echo ! empty( $short_excerpt ) ? "<p class='fs-base mb-4'>{$short_excerpt}...</p>" : '';
+		?>
+
+		<a href="<?php the_permalink(); ?>" class="btn btn-primary mt-auto align-self-start <?php echo $with_post_meta ? '' : 'stretched-link'; ?>"><?php echo $button_text; ?></a>
 	</div>
 </article>

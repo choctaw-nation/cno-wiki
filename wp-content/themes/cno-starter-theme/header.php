@@ -5,7 +5,6 @@
  * @package ChoctawNation
  */
 
-use ChoctawNation\Navwalker;
 ?>
 
 <!DOCTYPE html>
@@ -20,35 +19,24 @@ use ChoctawNation\Navwalker;
 
 <body <?php body_class(); ?>>
 	<?php wp_body_open(); ?>
-	<header class="d-flex text-bg-primary" id="site-header">
-		<div class="container">
-			<nav class="navbar navbar-expand-lg py-0">
-				<a class="navbar-brand my-2 align-items-md-center" href="<?php echo esc_url( site_url() ); ?>" class="logo" aria-label="to Home Page">
-					<img src="<?php echo get_template_directory_uri() . '/img/the-great-seal-min.svg'; ?>" alt="The Great Seal of the Choctaw Nation" class='d-inline-block logo' />
-					<?php echo bloginfo( 'title' ); ?>
-				</a>
-				<button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+	<header class="text-bg-primary z-3" id="site-header">
+		<div class="container-xxl">
+			<nav class="navbar navbar-expand-lg justify-content-lg-between py-2 gap-3">
+				<div class="navbar-container flex-lg-grow-1 flex-shrink-1 w-auto d-flex flex-wrap flex-lg-nowrap align-items-center">
+					<div class="position-relative d-flex py-2 align-items-center gap-2">
+						<img src="<?php echo get_template_directory_uri() . '/img/the-great-seal-white.svg'; ?>" alt="The Great Seal of the Choctaw Nation" class='d-inline-block logo' />
+						<a class="stretched-link navbar-brand fw-bold text-white fs-5" href="<?php echo esc_url( site_url() ); ?>">
+							Home
+						</a>
+					</div>
+					<?php get_template_part( 'template-parts/header/offcanvas', 'navbar-nav' ); ?>
+				</div>
+				<?php get_search_form(); ?>
+				<button class="navbar-toggler border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar-nav" aria-controls="sidebar-nav" aria-expanded="false"
 						aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
-				<div class="offcanvas offcanvas-end ms-auto flex-grow-0" id='navbarNav' tabindex="-1">
-					<div class="offcanvas-header mt-5">
-						<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-					</div>
-					<?php
-					if ( has_nav_menu( 'primary_menu' ) ) {
-						wp_nav_menu(
-							array(
-								'theme_location'  => 'primary_menu',
-								'menu_class'      => 'navbar-nav header-nav',
-								'container'       => 'div',
-								'container_class' => 'offcanvas-body',
-								'walker'          => new Navwalker(),
-							)
-						);
-					}
-					?>
-				</div>
+				<?php get_template_part( 'template-parts/header/content', 'color-mode-toggle' ); ?>
 			</nav>
 		</div>
 	</header>
