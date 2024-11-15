@@ -154,7 +154,7 @@ new ( class ColorModeHandler {
 		selectedColorModeCheck: SVGElement;
 	} {
 		const colorModeTogglerText = document.querySelector(
-			'#bd-theme-text'
+			'#color-mode-toggle-text'
 		) as HTMLSpanElement;
 
 		const activeModeIcon = document.querySelector(

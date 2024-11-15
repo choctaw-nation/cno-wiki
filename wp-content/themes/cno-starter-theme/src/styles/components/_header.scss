@@ -16,9 +16,23 @@
 }
 
 #site-search {
+	@include m.media-breakpoint-up(lg) {
+		position: absolute;
+		inset-inline-end: 40%;
+		transform: translateX(20%);
+	}
+
 	.btn {
 		@include m.media-breakpoint-down(lg) {
 			border-width: 0 !important;
+		}
+	}
+}
+
+.offcanvas-lg {
+	@include m.media-breakpoint-down(lg) {
+		body:has(#wpadminbar) & {
+			top: 32px;
 		}
 	}
 }
