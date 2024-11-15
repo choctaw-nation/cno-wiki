@@ -1,0 +1,9 @@
+[data-bs-theme="dark"] {
+	--bs-box-shadow: 0 0.5rem 1rem rgba(255, 255, 255, 0.15);
+	--bs-box-shadow-sm: 0 0.25rem 0.5rem rgba(255, 255, 255, 0.15);
+	--bs-box-shadow-lg: 0 1rem 1.5rem rgba(255, 255, 255, 0.175);
+
+	.card {
+		--bs-card-border-color: var(--bs-primary);
+	}
+}

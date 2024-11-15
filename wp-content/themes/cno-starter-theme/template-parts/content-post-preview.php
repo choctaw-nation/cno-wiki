@@ -10,9 +10,9 @@ $with_last_modified = isset( $args['with_last_modified'] ) ? $args['with_last_mo
 $button_text        = isset( $args['button_text'] ) ? $args['button_text'] : 'Read More';
 
 ?>
-<article <?php post_class( 'card position-relative h-100 shadow' ); ?>>
+<article <?php post_class( 'card position-relative h-100 shadow-sm' ); ?>>
 	<?php if ( has_post_thumbnail() ) : ?>
-	<figure class="card-img-top ratio ratio-16x9">
+	<figure class="card-img-top ratio ratio-16x9 overflow-hidden">
 		<?php
 		the_post_thumbnail(
 			'large',
