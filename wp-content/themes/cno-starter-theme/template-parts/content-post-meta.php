@@ -19,7 +19,7 @@ $author           = get_the_author_meta( 'display_name', $author_id );
 		<?php
 		if ( $has_been_updated ) {
 			echo 'Last Updated: ';
-			if ( get_the_modified_time( 'Y-m-d' ) === date( 'Y-m-d' ) ) {
+			if ( get_the_modified_time( 'Y-m-d' ) === date( 'Y-m-d' ) ) { // phpcs:ignore WordPress.DateTime.RestrictedFunctions.date_date
 				echo 'Today at ';
 			}
 			the_modified_time( 'F j, Y @ g:ia' );
