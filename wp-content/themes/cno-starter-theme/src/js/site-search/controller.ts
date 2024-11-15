@@ -7,14 +7,19 @@ export default class Controller {
 
 	constructor() {
 		this.model = new Model();
-		const recentSearches = this.model.getRecentSearches();
-		this.view = new View( recentSearches );
+		this.view = new View( this.model.getRecentSearches.bind( this.model ) );
 		this.handleSearch();
 	}
 
+	/**
+	 * Handle search functionality.
+	 */
 	private handleSearch() {
 		this.view.addSearchInputListener(
 			this.model.performSearch.bind( this.model )
+		);
+		this.view.handleResultSelection(
+			this.model.storeRecentSearch.bind( this.model )
 		);
 	}
 }

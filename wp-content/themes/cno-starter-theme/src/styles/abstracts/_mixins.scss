@@ -1,1 +1,9 @@
 @forward "./bs_breakpoints";
+
+@mixin interaction() {
+	&:hover,
+	&:focus-visible,
+	&:active {
+		@content;
+	}
+}

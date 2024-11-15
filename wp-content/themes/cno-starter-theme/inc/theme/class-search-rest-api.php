@@ -7,7 +7,6 @@
 
 namespace ChoctawNation;
 
-use WP;
 use WP_REST_Request;
 use WP_REST_Response;
 
@@ -74,8 +73,20 @@ class Search_Rest_API {
 			while ( $query->have_posts() ) {
 				$query->the_post();
 				$results[] = array(
-					'title' => get_the_title(),
-					'link'  => get_permalink(),
+					'title'   => get_the_title(),
+					'link'    => get_permalink(),
+					'excerpt' => get_the_excerpt(),
+					'meta'    => array(
+						'post_type'  => get_post_type(),
+						'categories' => get_the_category_list( ', ' ),
+						'frameworks' => get_the_terms( get_the_ID(), 'framework' ),
+						'tags'       => get_the_tag_list( '', ', ' ),
+						'author'     => get_the_author(),
+						'date'       => get_the_date(),
+						'updated'    => get_the_modified_date(),
+						'languages'  => get_the_terms( get_the_ID(), 'language' ),
+						'website'    => get_the_terms( get_the_ID(), 'website' ),
+					),
 				);
 			}
 			wp_reset_postdata();

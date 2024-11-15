@@ -1,15 +1,18 @@
 import Modal from 'bootstrap/js/dist/modal';
+import { LocalStorageQuery, SearchQueryResponse } from './utils';
 
 export default class View {
 	modalEl: HTMLElement;
 	modal: Modal;
 	searchInput: HTMLInputElement;
 	searchResults: HTMLElement;
-	recentSearches: string[] | null;
+	recentSearches: LocalStorageQuery[] | null;
+	private getRecentSearches: () => LocalStorageQuery[] | null;
 	private searchTimeoutId: number | null = null;
 
-	constructor( recentSearches: string[] | null ) {
-		this.recentSearches = recentSearches;
+	constructor( getRecentSearches: () => LocalStorageQuery[] | null ) {
+		this.getRecentSearches = getRecentSearches;
+		this.recentSearches = this.getRecentSearches();
 		const { modalEl, searchInput, searchResults } = this.getElements();
 		this.searchInput = searchInput;
 		this.searchResults = searchResults;
@@ -35,6 +38,9 @@ export default class View {
 		};
 	}
 
+	/**
+	 * Wire up event listeners.
+	 */
 	private wireEventListeners() {
 		this.addGlobalKeyboardListener();
 		this.setFocusOnModalShown();
@@ -61,7 +67,6 @@ export default class View {
 			this.searchInput.focus();
 		} );
 		this.showRecentSearches();
-		this.handleRecentSearchEvents();
 	}
 
 	/**
@@ -69,44 +74,58 @@ export default class View {
 	 * @returns
 	 */
 	private showRecentSearches() {
-		if ( ! this.recentSearches || this.searchInput.value !== '' ) {
+		this.recentSearches = this.getRecentSearches();
+		const noRecentSearches =
+			! this.recentSearches || this.recentSearches.length === 0;
+		if ( noRecentSearches || this.searchInput.value !== '' ) {
 			return;
 		}
-		let markup =
-			'<section="recent-pages"><h5>Recent</h5><ul class="list-group ms-0" id="recent-search-queries">';
-		markup += this.recentSearches
-			.map( ( query ) => {
-				return `<li class="list-group-item"><a class="list-group-item-action" href="#">${ query }</a></li>`;
-			} )
-			.join( '' );
-		markup += '</ul></section>';
+		let markup = `<section class="recent-results"><h5>Recent</h5>${ this.generateListGroup(
+			this.recentSearches!,
+			'recent-searches'
+		) }</section>`;
 		this.searchResults.innerHTML = markup;
 	}
 
 	/**
-	 * Handle events for the recent searches.
+	 * Renders a spinner while results are loading
 	 */
-	private handleRecentSearchEvents() {
-		const recentSearches = document.getElementById(
-			'recent-search-queries'
-		);
-		if ( ! recentSearches ) {
-			return;
-		}
-		recentSearches.addEventListener( 'click', ( event ) => {
-			event.preventDefault();
-			const target = event.target as HTMLElement;
-			if ( target.tagName === 'A' ) {
-				this.searchInput.value = target.textContent || '';
-			}
-		} );
+	private renderSpinner() {
+		return '<div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div>';
+	}
+
+	/**
+	 * Generates a list group from search results.
+	 *
+	 * @param results The search results to display.
+	 * @param id The id of the list group.
+	 */
+	private generateListGroup(
+		results: SearchQueryResponse[] | LocalStorageQuery[],
+		id?: string
+	) {
+		let markup = `<ul class="list-group ms-0" ${
+			id ? `id="${ id }"` : ''
+		}">`;
+		markup += results
+			.map( ( { link, title, excerpt } ) => {
+				return `<li class="list-group-item position-relative">
+				<a class="stretched-link d-inline-block text-decoration-none h6 mb-0" href="${ link }">${ title }</a>
+				${ excerpt ? `<div class="text-muted fs-base">${ excerpt }</div>` : '' }
+				</li>`;
+			} )
+			.join( '' );
+		markup += '</ul>';
+		return markup;
 	}
 
 	/**
 	 * Add an input event listener to the search input field to perform a search when the user types.
 	 */
 	addSearchInputListener(
-		performSearch: ( query: string ) => Promise< any[] | null >
+		performSearch: (
+			query: string
+		) => Promise< SearchQueryResponse[] | null >
 	) {
 		const typingDelay = 250;
 		this.searchInput.addEventListener( 'input', () => {
@@ -114,6 +133,8 @@ export default class View {
 				clearTimeout( this.searchTimeoutId );
 			}
 			this.searchTimeoutId = window.setTimeout( () => {
+				this.searchResults.innerHTML = '';
+				this.searchResults.innerHTML = this.renderSpinner();
 				performSearch( this.searchInput.value ).then( ( results ) =>
 					this.updateSearchResults( results )
 				);
@@ -121,30 +142,36 @@ export default class View {
 		} );
 	}
 
-	private renderSpinner() {
-		return '<div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div>';
-	}
-
 	/**
 	 * Update the search results in the DOM.
 	 *
 	 * @param results The search results to display.
 	 */
-	updateSearchResults( results: any[] | null ) {
-		this.searchResults.innerHTML = '';
-		if ( ! results ) {
+	updateSearchResults( results: SearchQueryResponse[] | null ) {
+		if ( this.searchInput.value === '' ) {
+			this.showRecentSearches();
+			return;
+		}
+		if ( ! results || results.length === 0 ) {
 			this.searchResults.innerHTML = '<p>No Results found</p>';
 			return;
 		}
-		this.searchResults.innerHTML = this.renderSpinner();
-		let markup = '<ul class="list-group">';
-		markup += results
-			.map( ( result ) => {
-				console.log( result );
-				return `<li class="list-group-item"><a class="list-group-item-action" href="${ result.link }">${ result.title }</a></li>`;
-			} )
-			.join( '' );
-		markup += '</ul>';
-		this.searchResults.innerHTML = markup;
+		this.searchResults.innerHTML = this.generateListGroup( results );
+	}
+
+	/**
+	 * Handle the selection of a search result.
+	 *
+	 * @param callback The callback function to execute when a search result is selected.
+	 */
+	handleResultSelection( callback: ( result: string ) => void ) {
+		this.searchResults.addEventListener( 'click', ( event ) => {
+			event.preventDefault();
+			const target = event.target as HTMLElement;
+			if ( target.tagName === 'A' ) {
+				callback( target.textContent! );
+				window.location.href = target.getAttribute( 'href' )!;
+			}
+		} );
 	}
 }
