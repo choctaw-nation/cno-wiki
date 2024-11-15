@@ -27,6 +27,7 @@ module.exports = {
 				global: `.${ THEME_DIR }/src/index.js`,
 				'vendors/bootstrap': `.${ THEME_DIR }/src/js/vendors/bootstrap.js`,
 				'modules/post-swiper': `.${ THEME_DIR }/src/js/PostSwiper.ts`,
+				'modules/color-mode-handler': `.${ THEME_DIR }/src/js/ColorModeHandler.ts`,
 				...addEntries( appNames, 'pages' ),
 				...addEntries( styleSheets, 'styles' ),
 			};

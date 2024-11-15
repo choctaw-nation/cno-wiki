@@ -150,6 +150,7 @@ class Theme_Init {
 	 */
 	public function enqueue_cno_scripts() {
 		$this->load_typekit();
+		$this->eager_js();
 
 		new Asset_Loader(
 			'bootstrap',
@@ -182,12 +183,24 @@ class Theme_Init {
 	}
 
 	/** Load Typekit */
-	public function load_typekit() {
+	private function load_typekit() {
 		wp_enqueue_style(
 			'typekit',
 			'https://use.typekit.net/jky5sek.css',
 			array(),
             null // phpcs:ignore
+		);
+	}
+
+	/** Scripts intentionally set as render-blocking */
+	private function eager_js() {
+		$color_mode_asset_file = require_once get_template_directory() . '/dist/modules/color-mode-handler.asset.php';
+		wp_enqueue_script(
+			'color-mode-handler',
+			get_template_directory_uri() . '/dist/modules/color-mode-handler.js',
+			array(),
+			$color_mode_asset_file['version'],
+			false
 		);
 	}
 
