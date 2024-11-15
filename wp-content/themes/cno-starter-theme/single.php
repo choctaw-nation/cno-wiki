@@ -10,7 +10,7 @@ get_header();
 <div class="container my-5">
 	<?php get_template_part( 'template-parts/single/nav', 'breadcrumbs' ); ?>
 </div>
-<article <?php post_class( 'my-5' ); ?>>
+<article <?php post_class( 'container-fluid my-5' ); ?>>
 	<?php if ( has_post_thumbnail() ) : ?>
 	<div class="row">
 		<div class="col">
