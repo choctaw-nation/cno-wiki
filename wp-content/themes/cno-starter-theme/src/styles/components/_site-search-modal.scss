@@ -1,0 +1,20 @@
+@use "../abstracts/mixins" as m;
+
+#site-search-results {
+	.list-group-item {
+		transition:
+			background-color var(--transition-standard),
+			color var(--transition-standard);
+
+		@include m.interaction() {
+			background-color: var(--bs-primary);
+			color: var(--bs-light);
+		}
+
+		a {
+			text-decoration: none;
+			width: 100%;
+			display: block;
+		}
+	}
+}

@@ -10,7 +10,17 @@
 */
 
 $primary: v.$color-purple;
-$secondary: #6c757d;
+$secondary: #b6a8c0;
+$light: #f2f2f2;
+$dark: #0a090b;
+
+$body-color: $dark;
+$body-bg: $light;
+
+// Dark Mode
+
+$body-color-dark: $light;
+$body-bg-dark: $dark;
 
 // ================================================
 
@@ -192,7 +202,7 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 // @import "bootstrap/scss/tooltip";
 // @import "bootstrap/scss/popover";
 // @import "bootstrap/scss/carousel";
-// @import "bootstrap/scss/spinners";
+@import "bootstrap/scss/spinners";
 // @import "bootstrap/scss/placeholders";
 
 // Helpers

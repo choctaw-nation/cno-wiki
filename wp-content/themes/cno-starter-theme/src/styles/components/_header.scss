@@ -14,3 +14,11 @@
 	width: var(--size);
 	height: var(--size);
 }
+
+#site-search {
+	.btn {
+		@include m.media-breakpoint-down(lg) {
+			border-width: 0 !important;
+		}
+	}
+}
