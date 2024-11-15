@@ -5,7 +5,7 @@
  */
 type ColorMode = 'light' | 'dark' | 'auto';
 
-export default class ColorModeHandler {
+new ( class ColorModeHandler {
 	/**
 	 * The color-theme buttons
 	 */
@@ -17,7 +17,6 @@ export default class ColorModeHandler {
 	private userPreference: 'light' | 'dark';
 
 	constructor() {
-		this.themeButtons = this.getThemeButtons();
 		this.userPreference = window.matchMedia(
 			'(prefers-color-scheme: dark)'
 		)
@@ -87,6 +86,7 @@ export default class ColorModeHandler {
 			} );
 
 		window.addEventListener( 'DOMContentLoaded', () => {
+			this.themeButtons = this.getThemeButtons();
 			// Set the theme when the page loads
 			this.showActiveTheme( this.getPreferredTheme() );
 
@@ -180,4 +180,4 @@ export default class ColorModeHandler {
 			selectedColorModeCheck,
 		};
 	}
-}
+} )();
