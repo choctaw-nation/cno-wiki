@@ -12,12 +12,4 @@
 			top: calc(var(--top-offset) + 32px);
 		}
 	}
-
-	.offcanvas-lg.offcanvas-start {
-		@include m.media-breakpoint-down(lg) {
-			body:has(#wpadminbar) & {
-				top: 32px;
-			}
-		}
-	}
 }
