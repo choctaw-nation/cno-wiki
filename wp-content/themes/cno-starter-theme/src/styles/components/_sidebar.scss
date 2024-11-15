@@ -2,7 +2,9 @@
 
 .sidebar {
 	--top-offset: 4rem;
+
 	@include m.media-breakpoint-up(lg) {
+		position: sticky;
 		top: var(--top-offset);
 		height: calc(100vh - var(--top-offset));
 

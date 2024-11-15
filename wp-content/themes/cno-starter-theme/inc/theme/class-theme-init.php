@@ -97,7 +97,6 @@ class Theme_Init {
 
 		$navwalkers = array(
 			'navwalker',
-			// 'mega-menu',
 		);
 		foreach ( $navwalkers as $navwalker ) {
 			require_once $base_path . "/theme/navwalkers/class-{$navwalker}.php";
@@ -107,6 +106,7 @@ class Theme_Init {
 			'allow-svg'       => 'Allow_SVG',
 			'role-editor'     => 'Role_Editor',
 			'badge-generator' => null,
+			'search-rest-api' => 'Search_Rest_API',
 		);
 		foreach ( $utility_files as $utility_file => $class_name ) {
 			require_once $base_path . "/theme/class-{$utility_file}.php";

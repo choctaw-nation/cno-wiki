@@ -12,14 +12,14 @@
 			<header class="modal-header">
 				<form class="flex-grow-1">
 					<div class="input-group">
-						<label for="docsearch-input" id="docsearch-label" class="input-group-text">
+						<label for="site-search-input" id="docsearch-label" class="input-group-text">
 							<svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true" class="DocSearch-Search-Icon">
 								<path d="M14.386 14.386l4.0877 4.0877-4.0877-4.0877c-2.9418 2.9419-7.7115 2.9419-10.6533 0-2.9419-2.9418-2.9419-7.7115 0-10.6533 2.9418-2.9419 7.7115-2.9419 10.6533 0 2.9419 2.9418 2.9419 7.7115 0 10.6533z"
 										stroke="currentColor" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
 								</path>
 							</svg>
 						</label>
-						<input aria-autocomplete="both" aria-labelledby="docsearch-label" id="docsearch-input" autocomplete="off" autocorrect="off" autocapitalize="off" enterkeyhint="go"
+						<input aria-autocomplete="both" aria-labelledby="docsearch-label" id="site-search-input" autocomplete="off" autocorrect="off" autocapitalize="off" enterkeyhint="go"
 								spellcheck="false" placeholder="Search docs" maxlength="64" type="search" class="form-control" aria-activedescendant="docsearch-recentSearches-item-0"
 								aria-controls="docsearch-recentSearches-list docsearch-favoriteSearches-list">
 					</div>
@@ -32,9 +32,7 @@
 					</button>
 				</form>
 			</header>
-			<div class="modal-body">
-				...
-			</div>
+			<div class="modal-body" id="site-search-results"></div>
 			<footer class="modal-footer justify-content-start">
 				<ul class="list-unstyled d-flex ms-0 gap-3">
 					<li class="d-flex align-items-center gap-2">
