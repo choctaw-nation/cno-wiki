@@ -29,10 +29,3 @@ article {
 		max-width: var(--wp--style--global--wide-size);
 	}
 }
-
-.docs-container {
-	grid-template-columns: 1fr;
-	@include m.media-breakpoint-up(lg) {
-		grid-template-columns: 1fr 5fr;
-	}
-}

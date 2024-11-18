@@ -1,0 +1,13 @@
+@use "../abstracts/mixins" as m;
+
+.docs-toc-sidebar {
+	@include m.media-breakpoint-up(lg) {
+		@include m.sticky-sidebar();
+	}
+
+	.docs-toc-sidebar-collapse {
+		@include m.media-breakpoint-up(md) {
+			display: block !important;
+		}
+	}
+}

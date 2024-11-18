@@ -7,3 +7,13 @@
 		@content;
 	}
 }
+
+@mixin sticky-sidebar() {
+	position: sticky;
+	top: var(--sidebar-top-offset);
+	height: calc(100vh - var(--sidebar-top-offset));
+
+	body:has(#wpadminbar) & {
+		top: calc(var(--sidebar-top-offset) + 32px);
+	}
+}

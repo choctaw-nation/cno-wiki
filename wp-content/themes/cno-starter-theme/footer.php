@@ -7,7 +7,7 @@
 
 ?>
 
-<footer class="container-xxl border-top border-1 mt-5 py-2">
+<footer class="docs-footer container-xxl border-top border-1 mt-5 py-2">
 	<div class="row gx-0">
 		<div class="col d-flex flex-wrap gap-2">
 			<p class="fst-italic fs-6 mb-0">See something inaccurate?</p><button data-bs-toggle="modal" data-bs-target="#contact-modal"
