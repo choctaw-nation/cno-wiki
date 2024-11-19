@@ -2,24 +2,30 @@
 
 .docs-container {
 	--sidebar-top-offset: 7rem;
+	display: grid;
 	grid-template-columns: 1fr;
 
 	@include m.media-breakpoint-up(lg) {
-		display: grid;
 		grid-template-columns: 1fr 5fr;
 		grid-template-areas: "sidebar main";
-		gap: 1.5rem;
 	}
 }
 
 .docs-main {
 	grid-area: main;
 	display: grid;
-	grid-template-columns: 1fr;
-	grid-template-areas: "toc" "content";
 	gap: inherit;
+	grid-template-columns: 1fr;
+	grid-template-areas: "toc" "content" "footer";
+	place-items: start;
+	place-content: start;
 
 	@include m.media-breakpoint-up(md) {
+		grid-template-columns: 2fr 1fr;
+		grid-template-areas: "content toc" "footer toc";
+	}
+
+	@include m.media-breakpoint-up(lg) {
 		grid-template-areas: "intro toc" "content toc";
 		grid-template-columns: 4fr 1fr;
 		grid-template-rows: auto auto 1fr;
@@ -28,6 +34,7 @@
 
 .docs-content {
 	grid-area: content;
+	order: 2;
 }
 
 .docs-toc-sidebar {
@@ -35,5 +42,6 @@
 }
 
 .docs-footer {
-	grid-column: span 2;
+	grid-area: footer;
+	grid-column: 1 / -1;
 }

@@ -8,12 +8,12 @@
 	}
 }
 
-@mixin sticky-sidebar() {
+@mixin sticky-sidebar($var: --sidebar-top-offset) {
 	position: sticky;
-	top: var(--sidebar-top-offset);
-	height: calc(100vh - var(--sidebar-top-offset));
+	top: var(#{$var});
+	height: calc(100vh - var(#{$var}));
 
 	body:has(#wpadminbar) & {
-		top: calc(var(--sidebar-top-offset) + 32px);
+		top: calc(var(#{$var}) + 32px);
 	}
 }
