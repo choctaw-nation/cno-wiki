@@ -84,8 +84,6 @@ class Theme_Init {
 		foreach ( $acf_classes as $acf_class ) {
 			require_once $base_path . "/acf/acf-classes/class-{$acf_class}.php";
 		}
-		/** Sets up Initial ACF Fields for global Hero Sections */
-		// require_once $base_path . '/acf/acf-fields/initial-acf-fields.php'; phpcs:ignore Squiz.PHP.CommentedOutCode.Found
 
 		$asset_loaders = array(
 			'enum-enqueue-type',
@@ -183,7 +181,7 @@ class Theme_Init {
 	}
 
 	/** Load Typekit */
-	private function load_typekit() {
+	public function load_typekit() {
 		wp_enqueue_style(
 			'typekit',
 			'https://use.typekit.net/jky5sek.css',
