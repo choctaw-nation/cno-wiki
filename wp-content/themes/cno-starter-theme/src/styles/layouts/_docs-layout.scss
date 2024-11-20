@@ -26,15 +26,15 @@
 	}
 
 	@include m.media-breakpoint-up(lg) {
-		grid-template-areas: "intro toc" "content toc";
+		grid-template-areas: "content toc";
 		grid-template-columns: 4fr 1fr;
+		align-content: stretch;
 		grid-template-rows: auto auto 1fr;
 	}
 }
 
 .docs-content {
 	grid-area: content;
-	order: 2;
 }
 
 .docs-toc-sidebar {

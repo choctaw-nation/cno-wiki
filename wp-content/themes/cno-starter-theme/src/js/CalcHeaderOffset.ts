@@ -32,9 +32,7 @@ export default class HeaderOffsetHandler {
 			this.siteHeader = siteHeader;
 		}
 
-		document.addEventListener( 'DOMContentLoaded', () => {
-			this.setOffset();
-		} );
+		this.setOffset();
 
 		window.addEventListener( 'resize', () => this.setOffset() );
 	}

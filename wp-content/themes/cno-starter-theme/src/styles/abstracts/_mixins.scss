@@ -14,6 +14,6 @@
 	height: calc(100vh - var(#{$var}));
 
 	body:has(#wpadminbar) & {
-		top: calc(var(#{$var}) + 32px);
+		top: calc(var(#{$var}) + var(--wp-admin--admin-bar--height));
 	}
 }

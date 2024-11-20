@@ -1,7 +1,9 @@
 @use "../abstracts/mixins" as m;
 
 .docs-toc-sidebar {
-	--toc-top-offset: calc(var(--sidebar-top-offset) + 1rem);
+	--toc-top-offset: calc(var(--site-header-offset) + 1rem);
+	height: 100%;
+
 	@include m.media-breakpoint-up(lg) {
 		@include m.sticky-sidebar(--toc-top-offset);
 	}

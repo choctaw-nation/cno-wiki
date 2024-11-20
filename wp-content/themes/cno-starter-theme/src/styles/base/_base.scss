@@ -19,7 +19,7 @@ body {
 	@include rfs.font-size(1.35rem);
 }
 
-article {
+.docs-content {
 	& > :where(:not(.alignleft):not(.alignright):not(.align-full)) {
 		max-width: var(--wp--style--global--content-size);
 		margin-inline: auto;

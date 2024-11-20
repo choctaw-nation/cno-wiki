@@ -7,9 +7,7 @@ new ( class TOCScrollHandler {
 	private headingElements: HTMLHeadingElement[][];
 
 	constructor() {
-		this.scrollContainer = document.querySelector(
-			'article.docs-content'
-		)!;
+		this.scrollContainer = document.querySelector( '.docs-content' )!;
 		this.tocContainer = document.getElementById( 'table-of-contents' )!;
 		this.toc = this.tocContainer.querySelector( 'ul' )!;
 		this.init();
@@ -25,7 +23,11 @@ new ( class TOCScrollHandler {
 			return;
 		}
 		this.collectHeadings();
-		this.generateTOC();
+		if ( this.headingElements.length ) {
+			this.generateTOC();
+		} else {
+			this.hideTOC();
+		}
 	}
 
 	/**
@@ -80,7 +82,6 @@ new ( class TOCScrollHandler {
 				subList.classList.add(
 					'nav-pills',
 					'flex-column',
-					'list-group',
 					'list-unstyled'
 				);
 				headingArray.slice( 1 ).forEach( ( subHeading ) => {
@@ -103,11 +104,11 @@ new ( class TOCScrollHandler {
 		headingSlug: string
 	): HTMLLIElement {
 		const listItem = document.createElement( 'li' );
-		listItem.classList.add( 'nav-item', 'list-group-item' );
+		listItem.classList.add( 'nav-item' );
 		const anchor = document.createElement( 'a' );
 		anchor.href = `#${ headingSlug }`;
 		anchor.textContent = headingText;
-		anchor.classList.add( 'nav-link', 'fs-base' );
+		anchor.classList.add( 'nav-link', 'fs-base', 'px-1' );
 		listItem.appendChild( anchor );
 		return listItem;
 	}
@@ -130,5 +131,15 @@ new ( class TOCScrollHandler {
 
 		heading.id = headingSlug;
 		return { headingText, headingSlug };
+	}
+
+	private hideTOC() {
+		const tocContainer =
+			this.tocContainer.closest< HTMLElement >( '.docs-toc-sidebar' )!;
+		tocContainer.style.display = 'none';
+
+		const contentGrid =
+			tocContainer.closest< HTMLElement >( '.docs-main' )!;
+		contentGrid.classList.add( 'd-block', 'container-lg' );
 	}
 } )();
