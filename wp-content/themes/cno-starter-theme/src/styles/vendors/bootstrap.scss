@@ -11,8 +11,8 @@
 
 $primary: v.$color-purple;
 $secondary: #b6a8c0;
-$light: #f2f2f2;
-$dark: #0a090b;
+$light: v.$light;
+$dark: v.$dark;
 
 $body-color: $dark;
 $body-bg: $light;
@@ -21,6 +21,7 @@ $body-bg: $light;
 
 $body-color-dark: $light;
 $body-bg-dark: $dark;
+$code-color-dark: #31d43c;
 
 // ================================================
 
@@ -37,6 +38,7 @@ $font-family-monospace:
 // LINKS
 $link-color: $primary;
 $link-hover-color: rgba($primary, 0.8);
+$link-color-dark: #cba3d8;
 
 // HEADINGS
 $headings-font-family: v.$font-body;

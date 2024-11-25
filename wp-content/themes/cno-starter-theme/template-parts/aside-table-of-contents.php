@@ -19,7 +19,7 @@
 	<hr class="d-none d-md-block my-2">
 	<div class="collapse docs-toc-sidebar-collapse" id="tocContents">
 		<nav id="table-of-contents">
-			<ul class="list-unstyled ms-0"></ul>
+			<ul class="nav nav-pills ms-0"></ul>
 		</nav>
 	</div>
 </aside>
