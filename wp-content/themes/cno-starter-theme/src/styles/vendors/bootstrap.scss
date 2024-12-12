@@ -28,6 +28,7 @@ $code-color-dark: #31d43c;
 /**
 * Typography
 */
+
 $font-size-base: 1rem;
 $font-family-sans-serif: v.$font-body;
 $font-family-monospace:
@@ -80,6 +81,7 @@ $display-line-height: calc(2ex + 4px);
 /**
 * Buttons
 */
+
 $btn-transition: all v.$transition-standard;
 
 $input-btn-padding-x: 0.75rem;
@@ -107,6 +109,16 @@ $navbar-light-brand-hover-color: $secondary;
 
 $navbar-dark-brand-color: white;
 // $navbar-dark-brand-hover-color: $secondary;
+
+// ================================================
+
+/**
+* Navs
+*/
+
+$nav-link-font-size: 1.125rem;
+$nav-link-padding-x: 0.5rem;
+$nav-pills-border-radius: 0.25rem;
 
 // ================================================
 
