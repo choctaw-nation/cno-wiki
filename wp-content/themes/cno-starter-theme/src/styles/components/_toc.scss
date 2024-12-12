@@ -1,0 +1,16 @@
+@use "../abstracts/mixins" as m;
+
+.docs-toc-sidebar {
+	--toc-top-offset: calc(var(--site-header-offset) + 1rem);
+	height: 100%;
+
+	@include m.media-breakpoint-up(lg) {
+		@include m.sticky-sidebar(--toc-top-offset);
+	}
+
+	.docs-toc-sidebar-collapse {
+		@include m.media-breakpoint-up(md) {
+			display: block !important;
+		}
+	}
+}

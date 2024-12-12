@@ -1,0 +1,47 @@
+@use "../abstracts/mixins" as m;
+
+.docs-container {
+	--sidebar-top-offset: 7rem;
+	display: grid;
+	grid-template-columns: 1fr;
+
+	@include m.media-breakpoint-up(lg) {
+		grid-template-columns: 1fr 5fr;
+		grid-template-areas: "sidebar main";
+	}
+}
+
+.docs-main {
+	grid-area: main;
+	display: grid;
+	gap: inherit;
+	grid-template-columns: 1fr;
+	grid-template-areas: "toc" "content" "footer";
+	place-items: start;
+	place-content: start;
+
+	@include m.media-breakpoint-up(md) {
+		grid-template-columns: 2fr 1fr;
+		grid-template-areas: "content toc" "footer toc";
+	}
+
+	@include m.media-breakpoint-up(lg) {
+		grid-template-areas: "content toc";
+		grid-template-columns: 4fr 1fr;
+		align-content: stretch;
+		grid-template-rows: auto auto 1fr;
+	}
+}
+
+.docs-content {
+	grid-area: content;
+}
+
+.docs-toc-sidebar {
+	grid-area: toc;
+}
+
+.docs-footer {
+	grid-area: footer;
+	grid-column: 1 / -1;
+}

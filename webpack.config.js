@@ -28,6 +28,7 @@ module.exports = {
 				'vendors/bootstrap': `.${ THEME_DIR }/src/js/vendors/bootstrap.js`,
 				'modules/post-swiper': `.${ THEME_DIR }/src/js/PostSwiper.ts`,
 				'modules/color-mode-handler': `.${ THEME_DIR }/src/js/ColorModeHandler.ts`,
+				'modules/toc-scroll': `.${ THEME_DIR }/src/js/TOCScrollSpy.ts`,
 				...addEntries( appNames, 'pages' ),
 				...addEntries( styleSheets, 'styles' ),
 			};

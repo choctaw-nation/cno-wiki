@@ -5,7 +5,7 @@
 	top: 0;
 
 	body:has(#wpadminbar) & {
-		top: 32px;
+		top: var(--wp-admin--admin-bar--height);
 	}
 }
 
@@ -32,7 +32,7 @@
 .offcanvas-lg {
 	@include m.media-breakpoint-down(lg) {
 		body:has(#wpadminbar) & {
-			top: 32px;
+			top: var(--wp-admin--admin-bar--height);
 		}
 	}
 }

@@ -43,7 +43,7 @@ $breadcrumbs[] = array(
 	'title' => get_the_title(),
 );
 ?>
-<nav class="breadcrumb fw-bold mb-0" style="--bs-breadcrumb-divider:'&gt;'">
+<nav class="breadcrumb fw-bold my-3" style="--bs-breadcrumb-divider:'&gt;'">
 	<ol class="list-unstyled m-0 d-flex flex-wrap">
 		<?php foreach ( $breadcrumbs as $index => $breadcrumb ) : ?>
 			<?php

@@ -8,6 +8,8 @@
 	--font-serif: #{v.$font-serif};
 
 	--transition-standard: #{v.$transition-standard};
+
+	color-scheme: light dark;
 }
 
 ul,
@@ -19,7 +21,7 @@ body {
 	@include rfs.font-size(1.35rem);
 }
 
-article {
+.docs-content {
 	& > :where(:not(.alignleft):not(.alignright):not(.align-full)) {
 		max-width: var(--wp--style--global--content-size);
 		margin-inline: auto;
@@ -27,12 +29,5 @@ article {
 
 	& > .alignwide {
 		max-width: var(--wp--style--global--wide-size);
-	}
-}
-
-.docs-container {
-	grid-template-columns: 1fr;
-	@include m.media-breakpoint-up(lg) {
-		grid-template-columns: 1fr 5fr;
 	}
 }

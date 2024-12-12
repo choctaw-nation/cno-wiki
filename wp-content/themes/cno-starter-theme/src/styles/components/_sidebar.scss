@@ -1,15 +1,9 @@
 @use "../abstracts/mixins" as m;
 
-.sidebar {
-	--top-offset: 4rem;
+.docs-sidebar {
+	grid-area: sidebar;
 
 	@include m.media-breakpoint-up(lg) {
-		position: sticky;
-		top: var(--top-offset);
-		height: calc(100vh - var(--top-offset));
-
-		body:has(#wpadminbar) & {
-			top: calc(var(--top-offset) + 32px);
-		}
+		@include m.sticky-sidebar();
 	}
 }

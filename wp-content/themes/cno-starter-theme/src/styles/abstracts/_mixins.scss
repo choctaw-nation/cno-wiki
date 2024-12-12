@@ -7,3 +7,13 @@
 		@content;
 	}
 }
+
+@mixin sticky-sidebar($var: --sidebar-top-offset) {
+	position: sticky;
+	top: var(#{$var});
+	height: calc(100vh - var(#{$var}));
+
+	body:has(#wpadminbar) & {
+		top: calc(var(#{$var}) + var(--wp-admin--admin-bar--height));
+	}
+}
