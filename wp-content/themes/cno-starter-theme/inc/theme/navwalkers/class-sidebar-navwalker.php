@@ -1,6 +1,6 @@
 <?php
 /**
- * CNO Navwalker
+ * Sidebar Navwalker
  *
  * Edits the output of wp_nav_menu()
  * <div class='menu-container'>
@@ -14,22 +14,14 @@
  * </div> // end_lvl()
  *
  * @package ChoctawNation
- * @since 1.8.0
- * @version 2.0
  */
 
 namespace ChoctawNation;
 
 /**
- * Extends the WP Nav Walker to create megamenu option
- * Based on the Bootscore 5 Nav Walker
- *
- * @link https://github.com/bootscore/bootscore/blob/main/inc/class-bootstrap-5-navwalker.php
- *
- * @since 0.1
- * @author Blake Perkins & KJ Roelke
+ * Creates the Docs Sidebar
  */
-class Navwalker extends \Walker_Nav_Menu {
+class Sidebar_Navwalker extends \Walker_Nav_Menu {
 	/** The current nav item
 	 *
 	 * @var WP_Post $current_item
@@ -90,6 +82,8 @@ class Navwalker extends \Walker_Nav_Menu {
 	 */
 	protected bool $href_is_empty;
 
+	private int $current_page_id;
+
 	/**
 	 * The Opening Level
 	 *
@@ -122,12 +116,13 @@ class Navwalker extends \Walker_Nav_Menu {
 	 * @param int      $id           Optional. ID of the current menu item. Default 0.
 	 */
 	public function start_el( &$output, $data_object, $depth = 0, $args = \null, $id = 0 ) {
-		$this->current_item  = $data_object;
-		$this->depth         = $depth;
-		$this->args          = $args;
-		$this->id            = $id;
-		$this->is_top_level  = $this->has_children && 0 === $this->depth;
-		$this->href_is_empty = '#' === $this->current_item->url;
+		$this->current_page_id = get_the_ID();
+		$this->current_item    = $data_object;
+		$this->depth           = $depth;
+		$this->args            = $args;
+		$this->id              = $id;
+		$this->is_top_level    = $this->has_children && 0 === $this->depth;
+		$this->href_is_empty   = '#' === $this->current_item->url;
 
 		$output .= $this->get_the_li_element();
 		if ( $this->is_top_level & ! $this->href_is_empty ) {
@@ -135,10 +130,7 @@ class Navwalker extends \Walker_Nav_Menu {
 		}
 
 		$output .= $this->get_the_anchor_element();
-		// if is top-level, add split-toggle dropdown button that only displays on mobile
-		if ( $this->has_children && $this->is_top_level && ! $this->href_is_empty ) {
-			$output .= '<button type="button" class="btn dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>';
-		}
+		$output .= $this->get_the_posts();
 	}
 
 	/** Generate the Opening `li` tag
@@ -191,7 +183,7 @@ class Navwalker extends \Walker_Nav_Menu {
 	 * @return string the anchor
 	 */
 	protected function get_the_anchor_element(): string {
-		$attributes = $this->get_the_attributes();
+		$attributes = $this->get_the_anchor_attributes();
 
 		$title = apply_filters( 'the_title', $this->current_item->title, $this->current_item->ID );
 		$title = apply_filters( 'nav_menu_item_title', $title, $this->current_item, $this->args, $this->depth );
@@ -212,8 +204,8 @@ class Navwalker extends \Walker_Nav_Menu {
 	}
 
 	/** Builds the anchor attributes */
-	protected function get_the_attributes(): string {
-		$active_class = ( $this->current_item->current || $this->current_item->current_item_ancestor || in_array( 'current_page_parent', $this->current_item->classes, true ) || in_array( 'current-post-ancestor', $this->current_item->classes, true ) ) ? 'active ' : '';
+	protected function get_the_anchor_attributes(): string {
+		$active_class = ( $this->current_item->current || $this->current_item->current_item_ancestor || in_array( 'current_page_parent', $this->current_item->classes, true ) || in_array( 'current-post-ancestor', $this->current_item->classes, true ) ) ? 'active fw-bold' : '';
 		if ( ! $this->href_is_empty ) {
 			$attributes = array(
 				'title'  => $this->current_item->attr_title,
@@ -242,5 +234,61 @@ class Navwalker extends \Walker_Nav_Menu {
 
 		$attributes['class'] .= ' nav-link';
 		return $this->build_atts( $attributes );
+	}
+
+	/**
+	 * Gets the posts for the current term and attaches them as a sub-menu
+	 *
+	 * @return string the markup
+	 */
+	private function get_the_posts(): string {
+		$term_id = $this->current_item->object_id;
+		$term    = get_term( $term_id );
+		$markup  = '';
+		if ( ! $term || is_wp_error( $term ) ) {
+			return $markup;
+		}
+
+		$query = new \WP_Query(
+			array(
+				'post_type' => array( 'post', 'dev-note' ),
+				'tax_query' => array(
+					array(
+						'taxonomy' => $term->taxonomy,
+						'field'    => 'term_id',
+						'terms'    => $term_id,
+					),
+				),
+			)
+		);
+
+		if ( ! $query->have_posts() ) {
+			return $markup;
+		}
+
+		$markup .= '<ul class="sub-menu list-unstyled list-group">';
+		while ( $query->have_posts() ) {
+			$query->the_post();
+			$li_classes     = array(
+				'list-group-item',
+				'list-group-item-action',
+				'border-0',
+				'rounded-0',
+				'position-relative',
+			);
+			$anchor_classes = array( 'text-decoration-none', 'stretched-link' );
+
+			$is_current = get_the_ID() === $this->current_page_id;
+			if ( $is_current ) {
+				$li_classes[]     = 'active';
+				$anchor_classes[] = 'text-white fw-bold';
+			}
+
+			$markup .= '<li ' . ( $is_current ? 'aria-current="true"' : '' ) . ' class="' . esc_attr( implode( ' ', $li_classes ) ) . '">';
+			$markup .= '<a href="' . get_permalink() . '" class="' . esc_attr( implode( ' ', $anchor_classes ) ) . '">' . get_the_title() . '</a></li>';
+		}
+		$markup .= '</ul>';
+		wp_reset_postdata();
+		return $markup;
 	}
 }
