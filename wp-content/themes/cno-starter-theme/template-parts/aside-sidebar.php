@@ -19,7 +19,7 @@ use ChoctawNation\Sidebar_Navwalker;
 			wp_nav_menu(
 				array(
 					'theme_location'  => 'sidebar_menu',
-					'menu_class'      => 'sidebar-nav list-unstyled m-0 p-0',
+					'menu_class'      => 'sidebar-nav list-group m-0 p-0',
 					'container'       => 'div',
 					'container_class' => 'offcanvas-body',
 					'walker'          => new Sidebar_Navwalker(),
