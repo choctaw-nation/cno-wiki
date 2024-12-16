@@ -79,7 +79,6 @@ class Theme_Init {
 		$acf_classes = array(
 			'generator',
 			'image',
-			// 'hero',
 		);
 		foreach ( $acf_classes as $acf_class ) {
 			require_once $base_path . "/acf/acf-classes/class-{$acf_class}.php";
@@ -95,6 +94,7 @@ class Theme_Init {
 
 		$navwalkers = array(
 			'navwalker',
+			'sidebar-navwalker',
 		);
 		foreach ( $navwalkers as $navwalker ) {
 			require_once $base_path . "/theme/navwalkers/class-{$navwalker}.php";

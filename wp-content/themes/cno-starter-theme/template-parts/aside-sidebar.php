@@ -5,7 +5,7 @@
  * @package ChoctawNation
  */
 
-use ChoctawNation\Navwalker;
+use ChoctawNation\Sidebar_Navwalker;
 
 ?>
 <aside class="docs-sidebar border-1 border-end overflow-y-auto d-block">
@@ -19,10 +19,10 @@ use ChoctawNation\Navwalker;
 			wp_nav_menu(
 				array(
 					'theme_location'  => 'sidebar_menu',
-					'menu_class'      => 'sidebar-nav list-unstyled m-0 p-0',
+					'menu_class'      => 'sidebar-nav list-group m-0 p-0',
 					'container'       => 'div',
 					'container_class' => 'offcanvas-body',
-					'walker'          => new Navwalker(),
+					'walker'          => new Sidebar_Navwalker(),
 				)
 			);
 		}
