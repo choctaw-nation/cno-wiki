@@ -23,7 +23,7 @@ body {
 
 .docs-content {
 	& > :where(:not(.alignleft):not(.alignright):not(.align-full)) {
-		max-width: var(--wp--style--global--content-size);
+		max-width: clamp(100vw, var(--wp--style--global--content-size), 100vw);
 		margin-inline: auto;
 	}
 

@@ -2,7 +2,7 @@
 
 body {
 	text-wrap: pretty;
-	word-break: normal;
+	word-break: break-word;
 }
 
 [class*="fs-"] > p {

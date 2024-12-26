@@ -19,7 +19,7 @@
 
 <body <?php body_class(); ?>>
 	<?php wp_body_open(); ?>
-	<header class="text-bg-primary z-3" id="site-header">
+	<header class="text-bg-primary z-3 position-sticky" id="site-header">
 		<div class="container-xxl">
 			<nav class="navbar navbar-expand-lg justify-content-start justify-content-lg-between py-2 flex-nowrap" id="site-nav">
 				<button id="docs-toggler" class="navbar-toggler border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar-nav" aria-controls="sidebar-nav"
