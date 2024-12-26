@@ -9,7 +9,9 @@
 }
 
 @mixin sticky-sidebar($var: --sidebar-top-offset) {
+	--total-offset: calc(var(#{$var}) + var(--wp-admin--admin-bar--height, 0));
 	position: sticky;
-	top: calc(var(#{$var}) + var(--wp-admin--admin-bar--height));
-	height: calc(100vh - var(#{$var}));
+	top: var(--total-offset);
+	height: calc(100vh - var(--total-offset));
+	bottom: 0;
 }
