@@ -1,0 +1,74 @@
+/**
+* "global" vars for consistent styles
+*/
+$light-color: rgb(240, 240, 240);
+$dark-color: #222;
+
+// ========================================
+
+/**
+ * Light mode
+ */
+$light-mode: (
+	"success",
+	"info",
+	"warning",
+	"danger",
+	"primary",
+	"secondary",
+	"dark"
+);
+$light-mode-light-text: ("dark", "secondary", "primary", "success");
+
+@each $color in $light-mode {
+	:where([data-bs-theme="light"] .has-#{$color}-background-color) {
+		@if (index($light-mode-light-text, $color)) {
+			--bs-code-color: #{$light-color};
+			--bs-link-color-rgb: #{$light-color};
+		} @else {
+			--bs-code-color: $dark-color;
+			--bs-link-color-rgb: rgb(0, 0, 0);
+		}
+	}
+}
+
+// ========================================
+
+/**
+ * Dark mode
+ */
+
+// Colors to loop through
+$dark-mode: ("white", "warning", "success", "warning", "danger", "info");
+
+// Colors that should have dark text
+$dark-mode-dark-text: ("white", "warning", "info", "success");
+
+// Colors that should have dark code
+$dark-mode-dark-code: ("danger", "info", "warning", "white");
+
+// Colors that should have light code
+$dark-mode-light-code: ("success", "danger");
+
+$dark-mode-light-links: ("danger");
+$dark-mode-dark-links: ("info", "warning", "success", "white");
+
+@each $color in $dark-mode {
+	:where([data-bs-theme="dark"] .has-#{$color}-background-color) {
+		@if (index($dark-mode-dark-text, $color)) {
+			color: var(--bs-dark);
+		}
+		@if (index($dark-mode-dark-code, $color)) {
+			--bs-code-color: #{$dark-color};
+		}
+		@if (index($dark-mode-light-code, $color)) {
+			--bs-code-color: #{$light-color};
+		}
+		@if (index($dark-mode-light-links, $color)) {
+			--bs-link-color-rgb: #{$light-color};
+		}
+		@if (index($dark-mode-dark-links, $color)) {
+			--bs-link-color-rgb: rgb(var(--bs-dark-rgb));
+		}
+	}
+}

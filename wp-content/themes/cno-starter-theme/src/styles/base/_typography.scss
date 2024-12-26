@@ -1,3 +1,5 @@
+@use "./block-overrides/paragraphs";
+
 body {
 	text-wrap: pretty;
 	word-break: normal;
