@@ -78,14 +78,14 @@ class Search_Rest_API {
 					'excerpt' => get_the_excerpt(),
 					'meta'    => array(
 						'post_type'  => get_post_type(),
-						'categories' => get_the_category_list( ', ' ),
+						'categories' => get_the_terms( get_the_ID(), 'category' ),
 						'frameworks' => get_the_terms( get_the_ID(), 'framework' ),
-						'tags'       => get_the_tag_list( '', ', ' ),
+						'tags'       => get_the_terms( get_the_ID(), 'post_tag' ),
 						'author'     => get_the_author(),
 						'date'       => get_the_date(),
 						'updated'    => get_the_modified_date(),
 						'languages'  => get_the_terms( get_the_ID(), 'language' ),
-						'website'    => get_the_terms( get_the_ID(), 'website' ),
+						'websites'   => get_the_terms( get_the_ID(), 'website' ),
 					),
 				);
 			}

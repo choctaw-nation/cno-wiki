@@ -21,6 +21,7 @@
 	},
 	"devDependencies": {
 		"@types/bootstrap": "^5.2.10",
-		"@wordpress/scripts": "^30.7.0"
+		"@wordpress/scripts": "^30.7.0",
+		"wp-types": "^4.67.0"
 	}
 }

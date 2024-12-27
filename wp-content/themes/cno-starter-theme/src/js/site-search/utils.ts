@@ -1,14 +1,15 @@
+import { WP_Term } from 'wp-types';
 export interface SearchQueryResponse {
 	title: string;
 	link: string;
 	excerpt: string;
 	meta: {
 		post_type: string;
-		categories: string;
-		frameworks: object | boolean;
-		languages: object | boolean;
-		website: object | boolean;
-		tags: string;
+		categories: WP_Term[] | false;
+		frameworks: WP_Term[] | false;
+		languages: WP_Term[] | false;
+		websites: WP_Term[] | false;
+		tags: WP_Term[] | false;
 	};
 }
 

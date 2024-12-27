@@ -108,15 +108,52 @@ export default class View {
 			id ? `id="${ id }"` : ''
 		}">`;
 		markup += results
-			.map( ( { link, title, excerpt } ) => {
+			.map( ( { link, title, excerpt, meta } ) => {
 				return `<li class="list-group-item position-relative">
+				<div class="d-flex flex-column justify-content-between gap-2">
 				<a class="stretched-link d-inline-block text-decoration-none h6 mb-0" href="${ link }">${ title }</a>
+				<div class="meta text-muted fs-base d-flex flex-wrap gap-2">${ this.generateMetaMarkup(
+					meta
+				) }</div>
 				${ excerpt ? `<div class="text-muted fs-base">${ excerpt }</div>` : '' }
+				</div>
 				</li>`;
 			} )
 			.join( '' );
 		markup += '</ul>';
 		return markup;
+	}
+
+	/**
+	 * Generates the meta markup for a search result.
+	 *
+	 * @param meta The meta data for the search result.
+	 */
+	private generateMetaMarkup( meta: SearchQueryResponse[ 'meta' ] ): string {
+		const { categories, tags, frameworks, languages, websites } = meta;
+		const metaMarkup: string[] = [];
+		const termsMap = {
+			primary: categories,
+			secondary: tags,
+			info: frameworks,
+			warning: languages,
+			success: websites,
+		};
+		const noMeta = Object.values( termsMap ).every( ( term ) => ! term );
+		if ( noMeta ) {
+			return '';
+		}
+		Object.entries( termsMap ).forEach( ( [ color, termsArray ] ) => {
+			if ( termsArray ) {
+				termsArray.forEach( ( term ) =>
+					metaMarkup.push(
+						`<span class="btn btn-sm btn-${ color } rounded-pill">${ term.name }</span>`
+					)
+				);
+			}
+		} );
+
+		return metaMarkup.join( '' );
 	}
 
 	/**
@@ -162,14 +199,14 @@ export default class View {
 	/**
 	 * Handle the selection of a search result.
 	 *
-	 * @param callback The callback function to execute when a search result is selected.
+	 * @param storeSearchResult The callback function to execute when a search result is selected.
 	 */
-	handleResultSelection( callback: ( result: string ) => void ) {
+	handleResultSelection( storeSearchResult: ( result: string ) => void ) {
 		this.searchResults.addEventListener( 'click', ( event ) => {
 			event.preventDefault();
 			const target = event.target as HTMLElement;
 			if ( target.tagName === 'A' ) {
-				callback( target.textContent! );
+				storeSearchResult( target.textContent! );
 				window.location.href = target.getAttribute( 'href' )!;
 			}
 		} );

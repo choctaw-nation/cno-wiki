@@ -37,12 +37,18 @@ export default class Model {
 	 * @param query The search query to store.
 	 */
 	storeRecentSearch( query: string ) {
+		if ( ! this.results ) return;
 		const searchResult = this.results.find(
 			( result ) => result.title === query
 		)!;
 		this.storeItemWithExpiration( searchResult );
 	}
 
+	/**
+	 * Get the recent search queries from local storage.
+	 *
+	 * @returns The recent search queries from local storage.
+	 */
 	getRecentSearches(): LocalStorageQuery[] {
 		return this.getStoredQueries();
 	}
