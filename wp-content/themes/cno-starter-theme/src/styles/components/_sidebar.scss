@@ -1,9 +1,11 @@
 @use "../abstracts/mixins" as m;
 
 .docs-sidebar {
-	grid-area: sidebar;
-
+	.offcanvas-lg.offcanvas-start {
+		top: var(--wp-admin--admin-bar--height, 0);
+	}
 	@include m.media-breakpoint-up(lg) {
+		grid-area: sidebar;
 		@include m.sticky-sidebar();
 	}
 }

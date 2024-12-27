@@ -13,8 +13,8 @@ get_header();
 ?>
 <div class="container-xxl docs-container d-lg-grid gap-3">
 	<?php get_template_part( 'template-parts/aside', 'sidebar' ); ?>
-	<main class="docs-main py-3">
-		<div <?php post_class( 'container-xxl docs-content' ); ?>>
+	<main class="docs-main my-3 d-grid">
+		<div <?php post_class( 'container-fluid docs-content overflow-hidden' ); ?>>
 			<?php get_template_part( 'template-parts/single/nav', 'breadcrumbs' ); ?>
 			<?php if ( has_post_thumbnail() ) : ?>
 			<div class="row">

@@ -1,7 +1,6 @@
 @use "../abstracts/mixins" as m;
 
 #site-header {
-	position: sticky;
 	top: var(--wp-admin--admin-bar--height, 0);
 }
 
@@ -25,8 +24,6 @@
 	}
 }
 
-.offcanvas-lg {
-	@include m.media-breakpoint-down(lg) {
-		top: var(--wp-admin--admin-bar--height, 0);
-	}
+.offcanvas-lg.offcanvas-end {
+	top: var(--wp-admin--admin-bar--height, 0);
 }

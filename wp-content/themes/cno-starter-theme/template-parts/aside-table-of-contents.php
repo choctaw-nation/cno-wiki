@@ -6,7 +6,7 @@
  */
 
 ?>
-<aside class="docs-toc-sidebar my-3 my-lg-0 mb-lg-5 px-sm-1 text-body-secondary">
+<aside class="docs-toc-sidebar my-3 my-lg-0 mb-lg-5 px-sm-1 text-body-secondary rounded-1">
 	<button class="btn btn-link p-md-0 mb-0 text-decoration-none d-md-none" type="button" data-bs-toggle="collapse" data-bs-target="#tocContents" aria-expanded="false"
 			aria-controls="tocContents">
 		On this page

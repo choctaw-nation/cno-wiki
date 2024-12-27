@@ -23,18 +23,23 @@ export default class HeaderOffsetHandler {
 	private headerHeight: number;
 
 	/**
+	 * The handler for the sticky mobile header.
+	 */
+	private stickyMobileHeaderHandler: () => void;
+
+	/**
 	 * Creates a new instance of the HeaderOffsetGenerator class.
 	 */
 	constructor() {
 		this.cssVar = '--site-header-offset';
-		const siteHeader = document.getElementById( 'site-header' );
-		if ( siteHeader ) {
-			this.siteHeader = siteHeader;
-		}
-
+		this.siteHeader = document.getElementById( 'site-header' )!;
+		this.stickyMobileHeaderHandler = this.mobileScrollHandler.bind( this );
 		this.setOffset();
-
-		window.addEventListener( 'resize', () => this.setOffset() );
+		this.handleLoggedInScroll();
+		window.addEventListener( 'resize', () => {
+			this.setOffset();
+			this.handleLoggedInScroll();
+		} );
 	}
 
 	/**
@@ -108,5 +113,35 @@ export default class HeaderOffsetHandler {
 			return href.slice( 0, -1 );
 		}
 		return href;
+	}
+
+	/**
+	 * Wires the scroll event handlers for the sticky mobile header.
+	 */
+	private handleLoggedInScroll() {
+		const isLoggedIn = document.getElementById( 'wpadminbar' );
+		if ( ! isLoggedIn ) {
+			return;
+		}
+		if ( window.innerWidth < 600 ) {
+			window.addEventListener( 'scroll', this.stickyMobileHeaderHandler );
+		} else {
+			window.removeEventListener(
+				'scroll',
+				this.stickyMobileHeaderHandler
+			);
+		}
+	}
+
+	/**
+	 * When a user on a mobile screen scrolls down, `.top-0` is added to the site header
+	 *
+	 */
+	private mobileScrollHandler() {
+		if ( window.scrollY > 0 ) {
+			this.siteHeader.classList.add( 'top-0' );
+		} else {
+			this.siteHeader.classList.remove( 'top-0' );
+		}
 	}
 }

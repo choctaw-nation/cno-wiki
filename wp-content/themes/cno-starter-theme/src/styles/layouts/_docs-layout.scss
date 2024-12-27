@@ -2,7 +2,6 @@
 
 .docs-container {
 	--sidebar-top-offset: 7rem;
-	display: grid;
 	grid-template-columns: 1fr;
 
 	@include m.media-breakpoint-up(lg) {
@@ -13,12 +12,9 @@
 
 .docs-main {
 	grid-area: main;
-	display: grid;
 	gap: inherit;
 	grid-template-columns: 1fr;
 	grid-template-areas: "toc" "content" "footer";
-	place-items: start;
-	place-content: start;
 
 	@include m.media-breakpoint-up(md) {
 		grid-template-columns: 2fr 1fr;

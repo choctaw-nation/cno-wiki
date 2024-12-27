@@ -91,7 +91,7 @@
 					"slug": "base",
 					"size": "1.35rem",
 					"name": "Body",
-					"fluid": true
+					"fluid": false
 				},
 				{
 					"slug": "sm",
