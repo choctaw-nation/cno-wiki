@@ -8,4 +8,11 @@
 		grid-area: sidebar;
 		@include m.sticky-sidebar();
 	}
+	[data-bs-theme="dark"] & {
+		--bs-border-color: var(--bs-primary);
+	}
+
+	[data-bs-theme="light"] & {
+		--bs-border-color: var(--bs-border-color-translucent);
+	}
 }

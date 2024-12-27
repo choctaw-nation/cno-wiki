@@ -8,8 +8,22 @@
 get_header();
 ?>
 <main class="d-flex flex-column row-gap-5 my-5">
-	<h1 class="text-center mb-4"><?php echo substr( get_the_archive_title(), 10 ); ?></h1>
-	<section class="text-bg-light py-5">
+	<header class="archive-header text-center container">
+		<div class="row justify-content-center">
+			<div class="col-lg-10">
+				<h1>
+					<?php echo substr( get_the_archive_title(), 10 ); ?>
+				</h1>
+				<?php
+				$description = get_the_archive_description();
+				if ( $description ) {
+					echo $description;
+				}
+				?>
+			</div>
+		</div>
+	</header>
+	<section class="search-form py-5">
 		<div class="container">
 			<div class="d-flex flex-column row-gap-3 my-5">
 				<div class="row row-cols-auto align-items-center gx-0 gap-2">

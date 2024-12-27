@@ -19,7 +19,16 @@ get_header();
 			<?php if ( has_post_thumbnail() ) : ?>
 			<div class="row">
 				<div class="col">
-					<?php the_post_thumbnail( 'full' ); ?>
+					<?php
+					the_post_thumbnail(
+						'full',
+						array(
+							'class'           => 'w-100 h-100 object-fit-contain',
+							'loading'         => 'eager',
+							'data-spai-eager' => true,
+						)
+					);
+					?>
 				</div>
 			</div>
 			<?php endif; ?>
