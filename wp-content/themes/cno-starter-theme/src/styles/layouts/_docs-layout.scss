@@ -15,8 +15,6 @@
 	gap: inherit;
 	grid-template-columns: 1fr;
 	grid-template-areas: "toc" "content" "footer";
-	place-items: start;
-	place-content: start;
 
 	@include m.media-breakpoint-up(md) {
 		grid-template-columns: 2fr 1fr;

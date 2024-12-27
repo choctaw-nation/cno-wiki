@@ -20,14 +20,3 @@ ol {
 body {
 	@include rfs.font-size(1.35rem);
 }
-
-.docs-content {
-	& > :where(:not(.alignleft):not(.alignright):not(.align-full)) {
-		max-width: clamp(100vw, var(--wp--style--global--content-size), 100vw);
-		margin-inline: auto;
-	}
-
-	& > .alignwide {
-		max-width: var(--wp--style--global--wide-size);
-	}
-}
