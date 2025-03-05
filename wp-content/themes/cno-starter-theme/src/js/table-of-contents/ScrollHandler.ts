@@ -21,7 +21,11 @@ export default class ScrollHandler {
 		this.scrollContainer = document.querySelector( '.docs-content' )!;
 		this.tocContainer = document.getElementById( 'table-of-contents' )!;
 		this.init();
-		ScrollSpy.getInstance( this.scrollContainer )?.refresh();
+		const scrollspy = ScrollSpy.getInstance( this.scrollContainer );
+		if ( scrollspy ) {
+			console.log( scrollspy );
+			scrollspy.refresh();
+		}
 	}
 
 	/**

@@ -130,6 +130,7 @@ export default class TOCGenerator {
 			.toLowerCase()
 			.replaceAll( ' &', '' )
 			.replaceAll( ',', '' )
+			.replaceAll( '.', '' )
 			.replaceAll( /\s/g, '-' );
 
 		const headingId = parentSlug

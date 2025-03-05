@@ -12,7 +12,7 @@ get_header();
 		<div class="row justify-content-center">
 			<div class="col-lg-10">
 				<h1>
-					<?php echo substr( get_the_archive_title(), 10 ); ?>
+					<?php echo the_archive_title(); ?>
 				</h1>
 				<?php
 				$description = get_the_archive_description();
