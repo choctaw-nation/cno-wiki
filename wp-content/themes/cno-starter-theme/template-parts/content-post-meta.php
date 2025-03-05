@@ -13,7 +13,7 @@ $author           = get_the_author_meta( 'display_name', $author_id );
 <div class="<?php echo "post-meta fs-base {$classes}"; ?>">
 	<p class="mb-0">
 		By:
-		<?php echo esc_html( $author ); ?>
+		<?php echo do_shortcode( '[publishpress_authors_box]' ); ?>
 	</p>
 	<p class="mb-2">
 		<?php

@@ -10,9 +10,14 @@
 		);
 	}
 
-	@include m.media-breakpoint-up(lg) {
-		@include m.sticky-sidebar(--toc-top-offset);
-		height: 100%;
+	@include m.media-breakpoint-up(md) {
+		--total-offset: calc(
+			var(--sidebar-top-offset) + var(--wp-admin--admin-bar--height, 0)
+		);
+		position: sticky;
+		top: var(--total-offset);
+		height: calc(100vh - var(--total-offset));
+		bottom: 0;
 	}
 
 	.docs-toc-sidebar-collapse {
