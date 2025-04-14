@@ -5,8 +5,18 @@
  * @package ChoctawNation
  */
 
-use ChoctawNation\Sidebar_Navwalker;
+$websites = get_terms(
+	array(
+		'taxonomy'   => 'website',
+		'hide_empty' => true,
+		'orderby'    => 'name',
+		'order'      => 'ASC',
+	)
+);
 
+if ( is_wp_error( $websites ) || empty( $websites ) ) {
+	return;
+}
 ?>
 <aside class="docs-sidebar border-1 border-end overflow-y-auto d-block">
 	<div class="offcanvas-lg offcanvas-start pt-lg-3" tabindex="-1" id="sidebar-nav" aria-labelledby="sidebarOffcanvasLabel">
@@ -14,18 +24,6 @@ use ChoctawNation\Sidebar_Navwalker;
 			<h5 class="offcanvas-title" id="sidebarOffcanvasLabel">Browse Docs</h5>
 			<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#sidebar-nav"></button>
 		</div>
-		<?php
-		if ( has_nav_menu( 'sidebar_menu' ) ) {
-			wp_nav_menu(
-				array(
-					'theme_location'  => 'sidebar_menu',
-					'menu_class'      => 'sidebar-nav list-group m-0 p-0',
-					'container'       => 'div',
-					'container_class' => 'offcanvas-body',
-					'walker'          => new Sidebar_Navwalker(),
-				)
-			);
-		}
-		?>
+		<?php get_template_part( 'template-parts/nav', 'websites', $websites ); ?>
 	</div>
 </aside>

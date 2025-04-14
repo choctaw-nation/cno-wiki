@@ -29,7 +29,7 @@
 				<div class="navbar-container w-auto d-flex align-items-center">
 					<div class="position-relative d-flex py-2 align-items-center gap-3">
 						<img src="<?php echo get_template_directory_uri() . '/img/the-great-seal-white.svg'; ?>" alt="The Great Seal of the Choctaw Nation"
-							 class="d-none d-sm-inline-block logo" loading="eager" data-spai-eager />
+							class="d-none d-sm-inline-block logo" loading="eager" data-spai-eager />
 						<a class="stretched-link navbar-brand fw-bold text-white fs-5" href="<?php echo esc_url( site_url() ); ?>">
 							Home
 						</a>
