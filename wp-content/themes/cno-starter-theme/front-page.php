@@ -14,14 +14,16 @@ get_header();
 			<?php the_content(); ?>
 		</section>
 		<?php
-		$recent_posts = new WP_Query(
-			array(
-				'post_type'      => array( 'dev-note', 'post' ),
-				'posts_per_page' => 6,
-				'orderby'        => 'modified',
-				'order'          => 'DESC',
-			)
+		$args = array(
+			'post_type'      => array( 'post', 'image-spec' ),
+			'posts_per_page' => 6,
+			'orderby'        => 'modified',
+			'order'          => 'DESC',
 		);
+		if ( cno_is_developer() ) {
+			array_push( $args['post_type'], 'dev-note' );
+		}
+		$recent_posts = new WP_Query( $args );
 		?>
 		<?php if ( $recent_posts->have_posts() ) : ?>
 		<section class="row gx-0 gap-4">
