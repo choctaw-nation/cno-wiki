@@ -34,6 +34,7 @@ class Badge_Generator {
 		$this->badges = array_merge( $this->badges, $this->get_category_badge() );
 		$this->badges = array_merge( $this->badges, $this->get_dev_note_badge( 'framework' ) );
 		$this->badges = array_merge( $this->badges, $this->get_dev_note_badge( 'language' ) );
+		$this->badges = array_merge( $this->badges, $this->get_tag_badges() );
 		return $this->badges;
 	}
 
@@ -60,6 +61,7 @@ class Badge_Generator {
 		}
 		return $category_badges;
 	}
+
 	/**
 	 * Get the dev-note badge
 	 *
@@ -88,5 +90,26 @@ class Badge_Generator {
 			);
 		}
 		return $terms_badges;
+	}
+
+	private function get_tag_badges(): array {
+		$tags = get_the_tags();
+		if ( ! $tags || is_wp_error( $tags ) ) {
+			return array();
+		}
+		$tag_badges = array();
+		foreach ( $tags as $tag ) {
+			$tag_badges = array_merge(
+				$tag_badges,
+				array(
+					$tag->slug => array(
+						'label' => $tag->name,
+						'color' => 'outline-primary',
+						'href'  => get_tag_link( $tag ),
+					),
+				),
+			);
+		}
+		return $tag_badges;
 	}
 }

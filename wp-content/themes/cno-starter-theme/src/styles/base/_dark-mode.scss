@@ -2,8 +2,18 @@
 	--bs-box-shadow: 0 0.5rem 1rem rgba(255, 255, 255, 0.15);
 	--bs-box-shadow-sm: 0 0.25rem 0.5rem rgba(255, 255, 255, 0.15);
 	--bs-box-shadow-lg: 0 1rem 1.5rem rgba(255, 255, 255, 0.175);
+	--bs-primary: #bb92d9;
+	--bs-light: #faf8fc;
+	--bs-light-rgb: 250, 248, 252;
+	--bs-dark: #100915;
+	--bs-dark-rgb: 16, 9, 21;
+	--bs-link-color: var(--bs-primary);
 
 	.card {
 		--bs-card-border-color: var(--bs-primary);
+	}
+	.btn-outline-primary {
+		--bs-btn-color: var(--bs-primary);
+		--bs-btn-border-color: var(--bs-primary);
 	}
 }
