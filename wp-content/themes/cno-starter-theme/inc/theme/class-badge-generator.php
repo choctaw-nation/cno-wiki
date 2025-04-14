@@ -92,6 +92,9 @@ class Badge_Generator {
 		return $terms_badges;
 	}
 
+	/**
+	 * Get the tag badges
+	 */
 	private function get_tag_badges(): array {
 		$tags = get_the_tags();
 		if ( ! $tags || is_wp_error( $tags ) ) {
