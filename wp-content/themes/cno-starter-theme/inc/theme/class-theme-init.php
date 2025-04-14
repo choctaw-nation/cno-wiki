@@ -274,7 +274,7 @@ class Theme_Init {
 		);
 
 		$dev_post_types = array( 'website', 'dev-note' );
-		if ( in_array( $block_editor_context->post->post_type, $dev_post_types, true ) ) {
+		if ( in_array( $block_editor_context->post->post_type, $dev_post_types, true ) || cno_user_is_developer() ) {
 			$dev_blocks           = array(
 				'core/embed',
 				'core/code',
@@ -287,6 +287,12 @@ class Theme_Init {
 				'core/post-excerpt',
 				'core/post-featured-image',
 				'dm-code-snippet/code-snippet-block-dm',
+				'search-filter/search',
+				'search-filter/choice',
+				'search-filter/range',
+				'search-filter/advanced',
+				'search-filter/control',
+				'search-filter/reusable-field',
 			);
 			$filtered_block_types = array_merge( $filtered_block_types, $dev_blocks );
 		}
