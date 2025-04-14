@@ -73,8 +73,11 @@ class Theme_Init {
 	private function load_required_files() {
 		$base_path = get_template_directory() . '/inc';
 
-		/** Loads the Theme Functions File (to keep the actual functions.php file clean) */
-		require_once $base_path . '/theme/theme-functions.php';
+		// Load Global Functions
+		$global_functions = array( 'theme-functions', 'role-functions' );
+		foreach ( $global_functions as $global_function ) {
+			require_once $base_path . "/theme/{$global_function}.php";
+		}
 
 		$acf_classes = array(
 			'generator',
@@ -101,10 +104,11 @@ class Theme_Init {
 		}
 
 		$utility_files = array(
-			'allow-svg'       => 'Allow_SVG',
-			'role-editor'     => 'Role_Editor',
-			'badge-generator' => null,
-			'search-rest-api' => 'Search_Rest_API',
+			'allow-svg'          => 'Allow_SVG',
+			'role-editor'        => 'Role_Editor',
+			'badge-generator'    => null,
+			'search-rest-api'    => 'Search_Rest_API',
+			'capability-handler' => 'Capability_Handler',
 		);
 		foreach ( $utility_files as $utility_file => $class_name ) {
 			require_once $base_path . "/theme/class-{$utility_file}.php";
