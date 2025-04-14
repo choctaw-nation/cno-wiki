@@ -20,7 +20,7 @@ get_header();
 			'orderby'        => 'modified',
 			'order'          => 'DESC',
 		);
-		if ( cno_is_developer() ) {
+		if ( cno_user_is_developer() ) {
 			array_push( $args['post_type'], 'dev-note' );
 		}
 		$recent_posts = new WP_Query( $args );

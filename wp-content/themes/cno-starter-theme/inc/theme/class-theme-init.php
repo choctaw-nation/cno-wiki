@@ -97,7 +97,6 @@ class Theme_Init {
 
 		$navwalkers = array(
 			'navwalker',
-			'sidebar-navwalker',
 		);
 		foreach ( $navwalkers as $navwalker ) {
 			require_once $base_path . "/theme/navwalkers/class-{$navwalker}.php";
@@ -214,7 +213,6 @@ class Theme_Init {
 
 		register_nav_menus(
 			array(
-				'sidebar_menu' => 'Sidebar Menu',
 				'primary_menu' => 'Primary Menu',
 			)
 		);

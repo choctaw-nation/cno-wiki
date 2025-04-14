@@ -26,6 +26,6 @@ function cno_get_caps_manager(): Capability_Handler {
  *
  * @return bool
  */
-function cno_is_developer(): bool {
+function cno_user_is_developer(): bool {
 	return cno_get_caps_manager()->user_is_developer();
 }
