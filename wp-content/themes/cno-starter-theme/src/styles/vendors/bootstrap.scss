@@ -39,7 +39,7 @@ $font-family-monospace:
 // LINKS
 $link-color: $primary;
 $link-hover-color: rgba($primary, 0.8);
-$link-color-dark: #cba3d8;
+$link-color-dark: #bb92d9;
 
 // HEADINGS
 $headings-font-family: v.$font-body;
@@ -152,12 +152,6 @@ $badge-font-size: 1rem;
 
 // Map Overrides Here (Optional)
 
-// Custom Colors to extend the theme with
-$custom-colors: (
-	"purple": v.$color-purple,
-);
-$theme-colors: map-merge($theme-colors, $custom-colors);
-
 // Required Bootstrap Modules
 @import "bootstrap/scss/maps";
 @import "bootstrap/scss/mixins";
@@ -171,7 +165,7 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 // Override Bootstrap Buttons
 @each $color, $value in $theme-colors {
 	.btn-#{$color} {
-		@if $color == "primary" or $color == "purple" {
+		@if $color == "primary" {
 			/**
 			* Override the styles with the `button-variant` mixin
 			* @see https://getbootstrap.com/docs/5.3/components/buttons/#sass-loops
