@@ -32,15 +32,17 @@ get_header();
 				</div>
 			</div>
 			<?php endif; ?>
-			<?php
-			the_title( '<h1>', '</h1>' );
-			get_template_part(
-				'template-parts/content',
-				'post-meta',
-				array( 'classes' => 'justify-content-start gap-3' )
-			);
-			the_content();
-			?>
+			<article>
+				<?php
+				the_title( '<h1>', '</h1>' );
+				get_template_part(
+					'template-parts/content',
+					'post-meta',
+					array( 'classes' => 'justify-content-start gap-3' )
+				);
+				the_content();
+				?>
+			</article>
 		</div>
 		<?php
 		get_template_part( 'template-parts/aside', 'table-of-contents' );
