@@ -24,7 +24,7 @@
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<div class="modal-body">
-				Gravity Forms Code goes here
+				<?php echo do_shortcode( '[gravityform id="1" title="false" ajax="true"]' ); ?>
 			</div>
 		</div>
 	</div>

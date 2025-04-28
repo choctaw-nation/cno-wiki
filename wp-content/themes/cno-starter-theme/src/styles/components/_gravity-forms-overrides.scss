@@ -1,0 +1,20 @@
+@use "../abstracts/mixins" as m;
+
+body .gform-theme {
+	&--framework {
+		&.gform_wrapper.gform-theme--orbital
+			.gform-footer.gform_footer.top_label
+			input:is([type="submit"]) {
+			--gf-local-bg-color: var(--bs-primary);
+			--gf-local-radius: 0;
+			--gf-local-border-width: 2px;
+			--gf-local-color: white;
+
+			@include m.interaction() {
+				--gf-local-border-color: var(--bs-primary);
+				--gf-local-color: var(--bs-primary);
+				--gf-local-bg-color: transparent;
+			}
+		}
+	}
+}
