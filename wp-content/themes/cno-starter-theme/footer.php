@@ -26,6 +26,12 @@
 			<div class="modal-body">
 				<?php echo do_shortcode( '[gravityform id="1" title="false" ajax="true"]' ); ?>
 			</div>
+			<div class="modal-footer justify-content-start">
+				<p class="fs-base fst-italic">This site is protected by reCAPTCHA and the Google
+					<a target="_blank" href="https://policies.google.com/privacy">Privacy Policy</a> and
+					<a target="_blank" href="https://policies.google.com/terms">Terms of Service</a> apply.
+				</p>
+			</div>
 		</div>
 	</div>
 </div>
