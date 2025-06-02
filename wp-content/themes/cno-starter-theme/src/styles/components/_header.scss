@@ -13,8 +13,15 @@
 #site-search {
 	@include m.media-breakpoint-up(lg) {
 		position: absolute;
-		inset-inline-end: 40%;
-		transform: translateX(20%);
+	}
+	@include m.media-breakpoint-only(lg) {
+		inset-inline-end: 20%;
+		translate: 20% 0%;
+	}
+
+	@include m.media-breakpoint-up(xl) {
+		inset-inline-end: 35%;
+		translate: 20% 0%;
 	}
 
 	.btn {
