@@ -1,6 +1,6 @@
 {
 	"name": "cno-starter-theme",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "Custom WP theme for CNO sites",
 	"prettier": "@wordpress/prettier-config",
 	"browserslist": [
