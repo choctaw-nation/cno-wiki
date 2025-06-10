@@ -235,7 +235,7 @@ class Theme_Init {
 	 */
 	public function register_custom_blocks() {
 		$blocks_path = get_template_directory() . '/dist';
-		wp_register_block_types_from_metadata_collection( $blocks_path . '/js/blocks', $blocks_path . '/blocks-manifest.php' );
+		wp_register_block_types_from_metadata_collection( $blocks_path . '/js/blocks/', $blocks_path . '/blocks-manifest.php' );
 	}
 
 	/**
@@ -280,6 +280,7 @@ class Theme_Init {
 			'core/buttons',
 			'core/button',
 			'core/block',
+			'cno/hide-by-role-block',
 		);
 
 		$dev_post_types = array( 'website', 'dev-note' );
