@@ -6,6 +6,10 @@ The Wiki Repo. Powered by Gutenberg
 
 # Changelog
 
+## v1.2.0
+
+-   Added: New "hide by role" block allows users to hide content by role!
+
 ## v1.1.0
 
 -   Added: Certain Contact Form fields are auto-populated
