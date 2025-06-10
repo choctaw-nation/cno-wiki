@@ -30,6 +30,7 @@ class Theme_Init {
 		add_action( 'enqueue_block_editor_assets', array( $this, 'load_typekit' ) );
 		add_action( 'after_setup_theme', array( $this, 'cno_theme_support' ) );
 		add_action( 'init', array( $this, 'alter_post_types' ) );
+		add_action( 'init', array( $this, 'register_custom_blocks' ) );
 		add_filter( 'allowed_block_types_all', array( $this, 'restrict_allowed_block_types' ), 10, 2 );
 		/**
 		 * Filter the priority of the Yoast SEO metabox
@@ -227,6 +228,14 @@ class Theme_Init {
 		foreach ( $post_types as $post_type ) {
 			$this->disable_post_type_support( $post_type );
 		}
+	}
+
+	/**
+	 * Registers custom blocks for the theme with the blocks-manifest.php file.
+	 */
+	public function register_custom_blocks() {
+		$blocks_path = get_template_directory() . '/dist';
+		wp_register_block_types_from_metadata_collection( $blocks_path . '/js/blocks', $blocks_path . '/blocks-manifest.php' );
 	}
 
 	/**
