@@ -2,19 +2,22 @@
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
 	"name": "cno/hide-by-role-block",
-	"version": "0.1.0",
+	"version": "1.0.0",
 	"title": "Hide By Role",
 	"category": "theme",
 	"icon": "block-default",
-	"description": "A block that allows you to set the visibility of its content based on user roles.",
-	"keywords": [
-		"hide",
-		"role",
-		"visibility",
-		"user"
-	],
+	"description": "A block that allows you to set the visibility of its content based on user roles or login status.",
+	"keywords": [ "hide", "role", "visibility", "user" ],
 	"supports": {
-		"html": false
+		"html": false,
+		"customClassName": false
 	},
-	"editorScript": "file:./index.tsx"
+	"attributes": {
+		"allowedRoles": {
+			"type": "array",
+			"default": [ "all" ]
+		}
+	},
+	"editorScript": "file:./index.tsx",
+	"render": "file:./render.php"
 }

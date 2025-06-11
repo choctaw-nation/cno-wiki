@@ -1,21 +1,33 @@
-import React from '@wordpress/element';
 import { registerBlockType } from '@wordpress/blocks';
-import { useBlockProps, InnerBlocks } from '@wordpress/block-editor';
+import { useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
+
 import metadata from './block.json';
 
+import BlockControls from './BlockControls';
+
 registerBlockType( metadata.name, {
-	edit: () => {
-		console.log( 'hello from the hide by role block!' );
+	edit: ( { attributes, setAttributes } ) => {
 		return (
-			<div { ...useBlockProps() }>
-				<h2>hello from the hide by role block!</h2>
-				<InnerBlocks />
-			</div>
+			<>
+				<BlockControls
+					attributes={ attributes }
+					setAttributes={ setAttributes }
+				/>
+				<div
+					{ ...useInnerBlocksProps( useBlockProps(), {
+						template: [
+							[
+								'core/paragraph',
+								{
+									placeholder:
+										'Start typing here....this content will be hidden!',
+								},
+							],
+						],
+					} ) }
+				/>
+			</>
 		);
 	},
-	save: () => (
-		<div { ...useBlockProps.save() }>
-			<InnerBlocks.Content />
-		</div>
-	),
+	save: () => <div { ...useInnerBlocksProps.save( useBlockProps.save() ) } />,
 } );
