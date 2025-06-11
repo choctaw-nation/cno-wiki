@@ -1,9 +1,8 @@
 const defaultConfig = require( '@wordpress/scripts/config/webpack.config.js' );
+const RemoveEmptyScriptsPlugin = require( 'webpack-remove-empty-scripts' );
 
-/** The name of the theme. Alter me! */
 const THEME_NAME = 'cno-starter-theme';
 
-/** The location of your theme. */
 const THEME_DIR = `/wp-content/themes/${ THEME_NAME }`;
 
 /**
@@ -12,6 +11,7 @@ const THEME_DIR = `/wp-content/themes/${ THEME_NAME }`;
  * **Be sure to import page scss in these files**
  */
 const appNames = [];
+// const blocks = [ 'services-block', 'staff-block' ];
 
 /**
  * For SCSS files (no leading `_`)
@@ -24,6 +24,7 @@ module.exports = {
 	...{
 		entry: () => {
 			return {
+				...defaultConfig.entry(),
 				global: `.${ THEME_DIR }/src/index.js`,
 				'vendors/bootstrap': `.${ THEME_DIR }/src/js/vendors/bootstrap.js`,
 				'modules/post-swiper': `.${ THEME_DIR }/src/js/PostSwiper.ts`,
@@ -33,11 +34,16 @@ module.exports = {
 				...addEntries( styleSheets, 'styles' ),
 			};
 		},
-
 		output: {
 			path: __dirname + `${ THEME_DIR }/dist`,
 			filename: `[name].js`,
 		},
+		plugins: [
+			...defaultConfig.plugins,
+			new RemoveEmptyScriptsPlugin( {
+				stage: RemoveEmptyScriptsPlugin.STAGE_AFTER_PROCESS_PLUGINS,
+			} ),
+		],
 	},
 };
 
