@@ -65,15 +65,46 @@
 			"minHeight": true
 		},
 		"layout": {
-			"contentSize": "800px",
-			"wideSize": "1200px"
+			"contentSize": "768px",
+			"wideSize": "1320px"
 		},
 		"spacing": {
 			"blockGap": true,
-			"customSpacingSize": true,
+			"customSpacingSize": false,
 			"margin": true,
 			"padding": true,
-			"units": [ "rem", "%", "px", "vh", "vw" ]
+			"spacingSizes": [
+				{
+					"name": "None",
+					"size": "0",
+					"slug": "none"
+				},
+				{
+					"name": "Extra Small",
+					"size": ".25rem",
+					"slug": "xs"
+				},
+				{
+					"name": "Small",
+					"size": ".5rem",
+					"slug": "sm"
+				},
+				{
+					"name": "Base",
+					"size": "1rem",
+					"slug": "base"
+				},
+				{
+					"name": "Large",
+					"size": "1.5rem",
+					"slug": "lg"
+				},
+				{
+					"name": "Extra Large",
+					"size": "3rem",
+					"slug": "xl"
+				}
+			]
 		},
 		"typography": {
 			"customFontSize": false,
@@ -87,6 +118,12 @@
 			"textDecoration": true,
 			"textTransform": true,
 			"fontSizes": [
+				{
+					"slug": "root",
+					"size": "1rem",
+					"name": "Root",
+					"fluid": false
+				},
 				{
 					"slug": "base",
 					"size": "1.35rem",
@@ -132,7 +169,7 @@
 			],
 			"fontFamilies": [
 				{
-					"slug": "gill-sans-nova",
+					"slug": "body",
 					"name": "Gill Sans Nova",
 					"fontFamily": "gill-sans-nova, \"Helvetica Neue\", \"Noto Sans\", \"Liberation Sans\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\""
 				}
@@ -143,42 +180,118 @@
 			"transitionTiming": ".15s",
 			"transitionEasing": "ease-in-out",
 			"transition": "var:custom|transition-timing var:custom|transition-easing"
-		}
+		},
+		"useRootPaddingAwareAlignments": true
 	},
 	"styles": {
-		"typography": {
-			"fontSize": "var:preset|font-size|base"
-		},
 		"blocks": {
+			"core/details": {
+				"color": {
+					"background": "var:preset|color|white",
+					"text": "var:preset|color|dark"
+				},
+				"spacing": {
+					"padding": {
+						"top": "var:preset|spacing|base",
+						"right": "var:preset|spacing|lg",
+						"bottom": "var:preset|spacing|base",
+						"left": "var:preset|spacing|lg"
+					},
+					"blockGap": "var:preset|spacing|base"
+				}
+			},
+			"core/button": {
+				"border": {
+					"radius": "0",
+					"width": "2px",
+					"color": "var:preset|color|primary"
+				},
+				"spacing": {
+					"padding": {
+						"top": "var:preset|spacing|sm",
+						"right": "var:preset|spacing|lg",
+						"bottom": "var:preset|spacing|sm",
+						"left": "var:preset|spacing|lg"
+					},
+					"blockGap": "var:preset|spacing|base"
+				},
+				"typography": {
+					"fontFamily": "var:preset|font-family|body",
+					"fontSize": "var:preset|font-size|base"
+				},
+				"color": {
+					"background": "var:preset|color|primary",
+					"text": "var:preset|color|white"
+				}
+			},
+			"core/image": {
+				"variations": {
+					"rounded": {
+						"border": {
+							"radius": "0"
+						}
+					}
+				}
+			},
 			"core/paragraph": {
 				"typography": {
 					"fontSize": "var:preset|font-size|base",
-					"fontFamily": "var:preset|font-family|gill-sans-nova"
+					"fontFamily": "var:preset|font-family|body"
 				}
 			},
 			"core/list": {
 				"typography": {
 					"fontSize": "var:preset|font-size|base",
-					"fontFamily": "var:preset|font-family|gill-sans-nova"
+					"fontFamily": "var:preset|font-family|body"
 				}
 			},
 			"core/list-item": {
 				"typography": {
 					"fontSize": "var:preset|font-size|base",
-					"fontFamily": "var:preset|font-family|gill-sans-nova"
+					"fontFamily": "var:preset|font-family|body"
 				}
 			},
 			"core/heading": {
 				"typography": {
-					"fontFamily": "var:preset|font-family|gill-sans-nova"
+					"fontFamily": "var:preset|font-family|body"
 				}
 			}
 		},
+		"typography": {
+			"fontSize": "var:preset|font-size|base",
+			"lineHeight": "1.5",
+			"fontWeight": "400",
+			"fontFamily": "var:preset|font-family|body"
+		},
 		"elements": {
+			"link": {
+				"css": "transition: color var(--transition-standard);text-underline-offset:.25em",
+				"color": {
+					"text": "var:preset|color|primary"
+				},
+				":hover": {
+					"color": {
+						"text": "#512d6dcc"
+					}
+				},
+				":visited": {
+					"color": {
+						"text": "var:preset|color|primary"
+					}
+				}
+			},
 			"heading": {
 				"typography": {
-					"fontFamily": "var:preset|font-family|gill-sans-nova"
-				}
+					"fontFamily": "var:preset|font-family|body",
+					"fontWeight": "700"
+				},
+				"spacing": {
+					"margin": {
+						"bottom": "0.5rem",
+						"top": "0"
+					}
+				},
+				"css": "text-wrap:balance;"
 			},
 			"h1": {
 				"typography": {
