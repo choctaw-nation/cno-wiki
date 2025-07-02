@@ -244,13 +244,15 @@ class Theme_Init {
 	 * This function restricts the available block types to a set list, and adds additional blocks based on post type.
 	 *
 	 * @param array|bool $allowed_block_types Array of block type slugs, or boolean to enable/disable all.
-	 * @param object     $block_editor_context The current block editor context.
 	 *
-	 * @return array The array of allowed block types.
+	 * @return array|bool The array of allowed block types.
 	 */
-	public function restrict_allowed_block_types( $allowed_block_types, $block_editor_context ) {
+	public function restrict_allowed_block_types( $allowed_block_types ): array|bool {
 		if ( ! $allowed_block_types ) {
 			return $allowed_block_types;
+		}
+		if ( cno_user_is_developer() ) {
+			return true;
 		}
 		$all_blocks           = \WP_Block_Type_Registry::get_instance()->get_all_registered();
 		$all_types            = array_keys( $all_blocks );
@@ -280,32 +282,7 @@ class Theme_Init {
 			'core/buttons',
 			'core/button',
 			'core/block',
-			'cno/hide-by-role-block',
 		);
-
-		$dev_post_types = array( 'website', 'dev-note' );
-		if ( in_array( $block_editor_context->post->post_type, $dev_post_types, true ) || cno_user_is_developer() ) {
-			$dev_blocks           = array(
-				'core/embed',
-				'core/code',
-				'core/template-part',
-				'core/preformatted',
-				'core/html',
-				'core/freeform',
-				'core/missing',
-				'core/post-date',
-				'core/post-excerpt',
-				'core/post-featured-image',
-				'dm-code-snippet/code-snippet-block-dm',
-				'search-filter/search',
-				'search-filter/choice',
-				'search-filter/range',
-				'search-filter/advanced',
-				'search-filter/control',
-				'search-filter/reusable-field',
-			);
-			$filtered_block_types = array_merge( $filtered_block_types, $dev_blocks );
-		}
 		return $filtered_block_types;
 	}
 
