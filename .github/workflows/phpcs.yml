@@ -16,7 +16,7 @@ jobs:
             changed_files: ${{ steps.check-php-files.outputs.changed_files }}
         steps:
             - name: Checkout code
-              uses: actions/checkout@v4
+              uses: actions/checkout@main
 
             - name: Check for PHP file changes
               id: check-php-files

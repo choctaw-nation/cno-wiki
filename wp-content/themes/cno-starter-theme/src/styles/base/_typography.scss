@@ -1,4 +1,5 @@
 @use "./block-overrides/paragraphs";
+@use "./block-overrides/details";
 
 body {
 	text-wrap: pretty;

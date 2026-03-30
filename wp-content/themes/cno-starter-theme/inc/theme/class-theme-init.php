@@ -35,12 +35,7 @@ class Theme_Init {
 		/**
 		 * Filter the priority of the Yoast SEO metabox
 		 */
-		add_filter(
-			'wpseo_metabox_prio',
-			function (): string {
-				return 'low';
-			}
-		);
+		add_filter( 'wpseo_metabox_prio', fn() => 'low' );
 	}
 
 	/**
@@ -61,8 +56,8 @@ class Theme_Init {
 					default:
 				}
 				echo "<link rel='apple-touch-icon' sizes='180x180' href='{$href}/apple-touch-icon.png'>
-				<link rel='icon' type'='image/png' sizes='192x192' href='{$href}/android-chrome-192x192.png'>
-				<link rel='icon' type'='image/png' sizes='512x512' href='{$href}/android-chrome-512x512.png'>
+				<link rel='icon' type='image/png' sizes='192x192' href='{$href}/android-chrome-192x192.png'>
+				<link rel='icon' type='image/png' sizes='512x512' href='{$href}/android-chrome-512x512.png'>
 				<link rel='icon' type='image/png' sizes='32x32' href='{$href}/favicon-32x32.png'>
 				<link rel='icon' type='image/png' sizes='16x16' href='{$href}/favicon-16x16.png'>
 				<link rel='mask-icon' href='{$href}/safari-pinned-tab.svg' color='#000000'>";
@@ -244,69 +239,79 @@ class Theme_Init {
 	 * This function restricts the available block types to a set list, and adds additional blocks based on post type.
 	 *
 	 * @param array|bool $allowed_block_types Array of block type slugs, or boolean to enable/disable all.
-	 * @param object     $block_editor_context The current block editor context.
 	 *
-	 * @return array The array of allowed block types.
+	 * @return array|bool The array of allowed block types.
 	 */
-	public function restrict_allowed_block_types( $allowed_block_types, $block_editor_context ) {
-		if ( ! $allowed_block_types ) {
+	public function restrict_allowed_block_types( $allowed_block_types ): array|bool {
+		if ( ! $context ) {
 			return $allowed_block_types;
 		}
-		$all_blocks           = \WP_Block_Type_Registry::get_instance()->get_all_registered();
-		$all_types            = array_keys( $all_blocks );
-		$filtered_block_types = array(
-			'core/heading',
-			'core/image',
-			'core/list',
-			'core/list-item',
-			'core/paragraph',
-			'core/cover',
-			'core/media-text',
-			'core/gallery',
-			'core/group',
-			'core/details',
-			'core/columns',
-			'core/column',
-			'core/video',
-			'core/text-columns',
-			'core/quote',
-			'core/table',
-			'core/read-more',
-			'core/shortcode',
-			'core/separator',
-			'core/table',
-			'core/more',
-			'core/pattern',
-			'core/buttons',
-			'core/button',
-			'core/block',
-			'cno/hide-by-role-block',
-		);
-
-		$dev_post_types = array( 'website', 'dev-note' );
-		if ( in_array( $block_editor_context->post->post_type, $dev_post_types, true ) || cno_user_is_developer() ) {
-			$dev_blocks           = array(
-				'core/embed',
-				'core/code',
-				'core/template-part',
-				'core/preformatted',
-				'core/html',
-				'core/freeform',
-				'core/missing',
-				'core/post-date',
-				'core/post-excerpt',
-				'core/post-featured-image',
-				'dm-code-snippet/code-snippet-block-dm',
-				'search-filter/search',
-				'search-filter/choice',
-				'search-filter/range',
-				'search-filter/advanced',
-				'search-filter/control',
-				'search-filter/reusable-field',
-			);
-			$filtered_block_types = array_merge( $filtered_block_types, $dev_blocks );
+		// Get all registered blocks if $allowed_block_types is not already set.
+		if ( ! is_array( $allowed_block_types ) || empty( $allowed_block_types ) ) {
+			$registered_blocks   = \WP_Block_Type_Registry::get_instance()->get_all_registered();
+			$allowed_block_types = array_keys( $registered_blocks );
 		}
-		return $filtered_block_types;
+		$disallowed_blocks = array(
+			'core/avatar',
+			'core/comments',
+			'core/comment-author-name',
+			'core/comment-content',
+			'core/comment-date',
+			'core/comment-edit-link',
+			'core/comment-reply-link',
+			'core/comment-template',
+			'core/comment-pagination-previous',
+			'core/comments-author-avatar',
+			'core/comments-pagination',
+			'core/comments-pagination-next',
+			'core/comments-pagination-numbers',
+			'core/comments-title',
+			'core/latest-comments',
+			'core/page-list-item',
+			'core/page-list',
+			'core/post-comment',
+			'core/post-comments',
+			'core/post-comments-count',
+			'core/post-comments-form',
+			'core/post-comments-link',
+			'core/rss',
+			'core/tag-cloud',
+			'core/term-description',
+			'core/video',
+			'core/verse',
+			'core/home-link',
+			'core/media-text',
+		);
+		if ( ! $this->is_admin() ) {
+			array_push(
+				$disallowed_blocks,
+				'core/archives',
+				'core/calendar',
+				'core/categories',
+				'core/latest-posts',
+				'core/missing',
+				'core/media-text',
+				'core/navigation',
+				'core/navigation-link',
+				'core/navigation-submenu',
+				'core/nextpage',
+				'core/post-author',
+				'core/post-author-biography',
+				'core/post-author-name',
+				'core/post-navigation-link',
+				'core/post-terms',
+				'core/site-logo',
+				'core/site-tagline',
+				'core/site-title',
+			);
+		}
+		$filtered = array_filter(
+			$allowed_block_types,
+			function ( $block ) use ( $disallowed_blocks ) {
+				return ! in_array( $block, $disallowed_blocks, true );
+			}
+		);
+		return array_values( $filtered );
 	}
 
 	/**

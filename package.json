@@ -1,11 +1,14 @@
 {
 	"name": "cno-starter-theme",
-	"version": "1.1.0",
+	"version": "1.2.0",
 	"description": "Custom WP theme for CNO sites",
 	"prettier": "@wordpress/prettier-config",
 	"browserslist": [
 		"extends @wordpress/browserslist-config"
 	],
+	"engines": {
+		"node": ">= 24"
+	},
 	"scripts": {
 		"build": "wp-scripts build --blocks-manifest --webpack-copy-php --source-path=wp-content/themes/cno-starter-theme/src/ --output-path=wp-content/themes/cno-starter-theme/dist/",
 		"check-engines": "wp-scripts check-engines",
@@ -15,12 +18,12 @@
 	"author": "Choctaw Nation of Oklahoma",
 	"license": "GPL-3.0-or-later",
 	"dependencies": {
-		"bootstrap": "^5.3.6",
-		"swiper": "^11.2.8"
+		"bootstrap": "^5.3.8",
+		"swiper": "^11.2.10"
 	},
 	"devDependencies": {
 		"@types/bootstrap": "^5.2.10",
-		"@wordpress/scripts": "^30.18.0",
+		"@wordpress/scripts": "^31.7.0",
 		"webpack-remove-empty-scripts": "^1.1.1",
 		"wp-types": "^4.68.0"
 	}

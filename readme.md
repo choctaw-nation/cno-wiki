@@ -6,6 +6,13 @@ The Wiki Repo. Powered by Gutenberg
 
 # Changelog
 
+## v1.3.0
+
+-   Added: Eager Speculative loading to make the site feel a little snappier
+-   Updated: Theme styles are more closely aligned to CNO theme standards
+-   Removed: "Hide My Role" block has been removed in favor of the Members Plugin functionality.
+-   Chore: Updated packages
+
 ## v1.2.0
 
 -   Added: New "hide by role" block allows users to hide content by role!
