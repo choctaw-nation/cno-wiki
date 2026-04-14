@@ -60,6 +60,7 @@ function renderMediums() {
 			'btn btn-link p-0 fw-bold lh-1 text-danger text-decoration-none';
 		removeBtn.textContent = '×';
 		removeBtn.title = 'Remove ' + medium;
+		removeBtn.setAttribute( 'aria-label', 'Remove ' + medium );
 		removeBtn.addEventListener( 'click', () => {
 			mediums.splice( index, 1 );
 			renderMediums();
@@ -73,7 +74,7 @@ function renderMediums() {
 
 	if ( mediums.length === 0 ) {
 		const empty = document.createElement( 'div' );
-		empty.className = 'help';
+		empty.className = 'text-muted small';
 		empty.textContent = 'No mediums included yet. Add one above.';
 		els.mediumList.appendChild( empty );
 	}
@@ -133,16 +134,6 @@ function renderRows() {
 			);
 			renderRows();
 		} );
-		vendorInput.addEventListener( 'blur', ( e ) => {
-			rows[ index ].vendor = e.target.value;
-			rows[ index ].longUrl = buildLongUrl(
-				rows[ index ].siteUrl,
-				rows[ index ].vendor,
-				rows[ index ].channel,
-				rows[ index ].campaign
-			);
-			renderRows();
-		} );
 		vendorTd.appendChild( vendorInput );
 
 		const channelTd = document.createElement( 'td' );
@@ -152,16 +143,6 @@ function renderRows() {
 		channelInput.className = 'form-control';
 		channelInput.value = row.channel;
 		channelInput.addEventListener( 'change', ( e ) => {
-			rows[ index ].channel = e.target.value;
-			rows[ index ].longUrl = buildLongUrl(
-				rows[ index ].siteUrl,
-				rows[ index ].vendor,
-				rows[ index ].channel,
-				rows[ index ].campaign
-			);
-			renderRows();
-		} );
-		channelInput.addEventListener( 'blur', ( e ) => {
 			rows[ index ].channel = e.target.value;
 			rows[ index ].longUrl = buildLongUrl(
 				rows[ index ].siteUrl,
@@ -189,16 +170,6 @@ function renderRows() {
 			);
 			renderRows();
 		} );
-		campaignInput.addEventListener( 'blur', ( e ) => {
-			rows[ index ].campaign = e.target.value;
-			rows[ index ].longUrl = buildLongUrl(
-				rows[ index ].siteUrl,
-				rows[ index ].vendor,
-				rows[ index ].channel,
-				rows[ index ].campaign
-			);
-			renderRows();
-		} );
 		campaignTd.appendChild( campaignInput );
 
 		const urlTd = document.createElement( 'td' );
@@ -208,12 +179,49 @@ function renderRows() {
 		urlDisplay.textContent = row.longUrl;
 		urlTd.appendChild( urlDisplay );
 
-		tr.draggable = true;
-		tr.addEventListener( 'dragstart', () => {
+		const dragTd = document.createElement( 'td' );
+		const dragHandle = document.createElement( 'span' );
+		dragHandle.className =
+			'drag-handle d-none d-md-inline-block border rounded p-2 fs-5 lh-1';
+		dragHandle.textContent = '⋮⋮';
+		dragHandle.title = 'Drag to reorder';
+		dragHandle.setAttribute( 'aria-hidden', 'true' );
+		dragTd.appendChild( dragHandle );
+
+		const upBtn = document.createElement( 'button' );
+		upBtn.type = 'button';
+		upBtn.className = 'btn btn-outline-secondary btn-sm d-md-none';
+		upBtn.textContent = '↑';
+		upBtn.setAttribute( 'aria-label', 'Move row up' );
+		upBtn.addEventListener( 'click', () => moveRowUp( index ) );
+
+		const downBtn = document.createElement( 'button' );
+		downBtn.type = 'button';
+		downBtn.className = 'btn btn-outline-secondary btn-sm d-md-none';
+		downBtn.textContent = '↓';
+		downBtn.setAttribute( 'aria-label', 'Move row down' );
+		downBtn.addEventListener( 'click', () => moveRowDown( index ) );
+
+		const reorderBtns = document.createElement( 'div' );
+		reorderBtns.className = 'd-flex flex-column gap-1 d-md-none';
+		reorderBtns.appendChild( upBtn );
+		reorderBtns.appendChild( downBtn );
+		dragTd.appendChild( reorderBtns );
+
+		tr.draggable = false;
+		dragHandle.addEventListener( 'mousedown', () => {
+			tr.draggable = true;
+		} );
+		tr.addEventListener( 'dragstart', ( e ) => {
+			if ( ! ( e.target as HTMLElement ).closest( '.drag-handle' ) ) {
+				e.preventDefault();
+				return;
+			}
 			dragSourceIndex = index;
 			tr.classList.add( 'opacity-50' );
 		} );
 		tr.addEventListener( 'dragend', () => {
+			tr.draggable = false;
 			tr.classList.remove( 'opacity-50' );
 			tr.classList.remove( 'drag-over' );
 		} );
@@ -229,14 +237,6 @@ function renderRows() {
 			tr.classList.remove( 'drag-over' );
 			moveRow( dragSourceIndex, index );
 		} );
-
-		const dragTd = document.createElement( 'td' );
-		const dragHandle = document.createElement( 'span' );
-		dragHandle.className =
-			'drag-handle d-inline-block border rounded p-2 fs-5 lh-1';
-		dragHandle.textContent = '⋮⋮';
-		dragHandle.title = 'Drag to reorder';
-		dragTd.appendChild( dragHandle );
 
 		const removeTd = document.createElement( 'td' );
 		removeTd.dataset.label = 'Remove Row';
@@ -374,12 +374,17 @@ function exportCsv() {
 	const blob = new Blob( [ lines.join( '\n' ) ], {
 		type: 'text/csv;charset=utf-8;',
 	} );
+	const objectUrl = URL.createObjectURL( blob );
 	const link = document.createElement( 'a' );
 	const baseName = sanitizeCampaign( els.campaign.value ) || 'utm-export';
-	link.href = URL.createObjectURL( blob );
+	link.href = objectUrl;
 	link.download = baseName + '.csv';
+	document.body.appendChild( link );
 	link.click();
-	URL.revokeObjectURL( link.href );
+	document.body.removeChild( link );
+	window.setTimeout( () => {
+		URL.revokeObjectURL( objectUrl );
+	}, 1000 );
 	setStatus( 'CSV exported.' );
 }
 
@@ -404,6 +409,14 @@ els.clearBtn.addEventListener( 'click', clearRows );
 renderMediums();
 renderRows();
 
-els.siteUrl.value = 'https://choctawtravelplazas.com/';
-els.campaign.value = 'fy26-brand-campaign';
-els.vendor.value = 'townsquare-media';
+if ( ! els.siteUrl.value ) {
+	els.siteUrl.value = 'https://choctawtravelplazas.com/';
+}
+
+if ( ! els.campaign.value ) {
+	els.campaign.value = 'fy26-brand-campaign';
+}
+
+if ( ! els.vendor.value ) {
+	els.vendor.value = 'townsquare-media';
+}

@@ -5,11 +5,10 @@
  * @package ChoctawNation
  */
 
-
 use ChoctawNation\Asset_Loader;
 use ChoctawNation\Enqueue_Type;
 
-$loader = new Asset_Loader( 'utmBuilder', Enqueue_Type::both, 'pages' );
+new Asset_Loader( 'utmBuilder', Enqueue_Type::both, 'pages' );
 get_header();
 ?>
 
@@ -34,12 +33,12 @@ get_header();
 		</div>
 
 		<div class="d-flex flex-wrap gap-2 mt-3">
-			<button id="generateBtn" class="btn btn-primary">Generate Rows for All Mediums</button>
-			<button id="exportBtn" class="btn btn-secondary">Export CSV</button>
-			<button id="clearBtn" class="btn btn-danger">Clear Rows</button>
+			<button type="button" id="generateBtn" class="btn btn-primary">Generate Rows for All Mediums</button>
+			<button type="button" id="exportBtn" class="btn btn-secondary">Export CSV</button>
+			<button type="button" id="clearBtn" class="btn btn-danger">Clear Rows</button>
 		</div>
 		<p class="text-muted small mt-1 mb-0">Generates new rows at the end only. Existing rows stay in place.</p>
-		<div id="status" class="text-success fw-bold mt-2" style="min-height:20px"></div>
+		<div id="status" class="text-success fw-bold mt-2" style="min-height:20px" role="status" aria-live="polite" aria-atomic="true"></div>
 	</div>
 
 	<div class="card card-body mb-4">
@@ -52,8 +51,8 @@ get_header();
 			</div>
 			<div class="col-auto">
 				<div class="d-flex gap-2">
-					<button id="addMediumBtn" class="btn btn-primary">Add Medium</button>
-					<button id="clearMediumsBtn" class="btn btn-danger">Remove All</button>
+					<button type="button" id="addMediumBtn" class="btn btn-primary">Add Medium</button>
+					<button type="button" id="clearMediumsBtn" class="btn btn-danger">Remove All</button>
 				</div>
 			</div>
 		</div>

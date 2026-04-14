@@ -37,11 +37,6 @@ td .url-display {
 			border: 1px solid var(--bs-border-color);
 			border-radius: var(--bs-border-radius);
 			margin-bottom: 1rem;
-
-			// hide drag column — not usable on touch
-			td:first-child {
-				display: none;
-			}
 		}
 
 		tbody td {
@@ -58,7 +53,7 @@ td .url-display {
 				border-bottom: none;
 			}
 
-			&::before {
+			&[data-label]::before {
 				content: attr(data-label);
 				font-weight: 600;
 				flex-shrink: 0;
