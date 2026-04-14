@@ -212,11 +212,7 @@ function renderRows() {
 		dragHandle.addEventListener( 'mousedown', () => {
 			tr.draggable = true;
 		} );
-		tr.addEventListener( 'dragstart', ( e ) => {
-			if ( ! ( e.target as HTMLElement ).closest( '.drag-handle' ) ) {
-				e.preventDefault();
-				return;
-			}
+		tr.addEventListener( 'dragstart', () => {
 			dragSourceIndex = index;
 			tr.classList.add( 'opacity-50' );
 		} );
