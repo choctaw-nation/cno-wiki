@@ -10,7 +10,7 @@ const THEME_DIR = `/wp-content/themes/${ THEME_NAME }`;
  *
  * **Be sure to import page scss in these files**
  */
-const appNames = [];
+const appNames = [ 'utm-builder' ];
 // const blocks = [ 'services-block', 'staff-block' ];
 
 /**
