@@ -1,40 +1,58 @@
 import '../../styles/pages/utm-builder.scss';
+
+interface UtmRow {
+	siteUrl: string;
+	vendor: string;
+	channel: string;
+	campaign: string;
+	longUrl: string;
+}
+
 const defaultMediums = [ 'youtube', 'ott', 'sem', 'display', 'rgd', 'audio' ];
 let mediums = [ ...defaultMediums ];
-let rows = [];
+let rows: UtmRow[] = [];
 
 const els = {
-	siteUrl: document.getElementById( 'siteUrl' ),
-	campaign: document.getElementById( 'campaign' ),
-	vendor: document.getElementById( 'vendor' ),
-	newMedium: document.getElementById( 'newMedium' ),
-	mediumList: document.getElementById( 'mediumList' ),
-	rowsBody: document.getElementById( 'rowsBody' ),
-	status: document.getElementById( 'status' ),
-	generateBtn: document.getElementById( 'generateBtn' ),
-	addMediumBtn: document.getElementById( 'addMediumBtn' ),
-	clearMediumsBtn: document.getElementById( 'clearMediumsBtn' ),
-	exportBtn: document.getElementById( 'exportBtn' ),
-	clearBtn: document.getElementById( 'clearBtn' ),
+	siteUrl: document.getElementById( 'siteUrl' ) as HTMLInputElement,
+	campaign: document.getElementById( 'campaign' ) as HTMLInputElement,
+	vendor: document.getElementById( 'vendor' ) as HTMLInputElement,
+	newMedium: document.getElementById( 'newMedium' ) as HTMLInputElement,
+	mediumList: document.getElementById( 'mediumList' ) as HTMLElement,
+	rowsBody: document.getElementById( 'rowsBody' ) as HTMLElement,
+	status: document.getElementById( 'status' ) as HTMLElement,
+	generateBtn: document.getElementById( 'generateBtn' ) as HTMLButtonElement,
+	addMediumBtn: document.getElementById(
+		'addMediumBtn'
+	) as HTMLButtonElement,
+	clearMediumsBtn: document.getElementById(
+		'clearMediumsBtn'
+	) as HTMLButtonElement,
+	exportBtn: document.getElementById( 'exportBtn' ) as HTMLButtonElement,
+	clearBtn: document.getElementById( 'clearBtn' ) as HTMLButtonElement,
 };
 
-function normalizeValue( value ) {
+function normalizeValue( value: string ): string {
 	return String( value || '' ).trim();
 }
 
-function sanitizeMedium( value ) {
+function sanitizeMedium( value: string ): string {
 	return normalizeValue( value ).toLowerCase().replace( /\s+/g, '-' );
 }
 
-function sanitizeVendor( value ) {
+function sanitizeVendor( value: string ): string {
 	return normalizeValue( value ).toLowerCase().replace( /\s+/g, '-' );
 }
 
-function sanitizeCampaign( value ) {
+function sanitizeCampaign( value: string ): string {
 	return normalizeValue( value ).toLowerCase().replace( /\s+/g, '-' );
 }
 
-function buildLongUrl( siteUrl, vendor, channel, campaign ) {
+function buildLongUrl(
+	siteUrl: string,
+	vendor: string,
+	channel: string,
+	campaign: string
+): string {
 	const cleanSite = normalizeValue( siteUrl );
 	if ( ! cleanSite ) return '';
 	const url = new URL( cleanSite );
@@ -80,7 +98,7 @@ function renderMediums() {
 	}
 }
 
-function moveRowUp( index ) {
+function moveRowUp( index: number ): void {
 	if ( index <= 0 ) return;
 	const temp = rows[ index - 1 ];
 	rows[ index - 1 ] = rows[ index ];
@@ -89,7 +107,7 @@ function moveRowUp( index ) {
 	setStatus( 'Row moved up.' );
 }
 
-function moveRowDown( index ) {
+function moveRowDown( index: number ): void {
 	if ( index >= rows.length - 1 ) return;
 	const temp = rows[ index + 1 ];
 	rows[ index + 1 ] = rows[ index ];
@@ -98,9 +116,9 @@ function moveRowDown( index ) {
 	setStatus( 'Row moved down.' );
 }
 
-let dragSourceIndex = null;
+let dragSourceIndex: number | null = null;
 
-function moveRow( fromIndex, toIndex ) {
+function moveRow( fromIndex: number | null, toIndex: number | null ): void {
 	if ( fromIndex === null || toIndex === null ) return;
 	if ( fromIndex === toIndex ) return;
 	if ( fromIndex < 0 || toIndex < 0 ) return;
@@ -125,7 +143,7 @@ function renderRows() {
 		vendorInput.className = 'form-control';
 		vendorInput.value = row.vendor;
 		vendorInput.addEventListener( 'change', ( e ) => {
-			rows[ index ].vendor = e.target.value;
+			rows[ index ].vendor = ( e.target as HTMLInputElement ).value;
 			rows[ index ].longUrl = buildLongUrl(
 				rows[ index ].siteUrl,
 				rows[ index ].vendor,
@@ -143,7 +161,7 @@ function renderRows() {
 		channelInput.className = 'form-control';
 		channelInput.value = row.channel;
 		channelInput.addEventListener( 'change', ( e ) => {
-			rows[ index ].channel = e.target.value;
+			rows[ index ].channel = ( e.target as HTMLInputElement ).value;
 			rows[ index ].longUrl = buildLongUrl(
 				rows[ index ].siteUrl,
 				rows[ index ].vendor,
@@ -161,7 +179,7 @@ function renderRows() {
 		campaignInput.className = 'form-control';
 		campaignInput.value = row.campaign;
 		campaignInput.addEventListener( 'change', ( e ) => {
-			rows[ index ].campaign = e.target.value;
+			rows[ index ].campaign = ( e.target as HTMLInputElement ).value;
 			rows[ index ].longUrl = buildLongUrl(
 				rows[ index ].siteUrl,
 				rows[ index ].vendor,
@@ -269,7 +287,7 @@ function renderRows() {
 	}
 }
 
-function setStatus( message ) {
+function setStatus( message: string ): void {
 	els.status.textContent = message || '';
 }
 
@@ -335,7 +353,7 @@ function generateRows() {
 	setStatus( 'Added ' + newRows.length + ' row(s) to the end.' );
 }
 
-function csvEscape( value ) {
+function csvEscape( value: unknown ): string {
 	const stringValue = String( value == null ? '' : value );
 	if (
 		stringValue.includes( '"' ) ||
