@@ -18,7 +18,7 @@ jobs:
         if: github.ref == 'refs/heads/stg'
         uses: choctaw-nation/shared-github-actions/.github/workflows/deploy.yml@main
         with:
-            WPE_ENV: # WP Engine environment name
+            WPE_ENV: cnowikistg # WP Engine environment name
             theme_name: cno-starter-theme
         secrets: inherit
 
@@ -27,6 +27,6 @@ jobs:
         if: github.ref == 'refs/heads/dev'
         uses: choctaw-nation/shared-github-actions/.github/workflows/deploy.yml@main
         with:
-            WPE_ENV: # WP Engine environment name
+            WPE_ENV: cnowikidev # WP Engine environment name
             theme_name: cno-starter-theme
         secrets: inherit
