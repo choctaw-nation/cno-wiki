@@ -1,0 +1,64 @@
+// Only styles that cannot be expressed with Bootstrap 5 utility classes
+
+.drag-handle {
+	cursor: grab;
+	user-select: none;
+}
+
+.drag-handle:active {
+	cursor: grabbing;
+}
+
+tr.drag-over {
+	outline: 2px dashed var(--bs-primary);
+	outline-offset: -2px;
+}
+
+td .url-display {
+	word-break: break-all;
+	font-size: 13px;
+
+	@media (min-width: 768px) {
+		min-width: 340px;
+	}
+}
+
+// Responsive stacked-row table (mirrors Bootstrap's pattern, custom to this table)
+@media (max-width: 767.98px) {
+	.utm-table {
+		min-width: unset;
+
+		thead {
+			display: none;
+		}
+
+		tbody tr {
+			display: block;
+			border: 1px solid var(--bs-border-color);
+			border-radius: var(--bs-border-radius);
+			margin-bottom: 1rem;
+		}
+
+		tbody td {
+			display: flex;
+			justify-content: space-between;
+			align-items: flex-start;
+			gap: 1rem;
+			border-bottom: 1px solid var(--bs-border-color-translucent);
+			border-left: none;
+			border-right: none;
+			border-top: none;
+
+			&:last-child {
+				border-bottom: none;
+			}
+
+			&[data-label]::before {
+				content: attr(data-label);
+				font-weight: 600;
+				flex-shrink: 0;
+				min-width: 7rem;
+			}
+		}
+	}
+}
