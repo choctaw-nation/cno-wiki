@@ -1,4 +1,17 @@
 /**
+ * Data localized from PHP via wp_localize_script( 'utmBuilder', 'utmBuilderData', ... ).
+ * Available on window before the script executes.
+ */
+declare global {
+	interface Window {
+		utmBuilderData?: {
+			/** Medium values sourced from the `utm_mediums` ACF Repeater field. */
+			mediums: string[];
+		};
+	}
+}
+
+/**
  * Represents a single UTM-tagged URL row in the builder table.
  * Each row captures the inputs used to construct one long URL.
  */

@@ -1,17 +1,27 @@
 import type { UtmRow } from './types';
 
 /**
- * The set of media channels (utm_medium values) available for row generation.
- * Users may add or remove entries at runtime. Defaults are restored on page load.
+ * Fallback mediums used when the ACF repeater field provides no data.
+ * These match the default channels used in most campaigns.
  */
-export const defaultMediums = [
-	'youtube',
-	'ott',
-	'sem',
-	'display',
-	'rgd',
-	'audio',
-];
+const fallbackMediums = [ 'youtube', 'ott', 'sem', 'display', 'rgd', 'audio' ];
+
+/**
+ * The set of media channels (utm_medium values) available for row generation.
+ * Built from the fallback list plus the `utm_mediums` ACF Repeater field
+ * (via wp_localize_script). This guarantees the fallback defaults are always
+ * present while still allowing ACF to add additional entries.
+ * Users may add or remove entries at runtime.
+ */
+const localizedMediums = Array.isArray( window.utmBuilderData?.mediums )
+	? window.utmBuilderData.mediums.filter( ( medium ) =>
+			Boolean( String( medium || '' ).trim() )
+	  )
+	: [];
+
+export const defaultMediums: string[] = Array.from(
+	new Set( [ ...fallbackMediums, ...localizedMediums ] )
+);
 
 /** Mutable list of currently active mediums. */
 export let mediums: string[] = [ ...defaultMediums ];
