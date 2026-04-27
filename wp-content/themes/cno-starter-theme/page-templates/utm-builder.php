@@ -9,6 +9,42 @@ use ChoctawNation\Asset_Loader;
 use ChoctawNation\Enqueue_Type;
 
 new Asset_Loader( 'utmBuilder', Enqueue_Type::both, 'pages' );
+
+/**
+ * Pass ACF repeater data to the UTM Builder script.
+ *
+ * This runs in the template file before `get_header()`, so the page-specific
+ * ACF data can be prepared and localized for the script used by this template.
+ *
+ * ACF field structure:
+ *   Repeater: utm_mediums
+ *   └─ Text:  mediums
+ */
+$acf_mediums = array();
+if ( function_exists( 'get_field' ) ) {
+	$page_id          = get_queried_object_id();
+	$utm_mediums_rows = get_field( 'utm_mediums', $page_id );
+	if ( is_array( $utm_mediums_rows ) ) {
+		foreach ( $utm_mediums_rows as $row ) {
+			if ( empty( $row['mediums'] ) ) {
+				continue;
+			}
+			$clean_medium = sanitize_text_field( $row['mediums'] );
+			if ( '' !== $clean_medium ) {
+				$acf_mediums[] = $clean_medium;
+			}
+		}
+	}
+}
+
+wp_localize_script(
+	'utmBuilder',
+	'utmBuilderData',
+	array(
+		'mediums' => $acf_mediums,
+	)
+);
+
 get_header();
 ?>
 
