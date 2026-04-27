@@ -1,3 +1,4 @@
+import { sanitizeMedium } from './utils';
 import type { UtmRow } from './types';
 
 /**
@@ -14,9 +15,9 @@ const fallbackMediums = [ 'youtube', 'ott', 'sem', 'display', 'rgd', 'audio' ];
  * Users may add or remove entries at runtime.
  */
 const localizedMediums = Array.isArray( window.utmBuilderData?.mediums )
-	? window.utmBuilderData.mediums.filter( ( medium ) =>
-			Boolean( String( medium || '' ).trim() )
-	  )
+	? window.utmBuilderData.mediums
+			.map( ( medium ) => sanitizeMedium( String( medium || '' ) ) )
+			.filter( Boolean )
 	: [];
 
 export const defaultMediums: string[] = Array.from(
