@@ -67,11 +67,19 @@ export function buildLongUrl(
 ): string {
 	const cleanSite = normalizeValue( siteUrl );
 	if ( ! cleanSite ) return '';
-	const url = new URL( cleanSite );
+	let url: URL;
+	try {
+		url = new URL( cleanSite );
+	} catch {
+		return '';
+	}
 	url.searchParams.set( 'utm_source', sanitizeVendor( vendor ) );
 	url.searchParams.set( 'utm_medium', sanitizeMedium( channel ) );
 	url.searchParams.set( 'utm_campaign', sanitizeCampaign( campaign ) );
-	url.searchParams.set( 'utm_content', sanitizeContent( content ) );
+	const sanitizedContent = sanitizeContent( content );
+	if ( sanitizedContent ) {
+		url.searchParams.set( 'utm_content', sanitizedContent );
+	}
 	return url.toString();
 }
 
