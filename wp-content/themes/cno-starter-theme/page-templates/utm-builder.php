@@ -67,6 +67,10 @@ get_header();
 				<label for="vendor" class="form-label fw-semibold">Vendor</label>
 				<input id="vendor" type="text" class="form-control" placeholder="townsquare-media" />
 			</div>
+			<div class="col-12 col-md-4">
+				<label for="content" class="form-label fw-semibold">Content</label>
+				<input id="content" type="text" class="form-control" placeholder="e.g., banner-ad" />
+			</div>
 		</div>
 
 		<div class="d-flex flex-wrap gap-2 mt-3">
@@ -108,6 +112,7 @@ get_header();
 						<th class="col" scope="col">Vendor</th>
 						<th class="col" scope="col">Channel</th>
 						<th class="col" scope="col">Campaign</th>
+						<th class="col" scope="col">Content</th>
 						<th class="col" scope="col">Long URL</th>
 						<th class="col" scope="col">Remove Row</th>
 					</tr>
@@ -115,7 +120,7 @@ get_header();
 				<tbody id="rowsBody"></tbody>
 			</table>
 		</div>
-		<p class="small text-muted mt-2 mb-0">Exported CSV columns: Long URL, Channel, Campaign, Vendor</p>
+		<p class="small text-muted mt-2 mb-0">Exported CSV columns: Long URL, Channel, Campaign, Vendor, Content</p>
 	</div>
 </div>
 

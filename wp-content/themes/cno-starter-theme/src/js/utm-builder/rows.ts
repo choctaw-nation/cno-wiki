@@ -10,6 +10,7 @@ import {
 	buildLongUrl,
 	sanitizeCampaign,
 	sanitizeVendor,
+	sanitizeContent,
 	normalizeValue,
 	setStatus,
 } from './utils';
@@ -94,7 +95,8 @@ export function renderRows(): void {
 				rows[ index ].siteUrl,
 				rows[ index ].vendor,
 				rows[ index ].channel,
-				rows[ index ].campaign
+				rows[ index ].campaign,
+				rows[ index ].content
 			);
 			renderRows();
 		} );
@@ -113,7 +115,8 @@ export function renderRows(): void {
 				rows[ index ].siteUrl,
 				rows[ index ].vendor,
 				rows[ index ].channel,
-				rows[ index ].campaign
+				rows[ index ].campaign,
+				rows[ index ].content
 			);
 			renderRows();
 		} );
@@ -132,11 +135,32 @@ export function renderRows(): void {
 				rows[ index ].siteUrl,
 				rows[ index ].vendor,
 				rows[ index ].channel,
-				rows[ index ].campaign
+				rows[ index ].campaign,
+				rows[ index ].content
 			);
 			renderRows();
 		} );
 		campaignTd.appendChild( campaignInput );
+
+		// --- Content cell ---
+		const contentTd = document.createElement( 'td' );
+		contentTd.dataset.label = 'Content';
+		const contentInput = document.createElement( 'input' );
+		contentInput.type = 'text';
+		contentInput.className = 'form-control';
+		contentInput.value = row.content;
+		contentInput.addEventListener( 'change', ( e ) => {
+			rows[ index ].content = ( e.target as HTMLInputElement ).value;
+			rows[ index ].longUrl = buildLongUrl(
+				rows[ index ].siteUrl,
+				rows[ index ].vendor,
+				rows[ index ].channel,
+				rows[ index ].campaign,
+				rows[ index ].content
+			);
+			renderRows();
+		} );
+		contentTd.appendChild( contentInput );
 
 		// --- Long URL cell (read-only display) ---
 		const urlTd = document.createElement( 'td' );
@@ -225,6 +249,7 @@ export function renderRows(): void {
 		tr.appendChild( vendorTd );
 		tr.appendChild( channelTd );
 		tr.appendChild( campaignTd );
+		tr.appendChild( contentTd );
 		tr.appendChild( urlTd );
 		tr.appendChild( removeTd );
 
@@ -235,7 +260,7 @@ export function renderRows(): void {
 	if ( rows.length === 0 ) {
 		const tr = document.createElement( 'tr' );
 		const td = document.createElement( 'td' );
-		td.colSpan = 6;
+		td.colSpan = 7;
 		td.className = 'text-muted fst-italic';
 		td.textContent =
 			'No rows yet. Use Generate Rows for All Mediums to append rows.';
@@ -258,6 +283,7 @@ export function generateRows(): void {
 	const siteUrl = normalizeValue( els.siteUrl.value );
 	const campaign = sanitizeCampaign( els.campaign.value );
 	const vendor = sanitizeVendor( els.vendor.value );
+	const content = sanitizeContent( els.content?.value || '' );
 
 	if ( ! siteUrl || ! campaign || ! vendor ) {
 		setStatus( 'Please enter Site URL, Campaign, and Vendor.' );
@@ -281,7 +307,8 @@ export function generateRows(): void {
 		vendor,
 		channel: medium,
 		campaign,
-		longUrl: buildLongUrl( siteUrl, vendor, medium, campaign ),
+		content,
+		longUrl: buildLongUrl( siteUrl, vendor, medium, campaign, content ),
 	} ) );
 
 	setRows( rows.concat( newRows ) );

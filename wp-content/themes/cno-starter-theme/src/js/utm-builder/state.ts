@@ -55,6 +55,7 @@ export const els = {
 	siteUrl: document.getElementById( 'siteUrl' ) as HTMLInputElement,
 	campaign: document.getElementById( 'campaign' ) as HTMLInputElement,
 	vendor: document.getElementById( 'vendor' ) as HTMLInputElement,
+	content: document.getElementById( 'content' ) as HTMLInputElement,
 	newMedium: document.getElementById( 'newMedium' ) as HTMLInputElement,
 	mediumList: document.getElementById( 'mediumList' ) as HTMLElement,
 	rowsBody: document.getElementById( 'rowsBody' ) as HTMLElement,

@@ -61,3 +61,7 @@ if ( ! els.campaign.value ) {
 if ( ! els.vendor.value ) {
 	els.vendor.value = 'townsquare-media';
 }
+
+if ( ! els.content.value ) {
+	els.content.value = 'banner';
+}
