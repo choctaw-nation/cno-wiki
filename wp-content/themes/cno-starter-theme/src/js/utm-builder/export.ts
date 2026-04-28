@@ -4,7 +4,7 @@ import { csvEscape, sanitizeCampaign, setStatus } from './utils';
 /**
  * Serializes the current rows array to a CSV file and triggers a browser download.
  *
- * Column order: Long URL, Channel, Campaign, Vendor.
+ * Column order: Long URL, Channel, Campaign, Vendor, Content.
  *
  * Implementation notes:
  * - A Blob is used so no server round-trip is needed.
@@ -21,7 +21,7 @@ export function exportCsv(): void {
 		return;
 	}
 
-	const headers = [ 'Long URL', 'Channel', 'Campaign', 'Vendor' ];
+	const headers = [ 'Long URL', 'Channel', 'Campaign', 'Vendor', 'Content' ];
 	const lines = [ headers.join( ',' ) ];
 
 	rows.forEach( ( row ) => {
@@ -31,6 +31,7 @@ export function exportCsv(): void {
 				csvEscape( row.channel ),
 				csvEscape( row.campaign ),
 				csvEscape( row.vendor ),
+				csvEscape( row.content ),
 			].join( ',' )
 		);
 	} );

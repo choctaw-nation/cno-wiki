@@ -36,6 +36,14 @@ export function sanitizeCampaign( value: string ): string {
 	return normalizeValue( value ).toLowerCase().replace( /\s+/g, '-' );
 }
 
+/**
+ * Sanitizes a content name for use as a utm_content value.
+ * Lowercases the input and replaces internal whitespace with hyphens.
+ */
+export function sanitizeContent( value: string ): string {
+	return normalizeValue( value ).toLowerCase().replace( /\s+/g, '-' );
+}
+
 // ---------------------------------------------------------------------------
 // URL construction
 // ---------------------------------------------------------------------------
@@ -48,19 +56,30 @@ export function sanitizeCampaign( value: string ): string {
  * @param vendor   - The advertising vendor (utm_source).
  * @param channel  - The media channel (utm_medium).
  * @param campaign - The campaign identifier (utm_campaign).
+ * @param content  - The content / creative identifier (utm_content).
  */
 export function buildLongUrl(
 	siteUrl: string,
 	vendor: string,
 	channel: string,
-	campaign: string
+	campaign: string,
+	content: string
 ): string {
 	const cleanSite = normalizeValue( siteUrl );
 	if ( ! cleanSite ) return '';
-	const url = new URL( cleanSite );
+	let url: URL;
+	try {
+		url = new URL( cleanSite );
+	} catch {
+		return '';
+	}
 	url.searchParams.set( 'utm_source', sanitizeVendor( vendor ) );
 	url.searchParams.set( 'utm_medium', sanitizeMedium( channel ) );
 	url.searchParams.set( 'utm_campaign', sanitizeCampaign( campaign ) );
+	const sanitizedContent = sanitizeContent( content );
+	if ( sanitizedContent ) {
+		url.searchParams.set( 'utm_content', sanitizedContent );
+	}
 	return url.toString();
 }
 
