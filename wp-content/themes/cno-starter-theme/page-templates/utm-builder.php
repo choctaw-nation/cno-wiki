@@ -13,9 +13,8 @@ new Asset_Loader( 'utmBuilder', Enqueue_Type::both, 'pages' );
 /**
  * Pass ACF repeater data to the UTM Builder script.
  *
- * IMPORTANT: this runs in the template file (before get_header), not inside a
- * `wp_enqueue_scripts` callback, because that action has already fired by the
- * time WordPress resolves and executes page templates.
+ * This runs in the template file before `get_header()`, so the page-specific
+ * ACF data can be prepared and localized for the script used by this template.
  *
  * ACF field structure:
  *   Repeater: utm_mediums
