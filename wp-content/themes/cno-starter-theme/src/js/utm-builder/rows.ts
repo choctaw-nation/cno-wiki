@@ -71,7 +71,7 @@ export function moveRow(
 
 /**
  * Rebuilds the entire rows table from the current `rows` array.
- * Each row gets inline inputs for vendor, channel, and campaign that
+ * Each row gets inline inputs for vendor, channel, campaign, and content that
  * recompute the long URL on change. Drag handles and up/down buttons
  * are rendered for desktop and mobile reordering respectively.
  * Displays an empty-state row when no rows exist.

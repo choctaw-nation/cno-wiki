@@ -101,7 +101,8 @@ get_header();
 
 	<div class="card card-body mb-4">
 		<h2 class="card-title">Rows</h2>
-		<p class="text-muted small mt-1 mb-0">Vendor, Channel, and Campaign are editable per row. Long URL updates automatically when those fields change. Drag rows by the handle to reorder
+		<p class="text-muted small mt-1 mb-0">Vendor, Channel, Campaign, and Content are editable per row. Long URL updates automatically when those fields change. Drag rows by the handle to
+			reorder
 			them.</p>
 		<div class="table-responsive mt-3">
 			<table class="table table-bordered align-middle utm-table">
