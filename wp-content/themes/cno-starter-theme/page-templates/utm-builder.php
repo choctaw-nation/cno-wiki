@@ -66,6 +66,10 @@ get_header();
 				<label for="vendor" class="form-label fw-semibold">Vendor</label>
 				<input id="vendor" type="text" class="form-control" placeholder="townsquare-media" />
 			</div>
+			<div class="col-12 col-md-4">
+				<label for="content" class="form-label fw-semibold">Content</label>
+				<input id="content" type="text" class="form-control" placeholder="e.g., banner-ad" />
+			</div>
 		</div>
 
 		<div class="d-flex flex-wrap gap-2 mt-3">
@@ -97,7 +101,8 @@ get_header();
 
 	<div class="card card-body mb-4">
 		<h2 class="card-title">Rows</h2>
-		<p class="text-muted small mt-1 mb-0">Vendor, Channel, and Campaign are editable per row. Long URL updates automatically when those fields change. Drag rows by the handle to reorder
+		<p class="text-muted small mt-1 mb-0">Vendor, Channel, Campaign, and Content are editable per row. Long URL updates automatically when those fields change. Drag rows by the handle to
+			reorder
 			them.</p>
 		<div class="table-responsive mt-3">
 			<table class="table table-bordered align-middle utm-table">
@@ -107,6 +112,7 @@ get_header();
 						<th class="col" scope="col">Vendor</th>
 						<th class="col" scope="col">Channel</th>
 						<th class="col" scope="col">Campaign</th>
+						<th class="col" scope="col">Content</th>
 						<th class="col" scope="col">Long URL</th>
 						<th class="col" scope="col">Remove Row</th>
 					</tr>
@@ -114,7 +120,7 @@ get_header();
 				<tbody id="rowsBody"></tbody>
 			</table>
 		</div>
-		<p class="small text-muted mt-2 mb-0">Exported CSV columns: Long URL, Channel, Campaign, Vendor</p>
+		<p class="small text-muted mt-2 mb-0">Exported CSV columns: Long URL, Channel, Campaign, Vendor, Content</p>
 	</div>
 </div>
 

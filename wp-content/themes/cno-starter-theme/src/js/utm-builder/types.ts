@@ -24,6 +24,8 @@ export interface UtmRow {
 	channel: string;
 	/** The campaign name (maps to utm_campaign) */
 	campaign: string;
+	/** The content / creative identifier (maps to utm_content) */
+	content: string;
 	/** The fully constructed UTM long URL */
 	longUrl: string;
 }
