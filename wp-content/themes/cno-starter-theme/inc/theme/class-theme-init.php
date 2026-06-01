@@ -257,7 +257,7 @@ class Theme_Init {
 		}
 		// Get all registered blocks if $allowed_block_types is not already set.
 		if ( true === $allowed_block_types || empty( $allowed_block_types ) ) {
-			$registered_blocks   = \WP_Block_Type_Registry::get_instance()->get_all_registered();
+			$registered_blocks   = WP_Block_Type_Registry::get_instance()->get_all_registered();
 			$allowed_block_types = array_keys( $registered_blocks );
 		}
 		$disallowed_blocks = array(
