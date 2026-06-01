@@ -241,7 +241,7 @@ class Theme_Init {
 	/**
 	 * Filters the list of allowed block types in the block editor.
 	 *
-	 * This function restricts the available block types to Heading, List, Image, and Paragraph only.
+	 * This function removes a set of disallowed block types while allowing registered blocks by default.
 	 *
 	 * @param array|bool               $allowed_block_types Array of block type slugs, or boolean to enable/disable all.
 	 * @param ?WP_Block_Editor_Context $context               The block editor context
@@ -252,8 +252,11 @@ class Theme_Init {
 		if ( ! $context ) {
 			return $allowed_block_types;
 		}
+		if ( false === $allowed_block_types ) {
+			return false;
+		}
 		// Get all registered blocks if $allowed_block_types is not already set.
-		if ( ! is_array( $allowed_block_types ) || empty( $allowed_block_types ) ) {
+		if ( true === $allowed_block_types || empty( $allowed_block_types ) ) {
 			$registered_blocks   = \WP_Block_Type_Registry::get_instance()->get_all_registered();
 			$allowed_block_types = array_keys( $registered_blocks );
 		}
