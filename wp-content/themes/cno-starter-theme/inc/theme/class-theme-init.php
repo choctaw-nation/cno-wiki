@@ -293,7 +293,7 @@ class Theme_Init {
 			'core/home-link',
 			'core/media-text',
 		);
-		if ( ! $this->is_admin() ) {
+		if ( ! cno_user_is_developer() ) {
 			array_push(
 				$disallowed_blocks,
 				'core/archives',
