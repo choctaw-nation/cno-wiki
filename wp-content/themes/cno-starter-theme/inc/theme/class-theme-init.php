@@ -301,7 +301,6 @@ class Theme_Init {
 				'core/categories',
 				'core/latest-posts',
 				'core/missing',
-				'core/media-text',
 				'core/navigation',
 				'core/navigation-link',
 				'core/navigation-submenu',
