@@ -293,7 +293,7 @@ class Theme_Init {
 			'core/home-link',
 			'core/media-text',
 		);
-		if ( ! cno_user_is_developer() ) {
+		if ( ! $this->is_admin() ) {
 			array_push(
 				$disallowed_blocks,
 				'core/archives',
@@ -301,7 +301,6 @@ class Theme_Init {
 				'core/categories',
 				'core/latest-posts',
 				'core/missing',
-				'core/media-text',
 				'core/navigation',
 				'core/navigation-link',
 				'core/navigation-submenu',
