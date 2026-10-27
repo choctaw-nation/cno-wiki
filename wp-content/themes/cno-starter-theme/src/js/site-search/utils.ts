@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { WP_Term } from 'wp-types';
 export interface SearchQueryResponse {
 	title: string;

@@ -295,7 +295,6 @@ export function generateRows(): void {
 	const siteUrl = normalizeValue( els.siteUrl.value );
 	const campaign = sanitizeCampaign( els.campaign.value );
 	const vendor = sanitizeVendor( els.vendor.value );
-	const content = sanitizeContent( els.content.value || '' );
 
 	if ( ! siteUrl || ! campaign || ! vendor ) {
 		setStatus( 'Please enter Site URL, Campaign, and Vendor.' );
@@ -314,6 +313,7 @@ export function generateRows(): void {
 		return;
 	}
 
+	const content = sanitizeContent( els.content.value || '' );
 	const newRows = mediums.map( ( medium ) => ( {
 		siteUrl,
 		vendor,

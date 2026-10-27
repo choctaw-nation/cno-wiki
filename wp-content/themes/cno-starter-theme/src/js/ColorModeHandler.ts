@@ -116,7 +116,6 @@ new ( class ColorModeHandler {
 		}
 
 		const {
-			colorModeTogglerText,
 			activeModeIcon,
 			selectedColorMode,
 			selectedColorModeIcon,

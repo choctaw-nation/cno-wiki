@@ -54,6 +54,7 @@ export default class HeaderOffsetHandler {
 		if (
 			! document.documentElement.style.getPropertyValue( this.cssVar )
 		) {
+			// eslint-disable-next-line no-console
 			console.warn( 'Header offset not found.' );
 		}
 	}

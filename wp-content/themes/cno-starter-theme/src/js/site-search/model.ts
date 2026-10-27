@@ -28,6 +28,7 @@ export default class Model {
 			this.results = results;
 			return results as SearchQueryResponse[];
 		} catch ( error ) {
+			// eslint-disable-next-line no-console
 			console.error( 'Search error:', error );
 			return null;
 		}

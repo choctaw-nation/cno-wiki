@@ -61,7 +61,7 @@ export default class BugReportFormHandler {
 
 	/**
 	 * Retrieves the Gravity Form fields from the DOM.
-	 * @throws Will throw an error if the fields are not found.
+	 * @throws {Error} Will throw an error if the fields are not found.
 	 */
 	private getGravityFormFields() {
 		const urlField =
@@ -94,6 +94,7 @@ export default class BugReportFormHandler {
 			this.setBrowser( browserField, browser );
 			this.setDeviceType( deviceTypeField, deviceType );
 		} catch ( error ) {
+			// eslint-disable-next-line no-console
 			console.error( error );
 		}
 	}
