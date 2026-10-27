@@ -6,7 +6,7 @@
  * @package ChoctawNation
  */
 
-use ChoctawNation\Capability_Handler;
+use ChoctawNation\Admin\Capability_Handler;
 
 /**
  * Get the capability manager.

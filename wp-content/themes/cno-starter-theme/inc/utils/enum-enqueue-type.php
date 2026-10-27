@@ -5,7 +5,7 @@
  * @package ChoctawNation
  */
 
-namespace ChoctawNation;
+namespace ChoctawNation\Utils;
 
 /** Allowable Enqueue Types */
 enum Enqueue_Type {

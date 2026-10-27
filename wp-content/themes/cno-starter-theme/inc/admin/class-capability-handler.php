@@ -5,7 +5,7 @@
  * @package ChoctawNation
  */
 
-namespace ChoctawNation;
+namespace ChoctawNation\Admin;
 
 /**
  * Capability Handler

@@ -5,8 +5,8 @@
  * @package ChoctawNation
  */
 
-use ChoctawNation\Asset_Loader;
-use ChoctawNation\Enqueue_Type;
+use ChoctawNation\Utils\Asset_Loader;
+use ChoctawNation\Utils\Enqueue_Type;
 
 new Asset_Loader( 'toc-scroll', Enqueue_Type::script, 'modules' );
 get_header();
