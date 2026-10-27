@@ -24,7 +24,9 @@ import {
  * Does nothing when the row is already at the top (index 0).
  */
 export function moveRowUp( index: number ): void {
-	if ( index <= 0 ) return;
+	if ( index <= 0 ) {
+		return;
+	}
 	const temp = rows[ index - 1 ];
 	rows[ index - 1 ] = rows[ index ];
 	rows[ index ] = temp;
@@ -37,7 +39,9 @@ export function moveRowUp( index: number ): void {
  * Does nothing when the row is already at the bottom.
  */
 export function moveRowDown( index: number ): void {
-	if ( index >= rows.length - 1 ) return;
+	if ( index >= rows.length - 1 ) {
+		return;
+	}
 	const temp = rows[ index + 1 ];
 	rows[ index + 1 ] = rows[ index ];
 	rows[ index ] = temp;
@@ -54,10 +58,18 @@ export function moveRow(
 	fromIndex: number | null,
 	toIndex: number | null
 ): void {
-	if ( fromIndex === null || toIndex === null ) return;
-	if ( fromIndex === toIndex ) return;
-	if ( fromIndex < 0 || toIndex < 0 ) return;
-	if ( fromIndex >= rows.length || toIndex >= rows.length ) return;
+	if ( fromIndex === null || toIndex === null ) {
+		return;
+	}
+	if ( fromIndex === toIndex ) {
+		return;
+	}
+	if ( fromIndex < 0 || toIndex < 0 ) {
+		return;
+	}
+	if ( fromIndex >= rows.length || toIndex >= rows.length ) {
+		return;
+	}
 
 	const movedRow = rows.splice( fromIndex, 1 )[ 0 ];
 	rows.splice( toIndex, 0, movedRow );

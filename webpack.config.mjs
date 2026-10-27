@@ -67,7 +67,10 @@ const addEditorEntry = ( webpackConfig ) => {
 					THEME_SRC,
 					'js/vendors/bootstrap.js'
 				),
-				'modules/color-mode-handler': path.resolve( THEME_SRC, 'js/ColorModeHandler.ts' ),
+				'modules/color-mode-handler': path.resolve(
+					THEME_SRC,
+					'js/ColorModeHandler.ts'
+				),
 				...addEntries( appNames, 'pages' ),
 				...addEntries( modules, 'modules' ),
 				...addEntries( styleSheets, 'styles' ),

@@ -17,7 +17,9 @@ export default class Model {
 	async performSearch(
 		query: string
 	): Promise< SearchQueryResponse[] | null > {
-		if ( ! query ) return null;
+		if ( ! query ) {
+			return null;
+		}
 		try {
 			const response = await fetch(
 				`/wp-json/cno/v1/search?s=${ encodeURIComponent( query ) }`
@@ -37,7 +39,9 @@ export default class Model {
 	 * @param query The search query to store.
 	 */
 	storeRecentSearch( query: string ) {
-		if ( ! this.results ) return;
+		if ( ! this.results ) {
+			return;
+		}
 		const searchResult = this.results.find(
 			( result ) => result.title === query
 		)!;
@@ -47,7 +51,7 @@ export default class Model {
 	/**
 	 * Get the recent search queries from local storage.
 	 *
-	 * @returns The recent search queries from local storage.
+	 * @return The recent search queries from local storage.
 	 */
 	getRecentSearches(): LocalStorageQuery[] {
 		return this.getStoredQueries();
@@ -56,7 +60,7 @@ export default class Model {
 	/**
 	 * Gets the stored search queries from local storage.
 	 *
-	 * @returns The stored search queries from local storage.
+	 * @return The stored search queries from local storage.
 	 */
 	private getStoredQueries(): LocalStorageQuery[] {
 		const storedQueries = this.getRecentSearchResults();
@@ -95,7 +99,7 @@ export default class Model {
 	/**
 	 * Get an item from local storage with an expiration time.
 	 *
-	 * @returns The stored item or null if the item has expired or does not exist.
+	 * @return The stored item or null if the item has expired or does not exist.
 	 */
 	private getRecentSearchResults(): LocalStorageQuery[] | null {
 		const itemStr = localStorage.getItem( this.LOCAL_STORAGE_KEY );
@@ -110,9 +114,8 @@ export default class Model {
 				// If the item has expired, remove it from storage and return null
 				localStorage.removeItem( this.LOCAL_STORAGE_KEY );
 				return null;
-			} else {
-				return result;
 			}
+			return result;
 		} );
 		return results.filter( ( query ) => query !== null );
 	}
