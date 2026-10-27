@@ -23,12 +23,17 @@ class Role_Editor {
 	 * Add custom capabilities to roles
 	 */
 	private function add_custom_capabilities() {
-		$capability = 'can_unlock_blocks';
-		$roles      = array( 'administrator', 'front-end' );
-		foreach ( $roles as $role ) {
-			$role_obj = get_role( $role );
-			if ( $role_obj && ! $role_obj->has_cap( $capability ) ) {
-				$role_obj->add_cap( $capability );
+		$capabilities = array(
+			'can_unlock_blocks' => array( 'administrator', 'front-end' ),
+			'edit_dev-notes'    => array( 'administrator', 'front-end' ),
+		);
+		foreach ( $capabilities as $capability => $roles ) {
+			foreach ( $roles as $role ) {
+				$role_obj = get_role( $role );
+
+				if ( $role_obj && ! $role_obj->has_cap( $capability ) ) {
+					$role_obj->add_cap( $capability );
+				}
 			}
 		}
 	}
