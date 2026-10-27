@@ -95,7 +95,7 @@ export function buildLongUrl(
  * Follows RFC 4180 CSV quoting rules.
  */
 export function csvEscape( value: unknown ): string {
-	const stringValue = String( value == null ? '' : value );
+	const stringValue = String( value === null ? '' : value );
 	if (
 		stringValue.includes( '"' ) ||
 		stringValue.includes( ',' ) ||
