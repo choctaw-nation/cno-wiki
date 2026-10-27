@@ -1,3 +1,4 @@
+/* stylelint-disable no-invalid-position-at-import-rule */
 @use "../abstracts/variables" as v;
 
 // Required
@@ -13,7 +14,6 @@ $primary: v.$color-purple;
 $secondary: #b6a8c0;
 $light: v.$light;
 $dark: v.$dark;
-
 $body-color: $dark;
 $body-bg: $light;
 
@@ -32,7 +32,7 @@ $code-color-dark: #31d43c;
 $font-size-base: 1rem;
 $font-family-sans-serif: v.$font-body;
 $font-family-monospace:
-	Monaspace Neon,
+	monaspace neon,
 	"Courier New",
 	monospace;
 
@@ -60,7 +60,7 @@ $h6-font-size: $font-size-base * 1.2;
 
 /**
 * Display Type Scale
-* Perfect Fourth Typescale
+* Perfect Fourth Type scale
 * @see https://typescale.com
 */
 $display-font-sizes: (
@@ -71,7 +71,6 @@ $display-font-sizes: (
 	5: 1.777rem,
 	6: 1.333rem,
 );
-
 $display-font-family: v.$font-body;
 $display-font-weight: 700;
 $display-line-height: calc(2ex + 4px);
@@ -84,13 +83,10 @@ $display-line-height: calc(2ex + 4px);
 
 $btn-transition: all v.$transition-standard;
 $btn-font-size: $h6-font-size;
-
 $input-btn-padding-x: 0.75rem;
 $input-btn-padding-y: 0.375rem;
-
 $input-btn-padding-x-lg: 1rem;
 $input-btn-padding-y-lg: 0.5rem;
-
 $input-btn-padding-x-sm: 0.5rem;
 $input-btn-padding-y-sm: 0.25rem;
 
@@ -107,8 +103,8 @@ $navbar-light-icon-color: white;
 $navbar-light-toggler-border-color: transparent;
 $navbar-light-brand-color: $primary;
 $navbar-light-brand-hover-color: $secondary;
-
 $navbar-dark-brand-color: white;
+
 // $navbar-dark-brand-hover-color: $secondary;
 
 // ================================================
@@ -193,8 +189,10 @@ $badge-font-size: 1rem;
 @import "bootstrap/scss/dropdown";
 @import "bootstrap/scss/type";
 @import "bootstrap/scss/images";
+
 // @import "bootstrap/scss/tables";
 @import "bootstrap/scss/forms";
+
 // @import "bootstrap/scss/button-group";
 @import "bootstrap/scss/nav";
 @import "bootstrap/scss/navbar"; // Requires nav
@@ -202,16 +200,20 @@ $badge-font-size: 1rem;
 @import "bootstrap/scss/breadcrumb";
 @import "bootstrap/scss/accordion";
 @import "bootstrap/scss/pagination";
+
 // @import "bootstrap/scss/badge";
 @import "bootstrap/scss/alert";
+
 // @import "bootstrap/scss/progress";
 @import "bootstrap/scss/list-group";
+
 // @import "bootstrap/scss/toasts";
 @import "bootstrap/scss/modal"; // Requires transitions
 // @import "bootstrap/scss/tooltip";
 // @import "bootstrap/scss/popover";
 // @import "bootstrap/scss/carousel";
 @import "bootstrap/scss/spinners";
+
 // @import "bootstrap/scss/placeholders";
 
 // Helpers

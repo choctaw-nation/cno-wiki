@@ -6,7 +6,7 @@
 			background-color var(--transition-standard),
 			color var(--transition-standard);
 
-		@include m.interaction() {
+		@include m.interaction {
 			background-color: var(--bs-primary);
 			color: var(--bs-light);
 		}

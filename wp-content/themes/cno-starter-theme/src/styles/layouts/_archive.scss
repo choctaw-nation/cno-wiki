@@ -1,12 +1,12 @@
 .archive {
 	.search-form {
 		border-block-width: 1px;
-		border-inline-width: 0px;
+		border-inline-width: 0;
 		border-style: solid;
 
 		[data-bs-theme="dark"] & {
 			border-color: var(--bs-primary);
-			background-color: rgba(var(--bs-primary-rgb), 0.3);
+			background-color: rgb(var(--bs-primary-rgb), 0.3);
 			color: var(--bs-light);
 		}
 

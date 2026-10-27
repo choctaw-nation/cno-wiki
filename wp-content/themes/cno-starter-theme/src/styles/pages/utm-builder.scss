@@ -18,13 +18,13 @@ td .url-display {
 	word-break: break-all;
 	font-size: 13px;
 
-	@media (min-width: 768px) {
+	@media (width >= 768px) {
 		min-width: 340px;
 	}
 }
 
 // Responsive stacked-row table (mirrors Bootstrap's pattern, custom to this table)
-@media (max-width: 767.98px) {
+@media (width <= 767.98px) {
 	.utm-table {
 		min-width: unset;
 
