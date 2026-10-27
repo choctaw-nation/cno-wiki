@@ -20,6 +20,8 @@
 
 namespace ChoctawNation;
 
+use WP_Post;
+
 /**
  * Extends the WP Nav Walker to create megamenu option
  * Based on the Bootscore 5 Nav Walker
@@ -93,9 +95,9 @@ class Navwalker extends \Walker_Nav_Menu {
 	/**
 	 * The Opening Level
 	 *
-	 * @param string    $output the html
-	 * @param int       $depth whether we are at the top-level or a sub-level
-	 * @param ?stdClass $args An object of wp_nav_menu() arguments.
+	 * @param string     $output the html
+	 * @param int        $depth whether we are at the top-level or a sub-level
+	 * @param ?\stdClass $args An object of wp_nav_menu() arguments.
 	 */
 	public function start_lvl( &$output, $depth = 0, $args = \null ) {
 		$dropdown_menu_class = array();
@@ -115,11 +117,11 @@ class Navwalker extends \Walker_Nav_Menu {
 	/**
 	 * Starts the Element Output (inside the `li`)
 	 *
-	 * @param string   $output       Used to append additional content (passed by reference).
-	 * @param WP_Post  $data_object  Menu item data object.
-	 * @param int      $depth        Depth of menu item. Used for padding.
-	 * @param stdClass $args         An object of wp_nav_menu() arguments.
-	 * @param int      $id           Optional. ID of the current menu item. Default 0.
+	 * @param string     $output       Used to append additional content (passed by reference).
+	 * @param WP_Post    $data_object  Menu item data object.
+	 * @param int        $depth        Depth of menu item. Used for padding.
+	 * @param ?\stdClass $args         An object of wp_nav_menu() arguments.
+	 * @param int        $id           Optional. ID of the current menu item. Default 0.
 	 */
 	public function start_el( &$output, $data_object, $depth = 0, $args = \null, $id = 0 ) {
 		$this->current_item  = $data_object;

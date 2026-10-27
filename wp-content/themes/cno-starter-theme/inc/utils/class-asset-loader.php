@@ -5,7 +5,7 @@
  * @package ChoctawNation
  */
 
-namespace ChoctawNation;
+namespace ChoctawNation\Utils;
 
 /** On Construction, enqueues the assets
  *

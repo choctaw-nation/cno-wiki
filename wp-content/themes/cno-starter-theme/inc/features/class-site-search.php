@@ -1,19 +1,20 @@
 <?php
 /**
- * The Search REST API
+ * The Site Search REST API
  *
  * @package ChoctawNation
  */
 
-namespace ChoctawNation;
+namespace ChoctawNation\Features;
 
+use WP_REST_Controller;
 use WP_REST_Request;
 use WP_REST_Response;
 
 /**
- * The Search REST API class
+ * The Site Search REST API class
  */
-class Search_Rest_API {
+class Site_Search extends WP_REST_Controller {
 	/**
 	 * The namespace for the REST API.
 	 *
@@ -27,13 +28,6 @@ class Search_Rest_API {
 	 * @var string
 	 */
 	protected $version = '1';
-
-	/**
-	 * Constructor.
-	 */
-	public function __construct() {
-		add_action( 'rest_api_init', array( $this, 'register_routes' ) );
-	}
 
 	/**
 	 * Register the routes for the objects of the controller.

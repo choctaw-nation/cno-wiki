@@ -9,6 +9,22 @@
 
 use ChoctawNation\Theme_Init;
 
-/** Get the theme init class */
-require_once get_template_directory() . '/inc/theme/class-theme-init.php';
-new Theme_Init( 'nation' );
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+$autoload_path = get_stylesheet_directory() . '/vendor/autoload.php';
+if ( file_exists( $autoload_path ) ) {
+	include $autoload_path;
+} elseif ( is_admin() ) {
+	wp_die(
+		'Autoload file not found. Please run composer install inside the theme directory.',
+		'Choctaw Template Theme Error',
+		array( 'response' => 500 )
+	);
+}
+
+/**
+ * Get the theme init class
+*/
+$theme = new Theme_Init( 'nation' );
+add_action( 'after_setup_theme', array( $theme, 'setup_theme' ) );
