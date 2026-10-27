@@ -1,10 +1,11 @@
-# CNO Wiki
-
-The Wiki Repo. Powered by Gutenberg
-
----
-
 # Changelog
+
+## v1.3.0 - [October 27, 2026]
+
+- Updated: Theme uses autoloading
+- Updated: Theme is inline with template theme
+- Fixed: Fonts load in block editor
+- Chore: Packages updated
 
 ## v1.2.0
 

@@ -1,0 +1,9 @@
+wp-admin/
+wp-content/mu-plugins/
+wp-content/plugins/
+wp-content/themes/*/dist/
+wp-content/themes/*/vendor/
+wp-content/upgrade/
+wp-content/upgrade-temp-backup/
+wp-content/uploads/
+wp-includes/
