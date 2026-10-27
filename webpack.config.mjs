@@ -62,6 +62,7 @@ const addEditorEntry = ( webpackConfig ) => {
 		entry: async () => {
 			return {
 				global: path.resolve( THEME_SRC, 'index.js' ),
+				frontend: path.resolve( THEME_SRC, 'styles/frontend.scss' ),
 				'vendors/bootstrap': path.resolve(
 					THEME_SRC,
 					'js/vendors/bootstrap.js'

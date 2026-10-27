@@ -49,6 +49,7 @@ class Gutenberg_Handler {
 	 * This is a blocks v3 compatibility path, as blocks are now iframed in the editor
 	 */
 	public function enqueue_block_assets() {
+
 		wp_enqueue_style(
 			'typekit',
 			'https://use.typekit.net/jky5sek.css',
@@ -56,9 +57,9 @@ class Gutenberg_Handler {
 			null // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
 		);
 
+		new Asset_Loader( 'global', Enqueue_Type::style, '', is_admin() ? array() : array( 'bootstrap' ) );
 		// enqueue assets that the blocks' iframes need, but that should not be loaded on the front end.
 		if ( is_admin() ) { // phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedIf
-			// This is different than the `block_editor_assets` hook, which is specifically for the block editor.
 		}
 	}
 

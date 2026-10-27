@@ -178,13 +178,16 @@ class Theme_Init {
 		);
 
 		new Utils\Asset_Loader(
-			'global',
-			Utils\Enqueue_Type::both,
+			'frontend',
+			Utils\Enqueue_Type::style,
 			null,
-			array(
-				'scripts' => array( 'bootstrap' ),
-				'styles'  => array( 'bootstrap' ),
-			)
+			array()
+		);
+		new Utils\Asset_Loader(
+			'global',
+			Utils\Enqueue_Type::script,
+			null,
+			array( 'bootstrap' ),
 		);
 		wp_localize_script( 'global', 'cnoSiteData', array( 'rootUrl' => home_url() ) );
 
