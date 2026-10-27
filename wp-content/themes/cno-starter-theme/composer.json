@@ -1,7 +1,11 @@
 {
-	"name": "choctaw-nation/template-theme",
-	"description": "a template theme to fork",
-	"type": "library",
+	"name": "choctaw-nation/cno-wiki-theme",
+	"description": "the wiki theme",
+	"version": "1.3.0",
+	"autoload": {
+		"classmap":["inc/"]
+	},
+	"type": "project",
 	"repositories": [
 		{
 			"type": "composer",
@@ -13,8 +17,8 @@
 		}
 	],
 	"scripts": {
-		"phpcs": "phpcs wp-content/themes/cno-starter-theme/ --extensions=php --ignore=wp-content/themes/cno-starter-theme/dist/",
-		"phpcbf": "phpcbf wp-content/themes/cno-starter-theme/ --extensions=php --ignore=wp-content/themes/cno-starter-theme/dist/"
+		"phpcs": "phpcs . --extensions=php --ignore=dist/,vendor/",
+		"phpcbf": "phpcbf . --extensions=php --ignore=dist/,vendor/"
 	},
 	"config": {
 		"allow-plugins": {
