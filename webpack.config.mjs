@@ -18,9 +18,9 @@ const THEME_DIST = path.resolve( THEME_ROOT, 'dist' );
  *
  * **Be sure to import page scss in these files**
  */
-const appNames = [];
+const appNames = [ 'utm-builder' ];
 const modules = []; // for global js files
-const blockEditor = [ 'editDefaultBlocks', 'mediapressCustomFilters' ];
+const blockEditor = [ 'editDefaultBlocks' ];
 
 /**
  * For SCSS files (no leading `_`)
@@ -61,8 +61,7 @@ const addEditorEntry = ( webpackConfig ) => {
 		...updatedConfig,
 		entry: async () => {
 			return {
-				global: path.resolve( THEME_SRC, 'index.ts' ),
-				'admin/editor': path.resolve( THEME_SRC, 'styles/editor.scss' ),
+				global: path.resolve( THEME_SRC, 'index.js' ),
 				'vendors/bootstrap': path.resolve(
 					THEME_SRC,
 					'js/vendors/bootstrap.js'
@@ -70,6 +69,10 @@ const addEditorEntry = ( webpackConfig ) => {
 				'modules/color-mode-handler': path.resolve(
 					THEME_SRC,
 					'js/ColorModeHandler.ts'
+				),
+				'modules/toc-scroll': path.resolve(
+					THEME_SRC,
+					'js/TOCScrollSpy.ts'
 				),
 				...addEntries( appNames, 'pages' ),
 				...addEntries( modules, 'modules' ),
