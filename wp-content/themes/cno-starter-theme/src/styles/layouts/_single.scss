@@ -1,5 +1,3 @@
-@use "../base/block-overrides/groups";
-
 .docs-content {
 	& > :where(:not(.alignleft, .alignright, .align-full)) {
 		max-width: clamp(100vw, var(--wp--style--global--content-size), 100vw);

@@ -91,5 +91,9 @@
 	"phpSniffer.executablesFolder": "wp-content/themes/cno-starter-theme/vendor/bin",
 	"scss.format.spaceAroundSelectorSeparator": true,
 	"stylelint.snippet": [ "css", "scss" ],
-	"stylelint.validate": [ "css", "scss" ]
+	"stylelint.validate": [
+		"css",
+		"scss"
+	],
+	"editor.formatOnSave": true
 }
