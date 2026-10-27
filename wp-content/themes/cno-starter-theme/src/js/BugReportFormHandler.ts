@@ -24,7 +24,7 @@ export default class BugReportFormHandler {
 
 	/**
 	 * Retrieves the current session information including URL, browser, and device type.
-	 * @returns An object containing the current URL, browser, and device type.
+	 * @return An object containing the current URL, browser, and device type.
 	 */
 	private getSessionInfo(): {
 		currentUrl: string;

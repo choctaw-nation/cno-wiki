@@ -66,7 +66,9 @@ export function buildLongUrl(
 	content: string
 ): string {
 	const cleanSite = normalizeValue( siteUrl );
-	if ( ! cleanSite ) return '';
+	if ( ! cleanSite ) {
+		return '';
+	}
 	let url: URL;
 	try {
 		url = new URL( cleanSite );
