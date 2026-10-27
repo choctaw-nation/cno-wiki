@@ -5,8 +5,8 @@
  * @package ChoctawNation
  */
 
-use ChoctawNation\Asset_Loader;
-use ChoctawNation\Enqueue_Type;
+use ChoctawNation\Utils\Asset_Loader;
+use ChoctawNation\Utils\Enqueue_Type;
 
 new Asset_Loader( 'utmBuilder', Enqueue_Type::both, 'pages' );
 
@@ -78,7 +78,8 @@ get_header();
 			<button type="button" id="clearBtn" class="btn btn-danger">Clear Rows</button>
 		</div>
 		<p class="text-muted small mt-1 mb-0">Generates new rows at the end only. Existing rows stay in place.</p>
-		<div id="status" class="text-success fw-bold mt-2" style="min-height:20px" role="status" aria-live="polite" aria-atomic="true"></div>
+		<div id="status" class="text-success fw-bold mt-2" style="min-height:20px" role="status" aria-live="polite"
+			aria-atomic="true"></div>
 	</div>
 
 	<div class="card card-body mb-4">
@@ -87,7 +88,8 @@ get_header();
 			<div class="col">
 				<label for="newMedium" class="form-label fw-semibold">Add Medium</label>
 				<input id="newMedium" type="text" class="form-control" placeholder="example: ctv" />
-				<p class="text-muted small mt-1 mb-0">You can add more mediums and remove any medium from the list below.</p>
+				<p class="text-muted small mt-1 mb-0">You can add more mediums and remove any medium from the list
+					below.</p>
 			</div>
 			<div class="col-auto">
 				<div class="d-flex gap-2">
@@ -101,7 +103,8 @@ get_header();
 
 	<div class="card card-body mb-4">
 		<h2 class="card-title">Rows</h2>
-		<p class="text-muted small mt-1 mb-0">Vendor, Channel, Campaign, and Content are editable per row. Long URL updates automatically when those fields change. Drag rows by the handle to
+		<p class="text-muted small mt-1 mb-0">Vendor, Channel, Campaign, and Content are editable per row. Long URL
+			updates automatically when those fields change. Drag rows by the handle to
 			reorder
 			them.</p>
 		<div class="table-responsive mt-3">
