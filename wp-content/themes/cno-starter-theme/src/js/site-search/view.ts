@@ -71,7 +71,6 @@ export default class View {
 
 	/**
 	 * Shows Recent Searches in the search results while no search is performed.
-	 * @return
 	 */
 	private showRecentSearches() {
 		this.recentSearches = this.getRecentSearches();
