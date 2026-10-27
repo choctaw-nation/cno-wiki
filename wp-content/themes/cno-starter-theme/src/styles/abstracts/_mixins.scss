@@ -1,4 +1,4 @@
-@forward "./bs_breakpoints";
+@forward "./bs-breakpoints";
 
 @mixin interaction() {
 	&:hover,
@@ -10,6 +10,7 @@
 
 @mixin sticky-sidebar($var: --sidebar-top-offset) {
 	--total-offset: calc(var(#{$var}) + var(--wp-admin--admin-bar--height, 0));
+
 	position: sticky;
 	top: var(--total-offset);
 	height: calc(100vh - var(--total-offset));

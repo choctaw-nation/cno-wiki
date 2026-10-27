@@ -1,7 +1,9 @@
+@use "sass:list";
+
 /**
 * "global" vars for consistent styles
 */
-$light-color: rgb(240, 240, 240);
+$light-color: rgb(240 240 240);
 $dark-color: #222;
 
 // ========================================
@@ -22,12 +24,12 @@ $light-mode-light-text: ("dark", "secondary", "primary", "success");
 
 @each $color in $light-mode {
 	:where([data-bs-theme="light"] .has-#{$color}-background-color) {
-		@if (index($light-mode-light-text, $color)) {
+		@if list.index($light-mode-light-text, $color) {
 			--bs-code-color: #{$light-color};
 			--bs-link-color-rgb: #{$light-color};
 		} @else {
-			--bs-code-color: $dark-color;
-			--bs-link-color-rgb: rgb(0, 0, 0);
+			--bs-code-color: #{$dark-color};
+			--bs-link-color-rgb: 0 0 0;
 		}
 	}
 }
@@ -49,25 +51,28 @@ $dark-mode-dark-code: ("danger", "info", "warning", "white");
 
 // Colors that should have light code
 $dark-mode-light-code: ("success", "danger");
-
 $dark-mode-light-links: ("danger");
 $dark-mode-dark-links: ("info", "warning", "success", "white");
 
 @each $color in $dark-mode {
 	:where([data-bs-theme="dark"] .has-#{$color}-background-color) {
-		@if (index($dark-mode-dark-text, $color)) {
+		@if list.index($dark-mode-dark-text, $color) {
 			color: var(--bs-dark);
 		}
-		@if (index($dark-mode-dark-code, $color)) {
+
+		@if list.index($dark-mode-dark-code, $color) {
 			--bs-code-color: #{$dark-color};
 		}
-		@if (index($dark-mode-light-code, $color)) {
+
+		@if list.index($dark-mode-light-code, $color) {
 			--bs-code-color: #{$light-color};
 		}
-		@if (index($dark-mode-light-links, $color)) {
+
+		@if list.index($dark-mode-light-links, $color) {
 			--bs-link-color-rgb: #{$light-color};
 		}
-		@if (index($dark-mode-dark-links, $color)) {
+
+		@if list.index($dark-mode-dark-links, $color) {
 			--bs-link-color-rgb: rgb(var(--bs-dark-rgb));
 		}
 	}

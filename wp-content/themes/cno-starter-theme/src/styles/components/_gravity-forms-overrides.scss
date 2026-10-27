@@ -1,3 +1,4 @@
+/* stylelint-disable selector-class-pattern */
 @use "../abstracts/mixins" as m;
 
 body .gform-theme {
@@ -10,7 +11,7 @@ body .gform-theme {
 			--gf-local-border-width: 2px;
 			--gf-local-color: white;
 
-			@include m.interaction() {
+			@include m.interaction {
 				--gf-local-border-color: var(--bs-primary);
 				--gf-local-color: var(--bs-primary);
 				--gf-local-bg-color: transparent;
@@ -38,7 +39,7 @@ body .gform-theme {
 			--gf-local-border-width: 2px;
 			--gf-local-color: white;
 
-			@include m.interaction() {
+			@include m.interaction {
 				--gf-local-border-color: var(--bs-primary);
 				--gf-local-color: var(--bs-primary);
 				--gf-local-bg-color: transparent;

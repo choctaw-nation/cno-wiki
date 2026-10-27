@@ -1,7 +1,7 @@
 @use "../base/block-overrides/groups";
 
 .docs-content {
-	& > :where(:not(.alignleft):not(.alignright):not(.align-full)) {
+	& > :where(:not(.alignleft, .alignright, .align-full)) {
 		max-width: clamp(100vw, var(--wp--style--global--content-size), 100vw);
 		margin-inline: auto;
 	}

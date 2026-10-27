@@ -4,10 +4,13 @@
 	.offcanvas-lg.offcanvas-start {
 		top: var(--wp-admin--admin-bar--height, 0);
 	}
+
 	@include m.media-breakpoint-up(lg) {
 		grid-area: sidebar;
-		@include m.sticky-sidebar();
+
+		@include m.sticky-sidebar;
 	}
+
 	[data-bs-theme="dark"] & {
 		--bs-border-color: var(--bs-primary);
 	}
