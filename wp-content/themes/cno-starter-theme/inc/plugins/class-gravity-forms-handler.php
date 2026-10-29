@@ -59,8 +59,9 @@ class Gravity_Forms_Handler {
 		$theme_json      = json_decode( file_get_contents( get_template_directory() . '/theme.json' ), JSON_OBJECT_AS_ARRAY );
 		$global_settings = wp_get_global_settings();
 		if ( ! $theme_json ) {
-			return $styles;
+			return is_array( $styles ) ? $styles : array();
 		}
+
 		$theme_colors  = $global_settings['color']['palette']['theme'];
 		$primary_color = array_find(
 			$theme_colors,

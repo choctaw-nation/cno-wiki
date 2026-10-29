@@ -32,6 +32,10 @@ class Plugins_Handler {
 			return;
 		}
 
+		if ( ! function_exists( 'is_plugin_active' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/plugin.php';
+		}
+
 		$plugins_to_disable = array(
 			'wordfence/wordfence.php'                 => array( 'local', 'development', 'staging' ),
 			'wp-mail-smtp-pro/wp_mail_smtp.php'       => array( 'local', 'development', 'staging' ),
