@@ -14,6 +14,7 @@
 		--total-offset: calc(
 			var(--sidebar-top-offset) + var(--wp-admin--admin-bar--height, 0)
 		);
+
 		position: sticky;
 		top: var(--total-offset);
 		height: calc(100vh - var(--total-offset));
@@ -24,5 +25,9 @@
 		@include m.media-breakpoint-up(md) {
 			display: block !important;
 		}
+	}
+
+	.nav > .nav {
+		margin-left: 1rem;
 	}
 }

@@ -6,6 +6,7 @@
 
 .logo {
 	--size: calc(4rem + 1.5vw);
+
 	width: var(--size);
 	height: var(--size);
 }
@@ -14,6 +15,7 @@
 	@include m.media-breakpoint-up(lg) {
 		position: absolute;
 	}
+
 	@include m.media-breakpoint-only(lg) {
 		inset-inline-end: 20%;
 		translate: 20% 0%;

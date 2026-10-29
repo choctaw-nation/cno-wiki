@@ -71,7 +71,6 @@ export default class View {
 
 	/**
 	 * Shows Recent Searches in the search results while no search is performed.
-	 * @returns
 	 */
 	private showRecentSearches() {
 		this.recentSearches = this.getRecentSearches();
@@ -80,7 +79,7 @@ export default class View {
 		if ( noRecentSearches || this.searchInput.value !== '' ) {
 			return;
 		}
-		let markup = `<section class="recent-results"><h5>Recent</h5>${ this.generateListGroup(
+		const markup = `<section class="recent-results"><h5>Recent</h5>${ this.generateListGroup(
 			this.recentSearches!,
 			'recent-searches'
 		) }</section>`;
@@ -98,7 +97,7 @@ export default class View {
 	 * Generates a list group from search results.
 	 *
 	 * @param results The search results to display.
-	 * @param id The id of the list group.
+	 * @param id      The id of the list group.
 	 */
 	private generateListGroup(
 		results: SearchQueryResponse[] | LocalStorageQuery[],

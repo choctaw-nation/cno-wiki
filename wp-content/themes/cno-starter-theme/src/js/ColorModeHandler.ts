@@ -39,7 +39,7 @@ new ( class ColorModeHandler {
 	 * Updates the root element with the selected theme
 	 */
 	private setTheme( theme: ColorMode ) {
-		if ( 'auto' == theme ) {
+		if ( 'auto' === theme ) {
 			document.documentElement.setAttribute(
 				'data-bs-theme',
 				this.userPreference
@@ -116,7 +116,6 @@ new ( class ColorModeHandler {
 		}
 
 		const {
-			colorModeTogglerText,
 			activeModeIcon,
 			selectedColorMode,
 			selectedColorModeIcon,

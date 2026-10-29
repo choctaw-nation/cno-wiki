@@ -24,7 +24,7 @@ export default class BugReportFormHandler {
 
 	/**
 	 * Retrieves the current session information including URL, browser, and device type.
-	 * @returns An object containing the current URL, browser, and device type.
+	 * @return An object containing the current URL, browser, and device type.
 	 */
 	private getSessionInfo(): {
 		currentUrl: string;
@@ -61,7 +61,7 @@ export default class BugReportFormHandler {
 
 	/**
 	 * Retrieves the Gravity Form fields from the DOM.
-	 * @throws Will throw an error if the fields are not found.
+	 * @throws {Error} Will throw an error if the fields are not found.
 	 */
 	private getGravityFormFields() {
 		const urlField =
@@ -94,6 +94,7 @@ export default class BugReportFormHandler {
 			this.setBrowser( browserField, browser );
 			this.setDeviceType( deviceTypeField, deviceType );
 		} catch ( error ) {
+			// eslint-disable-next-line no-console
 			console.error( error );
 		}
 	}

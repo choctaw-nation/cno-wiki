@@ -2,16 +2,3 @@
 @use "./base/typography";
 @use "./base/utilities";
 @use "./base/dark-mode";
-
-// Components
-@use "./components/header";
-@use "./components/sidebar";
-@use "./components/toc";
-@use "./components/gravity-forms-overrides";
-@use "./components/site-search-modal";
-@use "./components/footer";
-
-// Layouts
-@use "./layouts/docs-layout";
-@use "./layouts/single";
-@use "./layouts/archive";

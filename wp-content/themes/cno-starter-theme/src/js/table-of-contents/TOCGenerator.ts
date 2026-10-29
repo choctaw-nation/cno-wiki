@@ -49,7 +49,7 @@ export default class TOCGenerator {
 	/**
 	 * Creates a list item for each heading with a nested anchor
 	 * @param heading an HTML heading element
-	 * @returns HTMLLIElement a list item element
+	 * @return HTMLLIElement a list item element
 	 */
 	private createListItem( heading: HTMLHeadingElement ): HTMLLIElement {
 		const { headingText, headingSlug } = this.sanitizeHeading( heading );
@@ -106,7 +106,6 @@ export default class TOCGenerator {
 					const diff = previousLevel - currentLevel;
 					stack[ stack.length - 1 - diff ].appendChild( listItem );
 					stack.splice( stack.length - diff, diff );
-					return;
 				}
 			}
 		);

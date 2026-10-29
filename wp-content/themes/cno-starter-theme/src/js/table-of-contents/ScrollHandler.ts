@@ -63,7 +63,9 @@ export default class ScrollHandler {
 			( entries ) => {
 				entries.forEach( ( entry ) => {
 					const targetId = entry.target.getAttribute( 'id' );
-					if ( ! targetId ) return;
+					if ( ! targetId ) {
+						return;
+					}
 
 					const tocLink = this.tocContainer.querySelector(
 						`a[href="#${ targetId }"]`

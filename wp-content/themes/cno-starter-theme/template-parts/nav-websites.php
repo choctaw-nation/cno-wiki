@@ -28,8 +28,9 @@
 			<?php if ( ! empty( $related_posts ) ) : ?>
 		<li class="accordion-item">
 			<h4 class="accordion-header">
-				<button class="accordion-button collapsed px-2 py-1" data-bs-toggle="collapse" data-bs-target="<?php echo '#' . $website->slug; ?>" aria-expanded="false"
-						aria-controls="<?php echo '#' . $website->slug; ?>">
+				<button class="accordion-button collapsed px-2 py-2" data-bs-toggle="collapse"
+					data-bs-target="<?php echo '#' . $website->slug; ?>" aria-expanded="false"
+					aria-controls="<?php echo '#' . $website->slug; ?>">
 					<?php echo $website->name; ?>
 				</button>
 			</h4>

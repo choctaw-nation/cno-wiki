@@ -49,8 +49,8 @@ module.exports = {
 
 /**
  * Helper function to add entries to the entries object. It takes an array of strings in either kebab-case or snake_case and returns an object with the key as the entry name and the value as the path to the entry file.
- * @param {array} array - Array of strings
- * @param {string} type - The type of entry. Either 'pages' or 'styles'
+ * @param {Array}  array - Array of strings
+ * @param {string} type  - The type of entry. Either 'pages' or 'styles'
  */
 function addEntries( array, type ) {
 	if ( ! Array.isArray( array ) ) {
@@ -63,13 +63,11 @@ function addEntries( array, type ) {
 	array.forEach( ( asset ) => {
 		const assetOutput = snakeToCamel( asset );
 		if ( type === 'styles' ) {
-			entries[
-				`pages/${ assetOutput }`
-			] = `.${ THEME_DIR }/src/styles/pages/${ asset }.scss`;
+			entries[ `pages/${ assetOutput }` ] =
+				`.${ THEME_DIR }/src/styles/pages/${ asset }.scss`;
 		} else if ( type === 'pages' ) {
-			entries[
-				`pages/${ assetOutput }`
-			] = `.${ THEME_DIR }/src/js/${ asset }/index.ts`;
+			entries[ `pages/${ assetOutput }` ] =
+				`.${ THEME_DIR }/src/js/${ asset }/index.ts`;
 		} else {
 			throw new Error(
 				`Invalid type! Expected "styles" or "pages", received "${ type }"`
@@ -79,7 +77,8 @@ function addEntries( array, type ) {
 	return entries;
 }
 
-/** A simple utility class to alter strings from kebab-case or snake_case to camelCase
+/**
+ * A simple utility class to alter strings from kebab-case or snake_case to camelCase
  *
  * @param {string} str - The string to be converted
  */

@@ -66,7 +66,9 @@ export function buildLongUrl(
 	content: string
 ): string {
 	const cleanSite = normalizeValue( siteUrl );
-	if ( ! cleanSite ) return '';
+	if ( ! cleanSite ) {
+		return '';
+	}
 	let url: URL;
 	try {
 		url = new URL( cleanSite );
@@ -93,7 +95,7 @@ export function buildLongUrl(
  * Follows RFC 4180 CSV quoting rules.
  */
 export function csvEscape( value: unknown ): string {
-	const stringValue = String( value == null ? '' : value );
+	const stringValue = String( value ?? '' );
 	if (
 		stringValue.includes( '"' ) ||
 		stringValue.includes( ',' ) ||

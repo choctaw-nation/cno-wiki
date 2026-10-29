@@ -7,8 +7,6 @@
 
 namespace ChoctawNation;
 
-use WP_Block_Type_Registry;
-
 /** Builds the Theme */
 class Theme_Init {
 	/** The type of site
@@ -23,24 +21,23 @@ class Theme_Init {
 	 */
 	public function __construct( string $type = 'nation' ) {
 		$this->theme_type = $type;
+	}
+
+	/**
+	 * Bootstrap the theme in the `after_setup_theme` hook.
+	 */
+	public function setup_theme(): void {
 		$this->load_required_files();
 		$this->disable_discussion();
-		$this->load_favicons( 'nation' );
+		$this->load_favicons();
+		$this->edit_roles();
+		$this->allow_svg();
+		$this->handle_plugins();
+		$this->cno_theme_support();
+		$this->handle_gutenberg();
+		$this->enable_site_search();
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_cno_scripts' ) );
-		add_action( 'enqueue_block_editor_assets', array( $this, 'load_typekit' ) );
-		add_action( 'after_setup_theme', array( $this, 'cno_theme_support' ) );
 		add_action( 'init', array( $this, 'alter_post_types' ) );
-		add_action( 'init', array( $this, 'register_custom_blocks' ) );
-		add_filter( 'allowed_block_types_all', array( $this, 'restrict_allowed_block_types' ), 10, 2 );
-		/**
-		 * Filter the priority of the Yoast SEO metabox
-		 */
-		add_filter(
-			'wpseo_metabox_prio',
-			function (): string {
-				return 'low';
-			}
-		);
 	}
 
 	/**
@@ -79,44 +76,6 @@ class Theme_Init {
 		foreach ( $global_functions as $global_function ) {
 			require_once $base_path . "/theme/{$global_function}.php";
 		}
-
-		$acf_classes = array(
-			'generator',
-			'image',
-		);
-		foreach ( $acf_classes as $acf_class ) {
-			require_once $base_path . "/acf/acf-classes/class-{$acf_class}.php";
-		}
-
-		$asset_loaders = array(
-			'enum-enqueue-type',
-			'class-asset-loader',
-		);
-		foreach ( $asset_loaders as $asset_loader ) {
-			require_once $base_path . "/theme/asset-loader/{$asset_loader}.php";
-		}
-
-		$navwalkers = array(
-			'navwalker',
-		);
-		foreach ( $navwalkers as $navwalker ) {
-			require_once $base_path . "/theme/navwalkers/class-{$navwalker}.php";
-		}
-
-		$utility_files = array(
-			'allow-svg'          => 'Allow_SVG',
-			'role-editor'        => 'Role_Editor',
-			'badge-generator'    => null,
-			'search-rest-api'    => 'Search_Rest_API',
-			'capability-handler' => 'Capability_Handler',
-		);
-		foreach ( $utility_files as $utility_file => $class_name ) {
-			require_once $base_path . "/theme/class-{$utility_file}.php";
-			if ( $class_name ) {
-				$class = __NAMESPACE__ . '\\' . $class_name;
-				new $class();
-			}
-		}
 	}
 
 	/** Remove comments, pings and trackbacks support from posts types. */
@@ -148,15 +107,69 @@ class Theme_Init {
 	}
 
 	/**
+	 * Edit user roles and capabilities
+	 */
+	private function edit_roles() {
+		$role_editor = new Admin\Role_Editor();
+		add_action( 'admin_init', array( $role_editor, 'create_custom_roles' ) );
+		add_filter( 'map_meta_cap', array( $role_editor, 'allow_edit_css' ), 10, 3 );
+	}
+
+	/**
+	 * Allow SVG uploads
+	 */
+	private function allow_svg() {
+		$svg = new Admin\Allow_SVG();
+		add_filter( 'upload_mimes', array( $svg, 'cc_mime_types' ) );
+		add_action( 'admin_head', array( $svg, 'fix_svg' ) );
+	}
+
+	/**
+	 * Handle Plugins
+	 */
+	private function handle_plugins() {
+		$handler = new Plugins\Plugins_Handler();
+		$handler->handle_acf();
+		$handler->handle_yoast();
+		$handler->handle_gravity_forms();
+		add_action( 'init', array( $handler, 'disable_plugins_per_environment' ) );
+		add_filter( 'auto_update_plugin', array( $handler, 'handle_auto_update_plugin' ) );
+		add_filter( 'googlesitekit_tagmanager_tag_blocked', array( $handler, 'block_gtm_for_logged_in_users' ) );
+	}
+
+	/**
+	 * Handle the block editor
+	 */
+	private function handle_gutenberg() {
+		$gutenberg_handler = new Admin\Gutenberg_Handler();
+		$gutenberg_handler->cno_block_theme_support();
+		add_action( 'init', array( $gutenberg_handler, 'init_block_theme' ) );
+		add_action( 'enqueue_block_editor_assets', array( $gutenberg_handler, 'enqueue_block_editor_assets' ) );
+		add_action( 'enqueue_block_assets', array( $gutenberg_handler, 'enqueue_block_assets' ) );
+		add_filter( 'block_editor_settings_all', array( $gutenberg_handler, 'alter_gutenberg_ui' ), 10, 2 );
+		add_filter( 'allowed_block_types_all', array( $gutenberg_handler, 'restrict_block_types' ), 10, 2 );
+		add_filter( 'use_block_editor_for_post_type', array( $gutenberg_handler, 'handle_page_templates' ) );
+		add_filter( 'should_load_remote_block_patterns', '__return_false' );
+	}
+
+	/**
+	 * Enable global site search
+	 */
+	private function enable_site_search() {
+		$site_search_handler = new Features\Site_Search();
+		add_action( 'rest_api_init', array( $site_search_handler, 'register_routes' ) );
+	}
+
+
+	/**
 	 * Adds scripts with the appropriate dependencies
 	 */
 	public function enqueue_cno_scripts() {
-		$this->load_typekit();
 		$this->eager_js();
 
-		new Asset_Loader(
+		new Utils\Asset_Loader(
 			'bootstrap',
-			Enqueue_Type::both,
+			Utils\Enqueue_Type::both,
 			'vendors',
 			array(
 				'scripts' => array(),
@@ -164,14 +177,17 @@ class Theme_Init {
 			)
 		);
 
-		new Asset_Loader(
-			'global',
-			Enqueue_Type::both,
+		new Utils\Asset_Loader(
+			'frontend',
+			Utils\Enqueue_Type::style,
 			null,
-			array(
-				'scripts' => array( 'bootstrap' ),
-				'styles'  => array( 'bootstrap' ),
-			)
+			array()
+		);
+		new Utils\Asset_Loader(
+			'global',
+			Utils\Enqueue_Type::script,
+			null,
+			array( 'bootstrap' ),
 		);
 		wp_localize_script( 'global', 'cnoSiteData', array( 'rootUrl' => home_url() ) );
 
@@ -181,16 +197,6 @@ class Theme_Init {
 			get_stylesheet_uri(),
 			array( 'global' ),
 			wp_get_theme()->get( 'Version' )
-		);
-	}
-
-	/** Load Typekit */
-	public function load_typekit() {
-		wp_enqueue_style(
-			'typekit',
-			'https://use.typekit.net/jky5sek.css',
-			array(),
-            null // phpcs:ignore
 		);
 	}
 
@@ -228,85 +234,6 @@ class Theme_Init {
 		foreach ( $post_types as $post_type ) {
 			$this->disable_post_type_support( $post_type );
 		}
-	}
-
-	/**
-	 * Registers custom blocks for the theme with the blocks-manifest.php file.
-	 */
-	public function register_custom_blocks() {
-		$blocks_path = get_template_directory() . '/dist';
-		wp_register_block_types_from_metadata_collection( $blocks_path . '/js/blocks/', $blocks_path . '/blocks-manifest.php' );
-	}
-
-	/**
-	 * Filters the list of allowed block types in the block editor.
-	 *
-	 * This function restricts the available block types to a set list, and adds additional blocks based on post type.
-	 *
-	 * @param array|bool $allowed_block_types Array of block type slugs, or boolean to enable/disable all.
-	 * @param object     $block_editor_context The current block editor context.
-	 *
-	 * @return array The array of allowed block types.
-	 */
-	public function restrict_allowed_block_types( $allowed_block_types, $block_editor_context ) {
-		if ( ! $allowed_block_types ) {
-			return $allowed_block_types;
-		}
-		$all_blocks           = \WP_Block_Type_Registry::get_instance()->get_all_registered();
-		$all_types            = array_keys( $all_blocks );
-		$filtered_block_types = array(
-			'core/heading',
-			'core/image',
-			'core/list',
-			'core/list-item',
-			'core/paragraph',
-			'core/cover',
-			'core/media-text',
-			'core/gallery',
-			'core/group',
-			'core/details',
-			'core/columns',
-			'core/column',
-			'core/video',
-			'core/text-columns',
-			'core/quote',
-			'core/table',
-			'core/read-more',
-			'core/shortcode',
-			'core/separator',
-			'core/table',
-			'core/more',
-			'core/pattern',
-			'core/buttons',
-			'core/button',
-			'core/block',
-			'cno/hide-by-role-block',
-		);
-
-		$dev_post_types = array( 'website', 'dev-note' );
-		if ( in_array( $block_editor_context->post->post_type, $dev_post_types, true ) || cno_user_is_developer() ) {
-			$dev_blocks           = array(
-				'core/embed',
-				'core/code',
-				'core/template-part',
-				'core/preformatted',
-				'core/html',
-				'core/freeform',
-				'core/missing',
-				'core/post-date',
-				'core/post-excerpt',
-				'core/post-featured-image',
-				'dm-code-snippet/code-snippet-block-dm',
-				'search-filter/search',
-				'search-filter/choice',
-				'search-filter/range',
-				'search-filter/advanced',
-				'search-filter/control',
-				'search-filter/reusable-field',
-			);
-			$filtered_block_types = array_merge( $filtered_block_types, $dev_blocks );
-		}
-		return $filtered_block_types;
 	}
 
 	/**

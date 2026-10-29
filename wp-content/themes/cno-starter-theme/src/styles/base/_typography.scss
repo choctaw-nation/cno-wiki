@@ -1,8 +1,54 @@
-@use "./block-overrides/paragraphs";
+@use "../abstracts/fluid-type-utils" as fluid-type;
 
-body {
-	text-wrap: pretty;
-	word-break: break-word;
+:root {
+	@include fluid-type.generate-type-scale;
+	@include fluid-type.generate-type-scale(
+		perfect-fourth,
+		"fs-display",
+		fluid-type.$display-steps,
+		0
+	);
+}
+
+// HEADINGS
+
+$headings: (
+	1: "xxxl",
+	2: "xxl",
+	3: "xl",
+	4: "lg",
+	5: "md",
+	6: "sm",
+);
+
+/**
+* Reset Headings and utils to use WP sizes instead of bootstrap's
+*/
+@each $heading, $slug in $headings {
+	h#{$heading},
+	.h#{$heading} {
+		text-wrap: pretty;
+		font-size: var(--wp--preset--font-size--#{$slug});
+	}
+	.fs-#{$heading} {
+		font-size: var(--wp--preset--font-size--#{$slug}) !important;
+	}
+}
+
+/**
+* Reset Display Font Sizes to use clamp instead of Bootstrap's RFS
+*/
+@each $step in fluid-type.$display-steps {
+	.display-#{$step} {
+		font-size: var(--fs-display-#{$step}) !important;
+	}
+}
+
+small,
+.small,
+.fs-small,
+.fs-xs,code {
+	font-size: var(--wp--preset--font-size--xs);
 }
 
 [class*="fs-"] > p {
@@ -10,16 +56,10 @@ body {
 }
 
 a {
-	transition: color var(--transition-standard);
+	transition: color var(--wp--custom--transition--standard);
 }
 
-// HEADINGS
-
-$headings: h1, h2, h3, h4, h5, h6;
-
-@each $heading in $headings {
-	#{$heading},
-	.#{$heading} {
-		text-wrap: pretty;
-	}
+summary {
+	font-size:var(--wp--preset--font-size--sm);
+	font-weight:700;
 }
